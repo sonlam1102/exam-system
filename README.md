@@ -6,10 +6,10 @@ Developer: Son T. Luu
 # Set up #
 Follow the configuration steps in Laravel Doc    
 Set up the database:   
-* Case 1: having database in server *    
+##* Case 1: having database in server * ##  
 Simply add the host ip, port, username and password to the .env file      
 
-* Case 2: run on local host with docker *   
+##* Case 2: run on local host with docker *##   
 Enable the db block in *docker-compose.yml.example*  
 Download, set up and run docker    
 Run the yml file (making .yml file by remove .example) docker-compose -f docker-compose.yml up    
