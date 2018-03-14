@@ -19,7 +19,7 @@ Type: docker exec -it <mysql_container_id> cat /etc/host
 Get the database IP, port is 3306    
 Fill those below in the .env file      
 
-* Connect to mysql command *     
+##* Connect to mysql command *##     
 mysql -u <username> -p <optional: db name>         
 Enter password then login the mysql server     
 
