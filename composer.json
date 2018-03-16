@@ -36,7 +36,13 @@
     "extra": {
         "laravel": {
             "dont-discover": [
-            ]
+            ],
+            "providers": [
+                "Watson\\Breadcrumbs\\ServiceProvider"
+            ],
+            "aliases": {
+                "Breadcrumbs": "Watson\\Breadcrumbs\\Facade"
+            }
         }
     },
     "scripts": {
