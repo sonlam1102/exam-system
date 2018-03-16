@@ -32,11 +32,15 @@
                                 <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
                             </div>
                         </div>
-                        @if (\Session::has('error'))
-                            <span>
-                                    <strong>{!!Session::get('error')!!}</strong>
-                            </span>
-                        @endif
+                        <div class="form-group row">
+                            <div class="col-md-6 justify-content-center">
+                                @if (\Session::has('error'))
+                                    <span>
+                                            <strong>{!!Session::get('error')!!}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
                         <div class="form-group row mb-0">
                             <div class="col-md-8 offset-md-4">
                                 <button type="submit" class="btn btn-primary">

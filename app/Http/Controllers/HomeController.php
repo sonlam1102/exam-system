@@ -29,13 +29,12 @@ class HomeController extends Controller
             return view('auth.login');
         }
         else {
-            // if (\Auth::user()->type == 0) {
-            //     dd('user');
-            // }
-            // else {
-            //     dd('admin');
-            // }
-            return view('home');
+            if (\Auth::user()->type == 0) {
+                dd('user');
+            }
+            else {
+                return redirect('/admin');
+            }
         }
     }
     public function login(Request $request)
@@ -93,7 +92,6 @@ class HomeController extends Controller
                'password' => bcrypt($data['password']),
             ]);
             return view('auth.login');
-
         }
         return view('auth.register');
     }
