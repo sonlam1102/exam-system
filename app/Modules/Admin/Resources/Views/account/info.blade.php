@@ -40,7 +40,7 @@
                 <div class="form-group">
                   <label for="inputEmail3" class="col-sm-2 control-label">Birthday</label>
                   <div class="col-sm-10">
-                    <input class="form-control" id="birthday" name="birthday" placeholder="Birthday" type="text" value="{{ $data->birthday }}">
+                    <input class="form-control" id="birthday" name="birthday" placeholder="Birthday" type="text" value="{{ date('d/m/Y', strtotime($data->birthday)) }}">
                   </div>
                 </div>
 

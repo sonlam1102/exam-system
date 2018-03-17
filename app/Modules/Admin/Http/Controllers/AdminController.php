@@ -10,7 +10,7 @@ use Carbon\Carbon;
 
 class AdminController extends Controller
 {
-   public function __construct()
+    public function __construct()
     {
         //Constructor
     }
@@ -38,7 +38,7 @@ class AdminController extends Controller
             $data = array(
                 'name' => ($request->name) ? $request->name : '',
                 'address' => ($request->address) ? $request->address : '',
-                'birthday' => ($request->birthday) ? $request->birthday : '',
+                'birthday' => ($request->birthday) ? date('Y-m-d', strtotime($request->birthday)) : '',
                 'img' => ($request->img) ? $request->img : '',
             );
             $check = User::update_info($id, $data);
@@ -50,9 +50,5 @@ class AdminController extends Controller
             \Session::flash('error', $message);
             return redirect('/admin/info');
         }
-    }
-    public function user_account(Request $request)
-    {
-        return view('admin::account.user');
     }
 }

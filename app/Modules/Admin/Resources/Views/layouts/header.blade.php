@@ -23,15 +23,13 @@
                   <small>{{ (\Auth::user()->id == 0) ? 'User' : 'Administrator' }}</small>
                 </p>
               </li>
-
               <li class="user-footer">
                 <div class="pull-left">
-                  <a href="#" class="btn btn-default btn-flat">Profile</a>
+                  <a href="/admin/info" class="btn btn-default btn-flat">Profile</a>
                 </div>
                 <div class="pull-right">
                   <form method="POST" action="/logout">
                     @csrf
-                    <!-- <a href="#" class="btn btn-default btn-flat">Sign out</a> -->
                     <input type="submit" value="Sign out" class="btn btn-default btn-flat">
                   </form>
                 </div>
