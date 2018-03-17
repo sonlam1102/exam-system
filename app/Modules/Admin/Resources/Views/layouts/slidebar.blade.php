@@ -14,7 +14,7 @@
       </a>
       <ul class="treeview-menu">
         <li><a href="/admin/info"><i class="fa fa-circle-o"></i> User Info </a></li>
-        <li><a href="index2.html"><i class="fa fa-circle-o"></i>User account</a></li>
+        <li><a href="/admin/user"><i class="fa fa-circle-o"></i>User account</a></li>
       </ul>
     </li>
 

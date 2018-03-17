@@ -14,5 +14,6 @@
 Route::group(['prefix' => 'admin'], function () {
     Route::get('/', 'AdminController@index');
     Route::get('/info', 'AdminController@info');
+    Route::get('/user', 'AdminController@user_account');
     Route::post('/update/{id}', 'AdminController@update')->where('id', '[0-9]+');
 });

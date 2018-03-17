@@ -51,4 +51,8 @@ class AdminController extends Controller
             return redirect('/admin/info');
         }
     }
+    public function user_account(Request $request)
+    {
+        return view('admin::account.user');
+    }
 }
