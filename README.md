@@ -15,9 +15,11 @@ Set up the database:
 - Run the yml file (making .yml file by remove .example) docker-compose -f docker-compose.yml up    
 - Type: docker ps     
 - Find the mysql container and copy its id     
-- Type: docker exec -it <mysql_container_id> cat /etc/host     
+- Type: docker exec -it <mysql_container_id> cat /etc/host (this is to show the mysql's ip of the mysql container from docker)    
 - Get the database IP, port is 3306    
 - Fill those below in the .env file      
+- *to quit docker, type: docker stop <container id>     
+- *to quit all docker's processes, type: docker stop $(docker ps -aq)     
 
 ##* Connect to mysql command *##     
 - mysql -u <username> -p <optional: db name>         
