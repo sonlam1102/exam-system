@@ -23,6 +23,10 @@ Set up the database:
 - mysql -u <username> -p <optional: db name>         
 Enter password then login the mysql server     
 
+##* Export from mysql server to file command *##     
+- mysqldump -u <username> -p <database name> > <name of export file>.sql         
+Enter password then login the mysql server
+
 ##* First setting for laravel *##
 - run composer update
 - Make .env file
