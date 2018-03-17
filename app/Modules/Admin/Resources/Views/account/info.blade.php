@@ -11,8 +11,8 @@
         <li><a href="#"><i class="fa fa-dashboard"></i> Account Info</a></li>
       </ol>
       	<div class="box box-primary">
-            <form class="form-horizontal" >
-
+            <form class="form-horizontal" method="POST" action="/admin/update/{{ \Auth::user()->id }}">
+              @csrf
               <div class="box-body">
 
                 <div class="form-group">
@@ -56,7 +56,7 @@
                   <label for="inputPassword3" class="col-sm-2 control-label">Retype Password</label>
 
                   <div class="col-sm-10">
-                    <input class="form-control" id="retype-password" name="retype-password" placeholder="Password" type="password">
+                    <input class="form-control" id="retype_password" name="retype_password" placeholder="Password" type="password">
                   </div>
                 </div>
 
@@ -66,6 +66,13 @@
                 <button type="submit" class="btn btn-info pull-left">Submit</button>
               </div>
 
+             <div class="col-md-6 justify-content-center">
+                @if (\Session::has('error'))
+                  <span>
+                      <strong>{!!Session::get('error')!!}</strong>
+                  </span>
+                @endif
+              </div>
             </form>
         </div>
     </section>
