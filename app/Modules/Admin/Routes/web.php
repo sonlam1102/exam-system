@@ -13,4 +13,5 @@
 
 Route::group(['prefix' => 'admin'], function () {
     Route::get('/', 'AdminController@index');
+    Route::get('/info', 'AdminController@info');
 });

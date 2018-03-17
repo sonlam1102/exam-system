@@ -15,7 +15,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'id', 'name', 'email', 'password', 'address', 'birthday', 'img', 'updated_at', 'created_at', 'type'
     ];
 
     /**
@@ -26,4 +26,19 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public static function update_info ($id, $array_info) {
+        $user = parent::find($id);
+        if (!$user)
+            return false;
+
+        if (!isset($array_info['name']) || !isset($array_info['address']) || !isset($array_info['birthday']))
+            return false;
+
+        $user->name = $array_info['name'];
+        $user->address = $array_info['address'];
+        $user->birthday = $array_info['birthday'];
+
+        return $user->save();
+    }
 }
