@@ -77,10 +77,4 @@
         </div>
     </section>
 </div>
-<script>
-	$('input[name="birthday"]').daterangepicker({
-	    singleDatePicker: true,
-	    showDropdowns: true
-	});
-</script>
 @endsection
