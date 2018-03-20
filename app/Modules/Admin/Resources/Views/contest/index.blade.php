@@ -10,9 +10,9 @@
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
         <li><a href="#"><i class="fa fa-dashboard"></i> Contest</a></li>
       </ol>
-      <div class="row">
+          <a href="/admin/contest/add"><button type="button" class="btn btn-block btn-primary" style="width:50px">Add</button></a>
+      <div class="box-primary">
         <div class="col-xs-12">
-          <a href="/admin/contest/add"><button type="button" class="btn btn-block btn-primary">Add</button></a>
           <div class="box">
             <!-- /.box-header -->
             <div class="box-body">
@@ -39,7 +39,7 @@
                     @endforeach
                   @endif
                 </tbody>
-            </table>
+              </table>
             </div>
             <!-- /.box-body -->
           </div>

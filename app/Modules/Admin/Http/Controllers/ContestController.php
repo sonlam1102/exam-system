@@ -33,8 +33,16 @@ class ContestController extends Controller
 
     	return view('admin::contest.add')->with('subject', $subject);
     }
-    public function add_question(Request $request)
+    public function add_question($id, Request $request)
     {
-        return view('admin::contest.question');
+        if (!$id)
+            abort('404');
+
+        $contest = Contests::select()->where('id', '=', $id)->first();
+        $subject = Subjects::select()->get();
+        if (!$contest)
+            abort('404');
+
+        return view('admin::contest.question')->with('data', $contest)->with('subject', $subject);
     }
 }

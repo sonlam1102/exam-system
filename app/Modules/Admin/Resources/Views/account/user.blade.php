@@ -10,7 +10,7 @@
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
         <li><a href="#"><i class="fa fa-dashboard"></i> User accounts</a></li>
       </ol>
-      <div class="row">
+      <div class="box-primary">
         <div class="col-xs-12">
           <div class="box">
             <!-- /.box-header -->
@@ -36,7 +36,7 @@
                     @endforeach
                   @endif
                 </tbody>
-            </table>
+              </table>
             </div>
             <!-- /.box-body -->
           </div>
