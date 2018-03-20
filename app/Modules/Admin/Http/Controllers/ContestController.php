@@ -28,10 +28,13 @@ class ContestController extends Controller
     		if ($check)
     			return redirect('/admin/contest');
 
-
     	}
     	$subject = Subjects::select()->get();
 
     	return view('admin::contest.add')->with('subject', $subject);
+    }
+    public function add_question(Request $request)
+    {
+        return view('admin::contest.question');
     }
 }

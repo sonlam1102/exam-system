@@ -15,7 +15,7 @@
           <a href="/admin/contest/add"><button type="button" class="btn btn-block btn-primary">Add</button></a>
           <div class="box">
             <!-- /.box-header -->
-            <div class="box-body table-responsive no-padding">
+            <div class="box-body">
               <table class="table table-hover">
                 <tbody>
                   <tr>
@@ -31,8 +31,10 @@
                         <td> {{ $item->id }}</td>
                         <td> {{ $item->title }}</td>
                         <td> {{ $item->subject_id }}</td>
-                        <td> {{ $item->date }}</td>
-                        <td></td>
+                        <td> {{ date('d/m/Y', strtotime($item->date)) }}</td>
+                        <td>
+                          <a href="/admin/contest/edit/{{ $item->id }}"><button type="button" class="btn btn-block btn-success">Edit</button></a>
+                        </td>
                       </tr>
                     @endforeach
                   @endif

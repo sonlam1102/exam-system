@@ -24,4 +24,5 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('/contest', 'ContestController@index');
     Route::get('/contest/add', 'ContestController@add');
     Route::post('/contest/add', 'ContestController@add');
+    Route::get('/contest/edit/{id}', 'ContestController@add_question')->where('id', '[0-9]+');
 });
