@@ -77,4 +77,15 @@
         </div>
     </section>
 </div>
-@endsection
+
+@stop
+@section('javascript')
+<script type="text/javascript">
+   $(function() {
+    $('#birthday').daterangepicker({
+        singleDatePicker: true,
+        showDropdowns: true
+    });
+  });
+</script>
+@stop

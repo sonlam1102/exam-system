@@ -61,3 +61,13 @@
     </section>
 </div>
 @endsection
+@section('javascript')
+<script type="text/javascript">
+   $(function() {
+    $('#date').daterangepicker({
+        singleDatePicker: true,
+        showDropdowns: true
+    });
+  });
+</script>
+@stop

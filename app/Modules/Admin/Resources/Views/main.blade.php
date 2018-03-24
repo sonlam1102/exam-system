@@ -36,6 +36,6 @@
 
   </body>
 </html>
-
-<!-- Load Javascript-->
 @include('admin::assets.script')
+@yield('javascript')
+<!-- Load Javascript-->

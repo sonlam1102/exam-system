@@ -55,8 +55,8 @@
               <div class="box-header">
                 <a href="javascript:void(0)" id="add_new_question">Add 1 question</a>
               </div>
-              <div class="box-body">
-                
+              <div class="box-body" id='question_field'>
+
               </div>
               <div class="box-footer">
                 <button type="submit" class="btn btn-info pull-left">Submit</button>
@@ -68,3 +68,14 @@
     </section>
 </div>
 @endsection
+@section('javascript')
+<script src="/admin/js/question.js"></script>
+<script type="text/javascript">
+   $(function() {
+    $('#date').daterangepicker({
+        singleDatePicker: true,
+        showDropdowns: true
+    });
+  });
+</script>
+@stop
