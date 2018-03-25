@@ -66,7 +66,10 @@
                               @php $mdlAnswer = new App\Answer() @endphp
                               @if($answers = $mdlAnswer->get_all_answers($item->id))
                                 @foreach($answers as $ans)
-                                  <input class="form-control answer" type="text" value="{{ $ans->content }}">
+                                  <div class='input-group'>
+                                    <input class='input-group-addon flat-red right-answer' type='checkbox'>
+                                    <input class="form-control answer" type="text" value="{{ $ans->content }}">
+                                  </div>
                                 @endforeach
                               @endif
                           </div>
