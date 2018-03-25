@@ -34,7 +34,6 @@ class User extends Authenticatable
 
         if (!isset($array_info['name']) || !isset($array_info['address']) || !isset($array_info['birthday']) || !isset($array_info['img']))
             return false;
-
         $user->name = $array_info['name'];
         $user->address = $array_info['address'];
         $user->birthday = $array_info['birthday'];

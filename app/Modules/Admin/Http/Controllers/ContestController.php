@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Contests;
 use App\Subjects;
+use App\Questions;
 
 class ContestController extends Controller
 {
@@ -43,6 +44,28 @@ class ContestController extends Controller
         if (!$contest)
             abort('404');
 
-        return view('admin::contest.question')->with('data', $contest)->with('subject', $subject);
+        $question = Questions::select()->where('contest_id', '=', $id)->get();
+        return view('admin::contest.question')
+            ->with('id', $id)
+            ->with('data', $contest)->with('subject', $subject)
+            ->with('questions', $question);
+    }
+    public function edit_info($id, Request $request)
+    {
+        if (!$id)
+            abort('404');
+        $subject_id = ($request->subject) ? $request->subject : '';
+        $title = ($request->title) ? $request->title : '';
+        $date = ($request->startdate) ? $request->startdate : '';
+
+        $data = array(
+            'subject_id' => $subject_id,
+            'title' => $title,
+            'date' => $date,
+        );
+
+        $check = Contests::edit($id, $data);
+
+        return redirect('admin/contest/edit/'.$id);
     }
 }

@@ -40,7 +40,7 @@
                 <div class="form-group">
                   <label for="inputEmail3" class="col-sm-2 control-label">Birthday</label>
                   <div class="col-sm-10">
-                    <input class="form-control" id="birthday" name="birthday" placeholder="Birthday" type="text" value="{{ date('d/m/Y', strtotime($data->birthday)) }}">
+                    <input class="form-control" id="birthday" name="birthday" placeholder="Birthday" type="text" data-date="{{ ($data->birthday) ? date('m/d/Y' ,strtotime($data->birthday)) : date('m/d/Y') }}">
                   </div>
                 </div>
 
@@ -84,7 +84,9 @@
    $(function() {
     $('#birthday').daterangepicker({
         singleDatePicker: true,
-        showDropdowns: true
+        "startDate": $('#birthday').data('date'),
+        format: 'DD/MM/YYYY',
+        showDropdowns: true,
     });
   });
 </script>

@@ -33,12 +33,14 @@ class HomeController extends Controller
                 dd('user');
             }
             else {
-                return redirect('/admin');
+                return redirect('/admin/info');
             }
         }
     }
     public function login(Request $request)
     {
+        if(\Auth::check())
+        	return redirect('/');
         if($request->isMethod('post')) {
             $rules = [
                 'email' =>'required|email',
