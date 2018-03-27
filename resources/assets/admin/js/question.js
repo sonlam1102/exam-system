@@ -18,20 +18,19 @@ $(document).ready(function() {
 function packedQuestion(objectQuestion)
 {
 	var question = objectQuestion.find('.question'),
-	answer = objectQuestion.find('.answers_group'),
 	answerObj = objectQuestion.find('.answers_group'),
 	answer_list = [],
 	j = 0
 	json_array = {};
 
-	answer.each(function(key, value) {
+	answerObj.each(function(key, value) {
 	    answer_list[j] = packedAnswer($(this));
 	   	j++;
 	});
 
 	json_array = {
-	    "question" : question,
-	    "answer" : answer_list
+	    "question" : question.val(),
+	    "answer" : answer_list,
 	}
 	return json_array;
 }
@@ -39,7 +38,7 @@ function packedAnswer(objAnswer)
 {
 	var json_array = {
 		'answer_content' : objAnswer.find('.answer').val(),
-		'right-answer' : objAnswer.find('.right-answer').is(':checked')
+		'right-answer' : objAnswer.find('.right-answer').is(':checked'),
 	};
 	return json_array;
 }

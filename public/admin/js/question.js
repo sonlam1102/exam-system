@@ -93,19 +93,18 @@ $(document).ready(function () {
 });
 function packedQuestion(objectQuestion) {
 	var question = objectQuestion.find('.question'),
-	    answer = objectQuestion.find('.answers_group'),
 	    answerObj = objectQuestion.find('.answers_group'),
 	    answer_list = [],
 	    j = 0;
 	json_array = {};
 
-	answer.each(function (key, value) {
+	answerObj.each(function (key, value) {
 		answer_list[j] = packedAnswer($(this));
 		j++;
 	});
 
 	json_array = {
-		"question": question,
+		"question": question.val(),
 		"answer": answer_list
 	};
 	return json_array;
