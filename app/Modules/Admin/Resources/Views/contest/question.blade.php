@@ -53,6 +53,7 @@
             </div>
             <div class="box">
               <form id='question-form' >
+                <input type="text" name="token" id='token' value="{{ csrf_token() }}" hidden>
                 <div class="box-header">
                   <a href="javascript:void(0)" id="add_new_question">Add 1 question</a>
                 </div>
@@ -63,21 +64,22 @@
                           <label for="inputEmail3" class="col-sm-2 control-label">Question</label>
                           <input class='form-control question' type='text' value="{{ $item->content }}">"
                           <div class='form-group answers_group'>
-                              @php $mdlAnswer = new App\Answer() @endphp
-                              @if($answers = $mdlAnswer->get_all_answers($item->id))
-                                @foreach($answers as $ans)
-                                  <div class='input-group'>
-                                    <input class='input-group-addon flat-red right-answer' type='checkbox'>
-                                    <input class="form-control answer" type="text" value="{{ $ans->content }}">
-                                  </div>
-                                @endforeach
-                              @endif
+                              
                           </div>
+                          @php $mdlAnswer = new App\Answer() @endphp
+                            @if($answers = $mdlAnswer->get_all_answers($item->id))
+                              @foreach($answers as $ans)
+                                <div class='input-group answers_group'>
+                                  <input class='input-group-addon flat-red right-answer' type='checkbox'>
+                                  <input class="form-control answer" type="text" value="{{ $ans->content }}">
+                                </div>
+                              @endforeach
+                          @endif
                         </div>
                       @endforeach
                     @endif
-                  </div>
-
+                </div>
+                <input type="text" name="data" id='data' hidden>
                 <div class="box-footer">
                  <button type="submit" id='submit' class="btn btn-info pull-left">Submit</button>
                 </div>
