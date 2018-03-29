@@ -98,7 +98,7 @@ $(document).ready(function () {
 			url: actionLink,
 			data: { '_token': $('#token').val(), 'data': data },
 			success: function success() {
-				console.log(1);
+				location.reload();
 			}
 		});
 	});

@@ -9,12 +9,12 @@ class Answer extends Model
     protected $table = "answers";
     public $timestamps = false;
 
-    public function get_all_answers($questionId)
+    public static function get_all_answers($questionId)
     {
     	if (!$questionId)
     		return null;
 
-    	$data = $this->select()->where('question_id', '=', $questionId)->get();
+    	$data = self::select()->where('question_id', '=', $questionId)->get();
     	return $data;
     }
 

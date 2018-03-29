@@ -60,19 +60,19 @@
                 <div class="box-body" id='question_field'>
                     @if ($questions)
                       @foreach($questions as $item)
-                       <div class='form-group question_pack'>         
+                       <div class='form-group question_item'>         
                           <label for="inputEmail3" class="col-sm-2 control-label">Question</label>
                           <input class='form-control question' type='text' value="{{ $item->content }}">
                           <label class='col-sm-2 control-label'>Answers</label>
-                          @php $mdlAnswer = new App\Answer() @endphp
-                            @if($answers = $mdlAnswer->get_all_answers($item->id))
-                              @foreach($answers as $ans)
-                                <div class='input-group answers_group'>
-                                  <input class='input-group-addon flat-red right-answer' type='checkbox'>
-                                  <input class="form-control answer" type="text" value="{{ $ans->content }}">
-                                </div>
-                              @endforeach
-                          @endif
+                          
+                          @if($answers = App\Answer::get_all_answers($item->id))
+                            @foreach($answers as $ans)
+                              <div class='input-group answers_group'>
+                                <input class='input-group-addon flat-red right-answer' type='checkbox' {{ ((App\Result::checkResultOfQuestion($item->id, $id))->answer_id == $ans->id ) ? 'checked' : '' }} >
+                                <input class="form-control answer" type="text" value="{{ $ans->content }}">
+                              </div>
+                            @endforeach
+                        @endif
                         </div>
                       @endforeach
                     @endif

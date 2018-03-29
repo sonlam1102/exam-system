@@ -41,14 +41,13 @@ class ContestController extends Controller
         if (!$id)
             abort('404');
         $data = $request->data;
-
         foreach ($data as $item) {
             $questionId = Questions::add_question($id, $item['question']);
             if ($questionId) {
                 foreach ($item['answer'] as $value) {
                     $answerId = Answer::addAnswer($questionId, $id, $value['answer_content']);
 
-                    if ($value['right_answer'] && $answerId) {
+                    if ($value['right_answer'] == 'true' && $answerId) {
                         Result::addResultOfQuestion($questionId, $id, $answerId);
                     }
                 }

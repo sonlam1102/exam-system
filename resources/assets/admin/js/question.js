@@ -22,7 +22,7 @@ $(document).ready(function() {
 		  url: actionLink,
 		  data: { '_token': $('#token').val(), 'data' : data },
 		  success: function(){
-		  	console.log(1);
+		  	location.reload();
 		  },
 		});
 	});
