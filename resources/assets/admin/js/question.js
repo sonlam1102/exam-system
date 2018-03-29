@@ -6,6 +6,7 @@ $(document).ready(function() {
 
 	$("#question-form").submit(function(e) {
 		var data = [],
+		actionLink = $(this).attr('action'),
 		i = 0;
 		e.preventDefault();
 	    $('.question_pack').each(function(key, value) {
@@ -18,9 +19,11 @@ $(document).ready(function() {
 
 		$.ajax({
 		  type: "POST",
-		  url: '',
+		  url: actionLink,
 		  data: { '_token': $('#token').val(), 'data' : data },
-		  success: function(){},
+		  success: function(){
+		  	console.log(1);
+		  },
 		});
 	});
 });
@@ -46,7 +49,7 @@ function packedAnswer(objAnswer)
 {
 	var json_array = {
 		'answer_content' : objAnswer.find('.answer').val(),
-		'right-answer' : objAnswer.find('.right-answer').is(':checked'),
+		'right_answer' : objAnswer.find('.right-answer').is(':checked'),
 	};
 	return json_array;
 }

@@ -8,6 +8,8 @@ use App\Http\Controllers\Controller;
 use App\Contests;
 use App\Subjects;
 use App\Questions;
+use App\Result;
+use App\Answer;
 
 class ContestController extends Controller
 {
@@ -38,22 +40,26 @@ class ContestController extends Controller
     {
         if (!$id)
             abort('404');
+        $data = $request->data;
 
-        $contest = Contests::select()->where('id', '=', $id)->first();
-        $subject = Subjects::select()->get();
-        if (!$contest)
-            abort('404');
+        foreach ($data as $item) {
+            $questionId = Questions::add_question($id, $item['question']);
+            if ($questionId) {
+                foreach ($item['answer'] as $value) {
+                    $answerId = Answer::addAnswer($questionId, $id, $value['answer_content']);
 
-        $question = Questions::select()->where('contest_id', '=', $id)->get();
-        return view('admin::contest.question')
-            ->with('id', $id)
-            ->with('data', $contest)->with('subject', $subject)
-            ->with('questions', $question);
+                    if ($value['right_answer'] && $answerId) {
+                        Result::addResultOfQuestion($questionId, $id, $answerId);
+                    }
+                }
+            }
+        }
     }
     public function edit_info($id, Request $request)
     {
         if (!$id)
             abort('404');
+
         $subject_id = ($request->subject) ? $request->subject : '';
         $title = ($request->title) ? $request->title : '';
         $date = ($request->startdate) ? $request->startdate : '';
@@ -67,5 +73,22 @@ class ContestController extends Controller
         $check = Contests::edit($id, $data);
 
         return redirect('admin/contest/edit/'.$id);
+    }
+
+    public function edit($id, Request $request)
+    {
+        if (!$id)
+            abort('404');
+
+        $contest = Contests::select()->where('id', '=', $id)->first();
+        $subject = Subjects::select()->get();
+        if (!$contest)
+            abort('404');
+
+        $question = Questions::select()->where('contest_id', '=', $id)->get();
+        return view('admin::contest.question')
+            ->with('id', $id)
+            ->with('data', $contest)->with('subject', $subject)
+            ->with('questions', $question);
     }
 }

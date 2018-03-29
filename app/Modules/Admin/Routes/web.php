@@ -13,6 +13,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('/contest', 'ContestController@index');
     Route::get('/contest/add', 'ContestController@add');
     Route::post('/contest/add', 'ContestController@add');
-    Route::post('/contest/edit/{id}/info', 'ContestController@edit_info')->where('id', '[0-9]+');  //edit question
-    Route::get('/contest/edit/{id}', 'ContestController@add_question')->where('id', '[0-9]+');
+    Route::get('/contest/edit/{id}', 'ContestController@edit')->where('id', '[0-9]+');  //add question request
+    Route::post('/contest/edit/{id}/info', 'ContestController@edit_info')->where('id', '[0-9]+');  //edit contest infp
+    Route::post('/contest/edit/{id}/question', 'ContestController@add_question')->where('id', '[0-9]+');  //add question request
 });

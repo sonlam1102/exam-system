@@ -14,7 +14,22 @@ class Answer extends Model
     	if (!$questionId)
     		return null;
 
-    	$data = Answer::select()->where('question_id', '=', $questionId)->get();
+    	$data = $this->select()->where('question_id', '=', $questionId)->get();
     	return $data;
+    }
+
+    public static function addAnswer($question_id, $constest_id, $content) {
+    	if (!$question_id || !$constest_id)
+    		return false;
+
+    	$answers = new Answer();
+    	$answers->question_id = $question_id;
+    	$answers->contest_id = $constest_id;
+    	$answers->content = $content;
+
+    	if ($answers->save())
+    		return $answers->id;
+
+    	return false;
     }
 }

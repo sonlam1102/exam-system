@@ -52,7 +52,7 @@
               </form>
             </div>
             <div class="box">
-              <form id='question-form' >
+              <form id='question-form' action='/admin/contest/edit/{{ $id }}/question'>
                 <input type="text" name="token" id='token' value="{{ csrf_token() }}" hidden>
                 <div class="box-header">
                   <a href="javascript:void(0)" id="add_new_question">Add 1 question</a>
@@ -62,10 +62,8 @@
                       @foreach($questions as $item)
                        <div class='form-group question_pack'>         
                           <label for="inputEmail3" class="col-sm-2 control-label">Question</label>
-                          <input class='form-control question' type='text' value="{{ $item->content }}">"
-                          <div class='form-group answers_group'>
-                              
-                          </div>
+                          <input class='form-control question' type='text' value="{{ $item->content }}">
+                          <label class='col-sm-2 control-label'>Answers</label>
                           @php $mdlAnswer = new App\Answer() @endphp
                             @if($answers = $mdlAnswer->get_all_answers($item->id))
                               @foreach($answers as $ans)
