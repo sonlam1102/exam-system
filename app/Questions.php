@@ -28,5 +28,11 @@ class Questions extends Model
         $this->content = $content;
         $this->save();
     }
-    
+
+    public static function countQuestionByContest($contest_id)
+    {
+        $question = self::select()->where('contest_id', '=', $contest_id);
+        return $question->count();
+    }
+
 }
