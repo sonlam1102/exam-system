@@ -22,5 +22,11 @@ class Questions extends Model
 
     	return false;
     }
+
+    public function edit_question($content)
+    {
+        $this->content = $content;
+        $this->save();
+    }
     
 }

@@ -40,15 +40,35 @@ class ContestController extends Controller
     {
         if (!$id)
             abort('404');
-        $data = $request->data;
-        foreach ($data as $item) {
-            $questionId = Questions::add_question($id, $item['question']);
-            if ($questionId) {
-                foreach ($item['answer'] as $value) {
-                    $answerId = Answer::addAnswer($questionId, $id, $value['answer_content']);
+        $data = isset($request->data) ? $request->data : null;
+        $update = isset($request->update) ? $request->update : null;
 
-                    if ($value['right_answer'] == 'true' && $answerId) {
-                        Result::addResultOfQuestion($questionId, $id, $answerId);
+        if ($data) {      
+            foreach ($data as $item) {
+                $questionId = Questions::add_question($id, $item['question']);
+                if ($questionId) {
+                    foreach ($item['answer'] as $value) {
+                        $answerId = Answer::addAnswer($questionId, $id, $value['answer_content']);
+
+                        if ($value['right_answer'] == 'true' && $answerId) {
+                            Result::addResultOfQuestion($questionId, $id, $answerId);
+                        }
+                    }
+                }
+            }
+        }
+
+        if ($update) {
+            foreach ($update as $item) {
+                $question = Questions::find($item['id'])->edit_question($item['question']);
+                foreach ($item['answer'] as $value) {
+                    $answer = Answer::find($value['id'])->editAnswer($value['answer_content']);
+
+                    if ($value['right_answer'] == 'true') {
+                        $result = Result::where('question_id', '=', $item['id'])
+                                        ->where('contest_id', '=', $id)
+                                        ->first();
+                        $result->editResult($value['id']);
                     }
                 }
             }
@@ -69,7 +89,7 @@ class ContestController extends Controller
             'date' => $date,
         );
 
-        $check = Contests::edit($id, $data);
+        $check = Contests::find($id)->edit($data);
 
         return redirect('admin/contest/edit/'.$id);
     }

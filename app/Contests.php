@@ -23,21 +23,17 @@ class Contests extends Model
 
     	return $contest->save();
     }
-    public static function edit($id, $data)
+    public function edit($data)
     {
         if (!isset($data['subject_id']) || !isset($data['title']) || !isset($data['date']))
             return false;
         if (!$data['subject_id'])
             return false;
 
-        $contest = self::find($id);
-        if (!$contest)
-            return false;
+        $this->title = $data['title'];
+        $this->date = date('Y-m-d', strtotime($data['date']));
+        $this->subject_id = $data['subject_id'];
 
-        $contest->title = $data['title'];
-        $contest->date = date('Y-m-d', strtotime($data['date']));
-        $contest->subject_id = $data['subject_id'];
-
-        return $contest->save();
+        return $this->save();
     }
 }

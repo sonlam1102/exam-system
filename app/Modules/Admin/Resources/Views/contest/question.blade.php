@@ -62,6 +62,7 @@
                       @foreach($questions as $item)
                        <div class='form-group question_item'>         
                           <label for="inputEmail3" class="col-sm-2 control-label">Question</label>
+                          <input class='form-control question_id' type='text' value="{{ $item->id }}" hidden >
                           <input class='form-control question' type='text' value="{{ $item->content }}">
                           <label class='col-sm-2 control-label'>Answers</label>
                           
@@ -70,10 +71,11 @@
                               <div class='input-group answers_group'>
                                 <input class='input-group-addon flat-red right-answer' type='checkbox' {{ ((App\Result::checkResultOfQuestion($item->id, $id))->answer_id == $ans->id ) ? 'checked' : '' }} >
                                 <input class="form-control answer" type="text" value="{{ $ans->content }}">
+                                <input class='form-control answer_id' type='text' value="{{ $ans->id }}" hidden >
                               </div>
                             @endforeach
                         @endif
-                        </div>
+                      </div>
                       @endforeach
                     @endif
                 </div>

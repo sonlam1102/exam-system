@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class Result extends Model
 {
     protected $table = "result";
+    protected $primaryKey = 'question_id';
+
     public $timestamps = false;
 
     public static function checkResultOfQuestion($question_id, $contest_id)
@@ -21,7 +23,8 @@ class Result extends Model
     	return $data;
     }
 
-    public static function addResultOfQuestion($question_id, $contest_id, $answer_id) {
+    public static function addResultOfQuestion($question_id, $contest_id, $answer_id) 
+    {
         if (!$question_id || !$contest_id || !$answer_id)
             return false;
 
@@ -31,5 +34,11 @@ class Result extends Model
         $result->answer_id = $answer_id;
 
         return $result->save();
+    }
+
+    public function editResult($newAnswerId) 
+    {
+        $this->answer_id = $newAnswerId;
+        $this->save();
     }
 }

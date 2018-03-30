@@ -32,4 +32,10 @@ class Answer extends Model
 
     	return false;
     }
+
+    public function editAnswer($content)
+    {
+        $this->content = $content;
+        $this->save();
+    }
 }
