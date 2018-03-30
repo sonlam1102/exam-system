@@ -21,7 +21,6 @@ $(document).ready(function() {
 	    	dataUpdate[j] = packedQuestion($(this), 1);
 	    	j++;
 	    });
-	    console.log(dataUpdate);
 
 		$.ajax({
 		  type: "POST",

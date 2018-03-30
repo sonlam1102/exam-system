@@ -60,10 +60,12 @@
                 <div class="box-body" id='question_field'>
                     @if ($questions)
                       @foreach($questions as $item)
-                       <div class='form-group question_item'>         
-                          <label for="inputEmail3" class="col-sm-2 control-label">Question</label>
+                       <div class='form-group question_item'>   
+                          <label for="inputEmail3" class="control-label">Question {{ $item->id }}</label>
+                                           
                           <input class='form-control question_id' type='text' value="{{ $item->id }}" hidden >
                           <input class='form-control question' type='text' value="{{ $item->content }}">
+
                           <label class='col-sm-2 control-label'>Answers</label>
                           
                           @if($answers = App\Answer::get_all_answers($item->id))
@@ -76,6 +78,7 @@
                             @endforeach
                         @endif
                       </div>
+                      <br>
                       @endforeach
                     @endif
                 </div>

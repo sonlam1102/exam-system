@@ -26,6 +26,7 @@
 
         <!-- Main content -->
         <div>
+          <!-- extend content from template-->
           @yield('content')
         </div>
 
@@ -36,6 +37,8 @@
 
   </body>
 </html>
-@include('admin::assets.script')
-@yield('javascript')
 <!-- Load Javascript-->
+@include('admin::assets.script')
+
+<!-- extend javascript code from template-->
+@yield('javascript')

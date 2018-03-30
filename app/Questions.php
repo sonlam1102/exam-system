@@ -26,7 +26,7 @@ class Questions extends Model
     public function edit_question($content)
     {
         $this->content = $content;
-        $this->save();
+        return $this->save();
     }
 
     public static function countQuestionByContest($contest_id)
@@ -35,4 +35,13 @@ class Questions extends Model
         return $question->count();
     }
 
+    public function deleteQuestion()
+    {
+        return $this->delete();   
+    }
+
+    public static function deleteByContest($contest_id)
+    {
+        return self::where('contest_id', '=', $contest_id)->delete();
+    }
 }

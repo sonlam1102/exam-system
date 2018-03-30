@@ -16,4 +16,5 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('/contest/edit/{id}', 'ContestController@edit')->where('id', '[0-9]+');  //add question request
     Route::post('/contest/edit/{id}/info', 'ContestController@edit_info')->where('id', '[0-9]+');  //edit contest infp
     Route::post('/contest/edit/{id}/question', 'ContestController@add_question')->where('id', '[0-9]+');  //add question request
+    Route::delete('/contest/delete/{id}', 'ContestController@deleteContest')->where('id', '[0-9]+');  //delete contest by id
 });

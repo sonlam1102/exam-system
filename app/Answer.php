@@ -36,6 +36,21 @@ class Answer extends Model
     public function editAnswer($content)
     {
         $this->content = $content;
-        $this->save();
+        return $this->save();
+    }
+
+    public function deleteAnswer()
+    {
+        return $this->delete();
+    }
+
+    public static function deleteByQuestion($question_id)
+    {
+        return self::where('question_id', '=', $question_id)->delete();
+    }
+
+    public static function deleteByContest($contest_id)
+    {
+        return self::where('contest_id', '=', $contest_id)->delete();
     }
 }

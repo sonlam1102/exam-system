@@ -39,6 +39,16 @@ class Result extends Model
     public function editResult($newAnswerId) 
     {
         $this->answer_id = $newAnswerId;
-        $this->save();
+        return $this->save();
+    }
+
+    public static function deleteByQuestion($questionId)
+    {
+        return self::where('question_id', '=', $questionId)->delete();
+    }
+
+    public static function deleteByContest($contest_id)
+    {
+        return self::where('contest_id', '=', $contest_id)->delete();
     }
 }

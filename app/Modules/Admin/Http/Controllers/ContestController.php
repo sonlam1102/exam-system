@@ -112,4 +112,18 @@ class ContestController extends Controller
             ->with('data', $contest)->with('subject', $subject)
             ->with('questions', $question);
     }
+
+    public function deleteContest($id)
+    {
+        if (!$id)
+            abort('404');
+        $contest = Contests::find($id);
+        Questions::deleteByContest($id);
+        Answer::deleteByContest($id);
+        Result::deleteByContest($id);
+
+        $contest->delete();
+
+        return redirect('admin/contest');
+    }
 }

@@ -35,7 +35,12 @@
                         <td> {{ App\Questions::countQuestionByContest($item->id) }}</td>
                         <td> {{ date('d/m/Y', strtotime($item->date)) }}</td>
                         <td>
-                          <a href="/admin/contest/edit/{{ $item->id }}"><button type="button" class="btn btn-block btn-success">Edit</button></a>
+                          <a href="/admin/contest/edit/{{ $item->id }}"><button type="button" class="btn btn-success">Edit</button></a>
+                          <form class="btn" action="/admin/contest/delete/{{ $item->id }}" method="POST">
+                            @csrf
+                            <input type="hidden" name="_method" value="delete" />
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                          </form>
                         </td>
                       </tr>
                     @endforeach
