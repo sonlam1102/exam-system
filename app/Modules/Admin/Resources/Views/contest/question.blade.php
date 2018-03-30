@@ -29,7 +29,7 @@
                   <div class="form-group">
                     <label for="inputEmail3" class="col-sm-2 control-label">Date</label>
                     <div class="col-sm-10">
-                      <input class="form-control" id="startdate" name="startdate" placeholder="Date" type="text" data-date="{{ ($data->date) ? date('m/d/Y' ,strtotime($data->date)) : date('m/d/Y') }}" >
+                      <input class="form-control" id="startdate" name="startdate" placeholder="Date" type="text" data-date="{{ ($data->date) ? date('d-m-Y' ,strtotime($data->date)) : date('d-m-Y') }}" >
                     </div>
                   </div>
 
@@ -46,7 +46,7 @@
                       </select>
                     </div>
                   </div>
-                  <button type="submit" id='submit' class="btn btn-info pull-left">Submit</button>
+                  <button type="submit" id='submit' class="btn btn-info pull-left">Edit info</button>
                 </div>
 
               </form>
@@ -68,8 +68,8 @@
                           
                           @if($answers = App\Answer::get_all_answers($item->id))
                             @foreach($answers as $ans)
-                              <div class='input-group answers_group'>
-                                <input class='input-group-addon flat-red right-answer' type='checkbox' {{ ((App\Result::checkResultOfQuestion($item->id, $id))->answer_id == $ans->id ) ? 'checked' : '' }} >
+                              <div class='input-group answers_group' name='answers_group'>
+                                <input class='input-group-addon flat-red right-answer' name = '{{ "right-answer".$item->id }}' type='radio' {{ ((App\Result::checkResultOfQuestion($item->id, $id))->answer_id == $ans->id ) ? 'checked' : '' }} >
                                 <input class="form-control answer" type="text" value="{{ $ans->content }}">
                                 <input class='form-control answer_id' type='text' value="{{ $ans->id }}" hidden >
                               </div>
@@ -81,7 +81,7 @@
                 </div>
                 <input type="text" name="data" id='data' hidden>
                 <div class="box-footer">
-                 <button type="submit" id='submit' class="btn btn-info pull-left">Submit</button>
+                 <button type="submit" id='submit' class="btn btn-info pull-left">Add question</button>
                 </div>
               </form>
             </div>
@@ -95,10 +95,13 @@
 <script type="text/javascript">
     $(function() {
         $('#startdate').daterangepicker({
+            locale: {
+              format: 'DD-MM-YYYY'
+            },
             singleDatePicker: true,
             "startDate": $('#startdate').data('date'),
-            format: 'DD/MM/YYYY',
             showDropdowns: true,
+
         });
   });
 </script>

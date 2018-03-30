@@ -66,7 +66,10 @@
    $(function() {
     $('#date').daterangepicker({
         singleDatePicker: true,
-        showDropdowns: true
+        showDropdowns: true,
+        locale: {
+              format: 'DD-MM-YYYY'
+        },
     });
   });
 </script>

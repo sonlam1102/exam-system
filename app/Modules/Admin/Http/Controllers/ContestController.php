@@ -45,6 +45,8 @@ class ContestController extends Controller
 
         if ($data) {      
             foreach ($data as $item) {
+                if (!$item['question'] || $item['question'] == '')
+                    continue;
                 $questionId = Questions::add_question($id, $item['question']);
                 if ($questionId) {
                     foreach ($item['answer'] as $value) {

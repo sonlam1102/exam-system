@@ -75,9 +75,10 @@ module.exports = __webpack_require__(1);
 /***/ (function(module, exports) {
 
 $(document).ready(function () {
-
+	var num = 0;
 	$('#add_new_question').click(function () {
-		$('#question_field').append(questionPackGenerate());
+		$('#question_field').append(questionPackGenerate(num));
+		num++;
 	});
 
 	$("#question-form").submit(function (e) {
@@ -155,7 +156,9 @@ function packedAnswer(objAnswer) {
 	return json_array;
 }
 function questionPackGenerate() {
-	var content = "<div class='form-group question_pack'>" + "<label class='col-sm-2 control-label'>Question</label>" + "<input class='form-control question' type='text'>" + "<label class='col-sm-2 control-label'>Answers</label>" + "<div class='input-group answers_group'>" + "<input class='input-group-addon flat-red right-answer' type='checkbox'>" + "<input class='form-control answer type='text'> " + "</div>" + "<div class='input-group answers_group'>" + "<input class='input-group-addon flat-red right-answer' type='checkbox'>" + "<input class='form-control answer type='text' >" + "</div>" + "<div class='input-group answers_group'>" + "<input class='input-group-addon flat-red right-answer' type='checkbox'>" + "<input class='form-control answer type='text' >" + "</div>" + "<div class='input-group answers_group'>" + "<input class='input-group-addon flat-red right-answer' type='checkbox'>" + "<input class='form-control answer type='text' >" + "</div>" + "</div>";
+	var i = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
+
+	var content = "<div class='form-group question_pack'>" + "<label class='col-sm-2 control-label'>Question</label>" + "<input class='form-control question' type='text'>" + "<label class='col-sm-2 control-label'>Answers</label>" + "<div class='input-group answers_group'>" + "<input class='input-group-addon flat-red right-answer' name ='answers_group " + i + "' type='radio'>" + "<input class='form-control answer type='text'> " + "</div>" + "<div class='input-group answers_group'>" + "<input class='input-group-addon flat-red right-answer' name ='answers_group " + i + "' type='radio'>" + "<input class='form-control answer type='text' >" + "</div>" + "<div class='input-group answers_group'>" + "<input class='input-group-addon flat-red right-answer' name ='answers_group " + i + "' type='radio'>" + "<input class='form-control answer type='text' >" + "</div>" + "<div class='input-group answers_group'>" + "<input class='input-group-addon flat-red right-answer' name ='answers_group " + i + "' type='radio'>" + "<input class='form-control answer type='text' >" + "</div>" + "</div>";
 	return content;
 }
 
