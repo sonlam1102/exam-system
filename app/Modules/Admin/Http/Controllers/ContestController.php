@@ -63,14 +63,16 @@ class ContestController extends Controller
         if ($update) {
             foreach ($update as $item) {
                 $question = Questions::find($item['id'])->edit_question($item['question']);
+                if (!isset($item['answer']))
+                    continue;
                 foreach ($item['answer'] as $value) {
                     $answer = Answer::find($value['id'])->editAnswer($value['answer_content']);
 
                     if ($value['right_answer'] == 'true') {
                         $result = Result::where('question_id', '=', $item['id'])
                                         ->where('contest_id', '=', $id)
-                                        ->first();
-                        $result->editResult($value['id']);
+                                        ->first();                   
+                        ($result) ? $result->editResult($value['id']) : Result::addResultOfQuestion($item['id'], $id, $value['id']);
                     }
                 }
             }

@@ -18,9 +18,9 @@ class Result extends Model
 
     	$data = self::select('answer_id')
     				->where('question_id', '=', $question_id)
-    				->where('contest_id', '=', $contest_id)
-    				->first();
-    	return $data;
+    				->where('contest_id', '=', $contest_id);
+    				
+    	return ($data) ? $data->first() : null;
     }
 
     public static function addResultOfQuestion($question_id, $contest_id, $answer_id) 
