@@ -21,9 +21,9 @@ class Answer extends Model
     public static function addAnswer($question_id, $constest_id, $content) {
     	if (!$question_id || !$constest_id)
     		return false;
-        if (!$content)
+        if (!$content || $content == '')
             return false;
-        
+
     	$answers = new Answer();
     	$answers->question_id = $question_id;
     	$answers->contest_id = $constest_id;

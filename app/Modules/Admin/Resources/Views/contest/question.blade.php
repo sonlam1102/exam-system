@@ -69,8 +69,8 @@
                           </div>   
                           <input class='form-control question_id' type='text' value="{{ $item->id }}" hidden >
                           <input class='form-control question' type='text' value="{{ $item->content }}">
+                          <label class='col-sm-2 control-label'>Answers</label>
                           @if($answers = App\Answer::get_all_answers($item->id))
-                            <label class='col-sm-2 control-label'>Answers</label>
                             @foreach($answers as $ans)
                               <div class='input-group answers_group' name='answers_group'>
                                 <input class='input-group-addon flat-red right-answer' name = '{{ "right-answer".$item->id }}' type='radio' {{ (App\Result::checkResultOfQuestion($item->id, $id)) ? (((App\Result::checkResultOfQuestion($item->id, $id))->answer_id == $ans->id ) ? 'checked' : '') : '' }} >
