@@ -56,6 +56,7 @@
                 <input type="text" name="token" id='token' value="{{ csrf_token() }}" hidden>
                 <div class="box-header">
                   <a href="javascript:void(0)" id="add_new_question">Add 1 question</a>
+                  <a href="javascript:void(0)" id="add_new_big_question">Add 1 big question</a>
                 </div>
                 <div class="box-body" id='question_field'>
                     @if ($questions)
@@ -68,8 +69,16 @@
                             <button type="button" class="btn btn-sm btn-danger" id='delete' data-qid = '{{ $item->id }} '>Delete</button>
                           </div>   
                           <input class='form-control question_id' type='text' value="{{ $item->id }}" hidden >
-                          <input class='form-control question' type='text' value="{{ $item->content }}">
+                          <textarea class='form-control question' type='text'> {{ $item->content }} </textarea>
                           <label class='col-sm-2 control-label'>Answers</label>
+                          <p>
+                            @php
+                              $subquestion = App\Subquestion::getAllSubquestion($item->id);
+                              foreach($subquestion as $val) {
+                                    echo $val->subquestion_id . ' ';
+                               }        
+                            @endphp
+                          </p>
                           @if($answers = App\Answer::get_all_answers($item->id))
                             @foreach($answers as $ans)
                               <div class='input-group answers_group' name='answers_group'>

@@ -30,7 +30,7 @@ CREATE TABLE `answers` (
   PRIMARY KEY (`id`),
   KEY `contest_id` (`contest_id`),
   CONSTRAINT `answers_ibfk_1` FOREIGN KEY (`contest_id`) REFERENCES `contest` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=133 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -39,7 +39,7 @@ CREATE TABLE `answers` (
 
 LOCK TABLES `answers` WRITE;
 /*!40000 ALTER TABLE `answers` DISABLE KEYS */;
-INSERT INTO `answers` VALUES (9,4,'2',1),(10,4,'3',1),(11,4,'4',1),(12,4,'5',1),(13,5,'21',1),(14,5,'40',1),(15,5,'22',1),(16,5,'1',1),(17,6,'10',1),(18,6,'55',1),(19,6,'65',1),(20,6,'100',1),(21,7,'A^2 + 2AB + B^2',1),(22,7,'A^2 - 2AB + B^2',1),(23,7,'A^2 + B^2',1),(24,7,'A^2 - B^2',1),(25,8,'Hình chữ nhật có 2 cạnh kề bằng nhau',1),(26,8,'Hình thoi có 2 đường chéo vuông góc',1),(27,8,'Hình chữ nhật có 2 đường chéo vuông góc',1),(28,8,'Cả 3 đều đúng',1),(29,9,'1.2.3 = 6',1),(30,9,'1.2 = 2',1),(31,9,'1',1),(32,9,'0',1);
+INSERT INTO `answers` VALUES (85,31,'When',4),(86,31,'While',4),(87,31,'If',4),(88,31,'Because',4),(89,32,'concerning',4),(90,32,'the concern of',4),(91,32,'concerned that',4),(92,32,'concerns about',4),(93,33,'during the last',4),(94,33,'in the following',4),(95,33,'periodically over',4),(96,33,'since the last',4),(97,35,'show off the ARPAnet',4),(98,35,'share information',4),(99,35,'test the abilities of the Department of Defense',4),(100,35,'to send person-to-person messages, or e-mail',4),(101,36,'1969',4),(102,36,'1972',4),(103,36,'the 1970s',4),(104,36,'the 1960s',4),(105,37,'the 1990s',4),(106,37,'1991',4),(107,37,'1993',4),(108,37,'the 1980s',4),(109,38,'words',4),(110,38,'pictures',4),(111,38,'data',4),(112,38,'sound',4),(113,39,'computing progress',4),(114,39,'browsers',4),(115,39,'links',4),(116,39,'personal computers',4);
 /*!40000 ALTER TABLE `answers` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -58,7 +58,7 @@ CREATE TABLE `contest` (
   PRIMARY KEY (`id`),
   KEY `subject_id` (`subject_id`),
   CONSTRAINT `contest_ibfk_1` FOREIGN KEY (`subject_id`) REFERENCES `subjects` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -67,7 +67,7 @@ CREATE TABLE `contest` (
 
 LOCK TABLES `contest` WRITE;
 /*!40000 ALTER TABLE `contest` DISABLE KEYS */;
-INSERT INTO `contest` VALUES (1,1,'Kiem tra toan','2018-04-17 00:00:00'),(2,3,'Kiem tra Hoa 8','2018-04-06 00:00:00'),(3,2,'Kiem tra Ly CLDN','2018-08-22 00:00:00');
+INSERT INTO `contest` VALUES (4,5,'Kiem tra Anh van 1','2018-04-03 00:00:00');
 /*!40000 ALTER TABLE `contest` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -86,7 +86,7 @@ CREATE TABLE `questions` (
   KEY `contest_id` (`contest_id`),
   CONSTRAINT `questions_ibfk_1` FOREIGN KEY (`contest_id`) REFERENCES `contest` (`id`),
   CONSTRAINT `questions_ibfk_2` FOREIGN KEY (`contest_id`) REFERENCES `contest` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -95,7 +95,7 @@ CREATE TABLE `questions` (
 
 LOCK TABLES `questions` WRITE;
 /*!40000 ALTER TABLE `questions` DISABLE KEYS */;
-INSERT INTO `questions` VALUES (4,1,'Số nguyên tố kế tiếp của 2 là:'),(5,1,'(7-3)*4+6 = ?'),(6,1,'tổng của 10 số tự nhiên liên tiếp là'),(7,1,'Khai triển hằng đẳng thức (A+B)^2 là:'),(8,1,'Hình vuông là:'),(9,1,'3! ?');
+INSERT INTO `questions` VALUES (32,4,'Commercial builders downplayed __________ a bust in the superheated housing market.'),(33,4,'The report showed that overall prices are up 3.1 percent _________ 12 months.'),(34,4,'The idea for the Internet began in the early 1960s in the United States. The Department of Defense wanted to connect then computers together in order to share private information. In 1969, the ARPAnet (an early form of the Internet) first connected computers at four American universities. One computer successfully sent information to another. In 1972, scientists shared the ARPAnet with the world. They created a way to send person-to-person messages using the ARPAnet. This was the beginning of e-mail.\n\nOver the next few years, there was a lot of progress made in the world of computing, but most people were not using the Internet. Then, in the 1980s, personal computers became more common. In the early 1990s, two important things happened] the birth of the World Wide Web in 1991, and the creation of the first Web browser in 1993. The Web made it easier to find information on the Internet, and to move from place to place using links. The Web and browser made it possible to see information as a web site with data, including pictures, sounds, and words.'),(35,4,'The original purpose of creating a world-wide network is to.......'),(36,4,'People in America first thought about creating the Internet in......'),(37,4,'Two important inventions in the world of computing happened in.......'),(38,4,'Information is stored in a web site in forms of.......'),(39,4,'People who work online can move easily from place to place with the help of.......');
 /*!40000 ALTER TABLE `questions` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -120,7 +120,7 @@ CREATE TABLE `result` (
 
 LOCK TABLES `result` WRITE;
 /*!40000 ALTER TABLE `result` DISABLE KEYS */;
-INSERT INTO `result` VALUES (1,4,10),(1,5,15),(1,6,18),(1,7,23),(1,8,28),(1,9,29);
+INSERT INTO `result` VALUES (4,31,87),(4,32,90),(4,33,93),(4,35,99),(4,36,103),(4,37,105),(4,38,111),(4,39,114);
 /*!40000 ALTER TABLE `result` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -146,6 +146,30 @@ LOCK TABLES `subjects` WRITE;
 /*!40000 ALTER TABLE `subjects` DISABLE KEYS */;
 INSERT INTO `subjects` VALUES (1,'Toan'),(2,'Ly'),(3,'Hoa'),(4,'Van'),(5,'Anh Van');
 /*!40000 ALTER TABLE `subjects` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `subquestion`
+--
+
+DROP TABLE IF EXISTS `subquestion`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `subquestion` (
+  `question_id` int(11) DEFAULT NULL,
+  `subquestion_id` int(11) DEFAULT NULL,
+  UNIQUE KEY `question_id` (`question_id`,`subquestion_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `subquestion`
+--
+
+LOCK TABLES `subquestion` WRITE;
+/*!40000 ALTER TABLE `subquestion` DISABLE KEYS */;
+INSERT INTO `subquestion` VALUES (34,35),(34,36),(34,37),(34,38),(34,39);
+/*!40000 ALTER TABLE `subquestion` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -179,7 +203,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (2,'admin','admin@admin.com','$2y$10$lTqN3EFK/sVpKrGKqCXtOOoV3c2.CyVT.PmwI6GBsIdw20TMusCua','n47azatpzQN5Kh0OQgeOFqpghIGkpRJWzqb6GSsnhHeJTtEhnt9U5Cb6StaW',NULL,'2018-03-24 09:59:54','2018-03-17 10:20:40',1,'Distric 7, Tan Phu Ward, HCMC','','1996-11-03 00:00:00'),(3,'root','root@root.com','$2y$10$n6xSG0E3AZhTeta0G64/7.tjbdkfC/XTCfCWc5T7cnztJWNU6HiOa','4DVLXcPXvsOGszjBK0KBenOlorVK1SUxJmdASxWe85zcB6MpVJGRP2oDfhXj',NULL,'2018-03-30 09:30:17','2018-03-17 10:33:44',1,'Vinh Long City','','1996-03-11 00:00:00'),(4,'Son T Luu','son.lt1103@gmail.com','$2y$10$gxABOMWklYQBpP26.aoHquIoI.gnNrVe8t/PIXOlu/6qeCf4YEpWi','jvosndnhoPmM3qggT3UYFhX6va6csP62H4LHjirI8C44bFSs2ryDqmCNXO2E',NULL,'2018-03-17 12:54:25','2018-03-17 12:54:25',0,NULL,NULL,NULL),(5,'Luu Thanh Son','sonlam1102@hotmail.com','$2y$10$ZANiosdqOkTrG8wjEHhMBeBILae4K7SHGUBJJ3mHhz2utmYdSFCoC','Jru8rvmFWGmQiTGWcFcmA46hGRe5070kaQ2dfOegnSqdSU9Qp8gxII1VW7zW',NULL,'2018-03-17 10:47:39','2018-03-17 10:47:39',0,NULL,NULL,NULL);
+INSERT INTO `users` VALUES (2,'admin','admin@admin.com','$2y$10$lTqN3EFK/sVpKrGKqCXtOOoV3c2.CyVT.PmwI6GBsIdw20TMusCua','n47azatpzQN5Kh0OQgeOFqpghIGkpRJWzqb6GSsnhHeJTtEhnt9U5Cb6StaW',NULL,'2018-03-24 09:59:54','2018-03-17 10:20:40',1,'Distric 7, Tan Phu Ward, HCMC','','1996-11-03 00:00:00'),(3,'root','root@root.com','$2y$10$n6xSG0E3AZhTeta0G64/7.tjbdkfC/XTCfCWc5T7cnztJWNU6HiOa','CGhxg5djnF7cqP5xpIxfsCks81RB1vSdyH4UTi6GGGaz1DHkp12MngY9VZUC',NULL,'2018-03-30 09:30:17','2018-03-17 10:33:44',1,'Vinh Long City','','1996-03-11 00:00:00'),(4,'Son T Luu','son.lt1103@gmail.com','$2y$10$gxABOMWklYQBpP26.aoHquIoI.gnNrVe8t/PIXOlu/6qeCf4YEpWi','jvosndnhoPmM3qggT3UYFhX6va6csP62H4LHjirI8C44bFSs2ryDqmCNXO2E',NULL,'2018-03-17 12:54:25','2018-03-17 12:54:25',0,NULL,NULL,NULL),(5,'Luu Thanh Son','sonlam1102@hotmail.com','$2y$10$ZANiosdqOkTrG8wjEHhMBeBILae4K7SHGUBJJ3mHhz2utmYdSFCoC','Jru8rvmFWGmQiTGWcFcmA46hGRe5070kaQ2dfOegnSqdSU9Qp8gxII1VW7zW',NULL,'2018-03-17 10:47:39','2018-03-17 10:47:39',0,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -192,4 +216,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-03-30  9:37:59
+-- Dump completed on 2018-03-31 15:40:44

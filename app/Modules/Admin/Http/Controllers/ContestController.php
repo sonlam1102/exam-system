@@ -10,6 +10,7 @@ use App\Subjects;
 use App\Questions;
 use App\Result;
 use App\Answer;
+use App\Subquestion;
 
 class ContestController extends Controller
 {
@@ -43,20 +44,40 @@ class ContestController extends Controller
         $data = isset($request->data) ? $request->data : null;
         $update = isset($request->update) ? $request->update : null;
 
-        if ($data) {      
+        if ($data) {  
+            $mainQuestion = null;
+            $subQuestion = null;
+
             foreach ($data as $item) {
                 if (!$item['question'] || $item['question'] == '')
                     continue;
                 $questionId = Questions::add_question($id, $item['question']);
-                if ($questionId) {
-                    foreach ($item['answer'] as $value) {
-                        $answerId = Answer::addAnswer($questionId, $id, $value['answer_content']);
-
-                        if ($value['right_answer'] == 'true' && $answerId) {
-                            Result::addResultOfQuestion($questionId, $id, $answerId);
-                        }
-                    }
+                if (!$questionId) {
+                    continue;
                 }
+                if (isset($item['big_question']) && $item['big_question'] == 'true') {
+                    if (!isset($item['answer']) || (isset($item['answer']) && empty($item['answer']))) {
+                        $mainQuestion = $questionId;
+                        continue;
+                    }
+                    else
+                        $subQuestion = $questionId;
+                }
+                else {
+                    $mainQuestion = null;
+                    $subQuestion = null;
+                }
+
+                foreach ($item['answer'] as $value) {
+                    $answerId = Answer::addAnswer($questionId, $id, $value['answer_content']);
+                    if ($value['right_answer'] != 'true' || !$answerId) {
+                        continue;
+                    }
+                    Result::addResultOfQuestion($questionId, $id, $answerId);
+                }
+                if ($mainQuestion && $subQuestion)  {
+                    Subquestion::addSubQuestion($mainQuestion, $subQuestion);
+                }                  
             }
         }
 
@@ -134,13 +155,23 @@ class ContestController extends Controller
     {
         if (!$id)
             abort('404');
+        if ($subquestion = Subquestion::getAllSubquestion($id)) {
+            foreach ($subquestion as $item) {
+                $subQuestion = Questions::find($item->subquestion_id);
+                $subQuestion->delete();
+                Answer::deleteByQuestion($item->subquestion_id);
+                Result::deleteByQuestion($item->subquestion_id);
+            }
+            Subquestion::deleteMainQuestion($id);
+            $question = Questions::find($id);
+            $question->delete();
+        } else {           
+            Answer::deleteByQuestion($id);
+            Result::deleteByQuestion($id);
+            $question = Questions::find($id);
+            $question->delete();
+        }
 
-        $question = Questions::find($id);
-        Answer::deleteByQuestion($id);
-        Result::deleteByQuestion($id);
-
-        $question->delete();
-
-        // return redirect('admin/contest/edit/'.$id);
+        
     }
 }
