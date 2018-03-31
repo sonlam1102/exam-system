@@ -25,7 +25,7 @@ class Answer extends Model
     	$answers = new Answer();
     	$answers->question_id = $question_id;
     	$answers->contest_id = $constest_id;
-    	$answers->content = $content;
+    	$answers->content = trim($content);
 
     	if ($answers->save())
     		return $answers->id;
@@ -35,7 +35,7 @@ class Answer extends Model
 
     public function editAnswer($content)
     {
-        $this->content = $content;
+        $this->content = trim($content);
         return $this->save();
     }
 

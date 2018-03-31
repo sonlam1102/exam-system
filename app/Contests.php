@@ -17,7 +17,7 @@ class Contests extends Model
 
     	$contest = new Contests();
 
-    	$contest->title = $data['title'];
+    	$contest->title = trim($data['title']);
     	$contest->date = date('Y-m-d', strtotime($data['date']));
     	$contest->subject_id = $data['subject_id'];
 

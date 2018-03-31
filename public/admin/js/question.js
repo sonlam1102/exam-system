@@ -81,6 +81,28 @@ $(document).ready(function () {
 		num++;
 	});
 
+	$('.delete_question #delete').click(function () {
+		var id = $(this).data('qid'),
+		    data = {},
+		    link = "/admin/contest/delete/";
+
+		data = {
+			'_token': $('.delete_question #token').val(),
+			'_method': $('.delete_question #method').val()
+		};
+
+		link = link + $.trim(id) + "/question";
+
+		$.ajax({
+			type: "POST",
+			url: link,
+			data: data,
+			success: function success() {
+				location.reload();
+			}
+		});
+	});
+
 	$("#question-form").submit(function (e) {
 		var data = [];
 		dataUpdate = [], actionLink = $(this).attr('action'), i = 0, j = 0;

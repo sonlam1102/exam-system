@@ -15,7 +15,7 @@ class Questions extends Model
 
     	$question = new Questions();
     	$question->contest_id = $contest_id;
-    	$question->content = $content;
+    	$question->content = trim($content);
 
     	if ($question->save())
     		return $question->id;
@@ -25,7 +25,7 @@ class Questions extends Model
 
     public function edit_question($content)
     {
-        $this->content = $content;
+        $this->content = trim($content);
         return $this->save();
     }
 

@@ -2,7 +2,7 @@
 
 @section('content')
 <div>
-	<section class="content-header">
+  <section class="content-header">
       <h1>
         Contests
       </h1>
@@ -60,9 +60,13 @@
                 <div class="box-body" id='question_field'>
                     @if ($questions)
                       @foreach($questions as $item)
-                       <div class='form-group question_item'>   
-                          <label for="inputEmail3" class="control-label">Question {{ $item->id }}</label>
-                                           
+                       <div class='form-group question_item'>
+                          <div class="delete_question"> 
+                            <input type="text" name="token" id='token' value="{{ csrf_token() }}" hidden> 
+                            <input type="hidden" name="_method" id='method' value="delete" />                         
+                            <label for="inputEmail3" class="control-label">Question {{ $item->id }}</label>                 
+                            <button type="button" class="btn btn-sm btn-danger" id='delete' data-qid = '{{ $item->id }} '>Delete</button>
+                          </div>   
                           <input class='form-control question_id' type='text' value="{{ $item->id }}" hidden >
                           <input class='form-control question' type='text' value="{{ $item->content }}">
 

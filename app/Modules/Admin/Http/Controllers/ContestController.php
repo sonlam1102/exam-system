@@ -117,6 +117,7 @@ class ContestController extends Controller
     {
         if (!$id)
             abort('404');
+
         $contest = Contests::find($id);
         Questions::deleteByContest($id);
         Answer::deleteByContest($id);
@@ -125,5 +126,19 @@ class ContestController extends Controller
         $contest->delete();
 
         return redirect('admin/contest');
+    }
+
+    public function deleteQuestion($id)
+    {
+        if (!$id)
+            abort('404');
+
+        $question = Questions::find($id);
+        Answer::deleteByQuestion($id);
+        Result::deleteByQuestion($id);
+
+        $question->delete();
+
+        // return redirect('admin/contest/edit/'.$id);
     }
 }
