@@ -1,5 +1,5 @@
 <header class="main-header">
-    <a href="/admin" class="logo">
+    <a href="/admin/home" class="logo">
       <span class="logo-lg"><b>Exam System</b> Admin Page</span>
     </a>
     <!-- Header Navbar: style can be found in header.less -->

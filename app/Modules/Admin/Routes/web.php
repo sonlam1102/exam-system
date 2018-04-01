@@ -2,7 +2,7 @@
 
 Route::group(['prefix' => 'admin'], function () {
 	//Admin info
-    Route::get('/index', 'AdminController@index');
+    Route::get('/home', 'AdminController@index');
     Route::get('/info', 'AdminController@info');
     Route::post('/update/{id}', 'AdminController@update')->where('id', '[0-9]+');
 

@@ -33,7 +33,7 @@ class HomeController extends Controller
                 dd('user');
             }
             else {
-                return redirect('/admin/info');
+                return redirect('/admin/home');
             }
         }
     }
