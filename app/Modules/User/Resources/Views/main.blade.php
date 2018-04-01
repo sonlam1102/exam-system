@@ -18,8 +18,6 @@
 <body>
     <!-- The navigator -->
     @include('user::layouts.navigation')
-    <!-- The header -->
-    @include('user::layouts.header')
 
 
     <!-- Page Content -->

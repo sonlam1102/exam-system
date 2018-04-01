@@ -31,10 +31,10 @@
         </div>
 
       </div>
-      <!-- Footer -->
-      @include('admin::layouts.footer')
+      
     </div>
-
+    <!-- Footer -->
+    @include('admin::layouts.footer')
   </body>
 </html>
 <!-- Load Javascript-->

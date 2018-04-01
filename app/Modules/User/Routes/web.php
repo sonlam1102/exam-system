@@ -13,4 +13,6 @@
 
 Route::group(['prefix' => 'user'], function () {
     Route::get('/home', 'UserController@index');
+    Route::get('/info', 'UserController@info');
+    Route::post('/update/{id}', 'UserController@update')->where('id', '[0-9]+');
 });

@@ -21,7 +21,7 @@
                 {{ \Auth::user()->name }}
               </a>
               <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownBlog">
-                <a class="dropdown-item" href="full-width.html">Info</a>
+                <a class="dropdown-item" href="/user/info">Info</a>
                 <form method="POST" action="/logout">
                     @csrf
                     <input type="submit" class="dropdown-item" value="Sign out">

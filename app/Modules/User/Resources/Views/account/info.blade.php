@@ -1,16 +1,12 @@
-@extends('admin::main')
-
+@extends('user::main')
 @section('content')
+<div>
 	<section class="content-header">
       <h1>
         Account Info
       </h1>
-      <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="#"><i class="fa fa-dashboard"></i> Account Info</a></li>
-      </ol>
       	<div class="box box-primary">
-            <form class="form-horizontal" method="POST" action="/admin/update/{{ \Auth::user()->id }}">
+            <form class="form-horizontal" method="POST" action="/user/update/{{ \Auth::user()->id }}">
               @csrf
               <div class="box-body">
 
@@ -59,13 +55,17 @@
                   </div>
                 </div>
 
+
+                <div class="form-group">
+                   <div class="col-sm-10">
+                    <button type="submit" class="btn btn-info">Submit</button>
+                  </div>
+                </div>
+
               </div>
 
-              <div class="box-footer">
-                <button type="submit" class="btn btn-info pull-left">Submit</button>
-              </div>
 
-             <div class="col-md-6 justify-content-center">
+              <div class="col-md-6 justify-content-center">
                 @if (\Session::has('error'))
                   <span>
                       <strong>{!!Session::get('error')!!}</strong>
@@ -75,6 +75,7 @@
             </form>
         </div>
     </section>
+</div>
 @stop
 @section('javascript')
 <script type="text/javascript">

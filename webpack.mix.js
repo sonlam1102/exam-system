@@ -12,4 +12,4 @@ let mix = require('laravel-mix');
  */
 
 mix.js('resources/assets/admin/js/question.js', 'public/admin/js/');
-mix.sass('resources/assets/user/css/main.sass', 'public/user/css/')
+mix.sass('resources/assets/user/css/main.sass', 'public/user/css/');
