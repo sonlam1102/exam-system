@@ -60,19 +60,20 @@
 /******/ 	__webpack_require__.p = "/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 0);
+/******/ 	return __webpack_require__(__webpack_require__.s = 8);
 /******/ })
 /************************************************************************/
-/******/ ([
-/* 0 */
+/******/ ({
+
+/***/ 8:
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(1);
-module.exports = __webpack_require__(2);
+module.exports = __webpack_require__(9);
 
 
 /***/ }),
-/* 1 */
+
+/***/ 9:
 /***/ (function(module, exports) {
 
 $(document).ready(function () {
@@ -196,11 +197,6 @@ function bigQuestionGenerate() {
 	return content;
 }
 
-/***/ }),
-/* 2 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
 /***/ })
-/******/ ]);
+
+/******/ });
