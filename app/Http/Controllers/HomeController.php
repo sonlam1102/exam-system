@@ -30,7 +30,7 @@ class HomeController extends Controller
         }
         else {
             if (\Auth::user()->type == 0) {
-                dd('user');
+                 return redirect('/user/home');
             }
             else {
                 return redirect('/admin/home');

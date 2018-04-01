@@ -67,7 +67,8 @@
 /* 0 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(1);
+__webpack_require__(1);
+module.exports = __webpack_require__(2);
 
 
 /***/ }),
@@ -194,6 +195,12 @@ function bigQuestionGenerate() {
 	var content = "<div class='big_question'>" + "<div class='form-group question_pack'>" + "<label class='col-sm-2 control-label'>Big Question</label>" + "<textarea class='form-control question'></textarea>" + "</div>" + "<a href='javascript:void(0)' id='add_new_subquestion'>Add 1 sub question question</a>" + "</div>";
 	return content;
 }
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
 
 /***/ })
 /******/ ]);
