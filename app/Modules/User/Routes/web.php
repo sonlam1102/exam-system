@@ -17,4 +17,5 @@ Route::group(['prefix' => 'user'], function () {
     Route::post('/update/{id}', 'UserController@update')->where('id', '[0-9]+');
 
     Route::get('/contest', 'ContestController@index');
+    Route::get('/contest/{id}', 'ContestController@exam')->where('id', '[0-9]+');
 });

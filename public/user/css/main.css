@@ -23,3 +23,8 @@ body {
   margin-bottom: 30px;
 }
 
+textarea {
+  min-height: 100px;
+  overflow-y: auto;
+}
+

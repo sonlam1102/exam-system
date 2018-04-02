@@ -44,4 +44,13 @@ class Questions extends Model
     {
         return self::where('contest_id', '=', $contest_id)->delete();
     }
+
+    public static function getAllQuestion($contest_id)
+    {
+        if (!$contest_id)
+            return null;
+
+        $data = self::select()->where('contest_id', '=', $contest_id);
+        return ($data) ? $data->get() : null;
+    }
 }

@@ -31,7 +31,7 @@
                         <td> {{ $item->name }}</td>
                         <td> {{ $item->email }}</td>
                         <td> {{ $item->address }}</td>
-                        <td> {{ $item->birthday }}</td>
+                        <td> {{ ($item->birthday) ? date('d/m/Y', strtotime($item->birthday)) : '' }}</td>
                       </tr>
                     @endforeach
                   @endif
