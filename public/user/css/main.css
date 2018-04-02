@@ -28,3 +28,7 @@ textarea {
   overflow-y: auto;
 }
 
+.border-line {
+  border-style: dotted;
+}
+

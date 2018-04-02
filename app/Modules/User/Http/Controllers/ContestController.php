@@ -26,7 +26,9 @@ class ContestController extends Controller
     		abort(404);
 
     	$data = Questions::getAllQuestion($id);
-
-    	return view('user::contest.exam')->with('data', $data);
+        $info = Contests::find($id);
+    	return view('user::contest.exam')
+            ->with('data', $data)
+            ->with('info', $info);
     }
 }

@@ -72,12 +72,15 @@
                           <textarea class='form-control question' type='text'> {{ $item->content }} </textarea>
                           <label class='col-sm-2 control-label'>Answers</label>
                           <p>
-                            @php
-                              $subquestion = App\Subquestion::getAllSubquestion($item->id);
-                              foreach($subquestion as $val) {
-                                    echo $val->subquestion_id . ' ';
-                               }        
-                            @endphp
+                            @if (App\Subquestion::isBigQuestion($item->id))
+                              This question is based on those answers: 
+                              @php
+                                $subquestion = App\Subquestion::getAllSubquestion($item->id);
+                                foreach($subquestion as $val) {
+                                      echo $val->subquestion_id . ' ';
+                                 }        
+                              @endphp
+                            @endif
                           </p>
                           @if($answers = App\Answer::get_all_answers($item->id))
                             @foreach($answers as $ans)
