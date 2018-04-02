@@ -1,12 +1,23 @@
 $(document).ready(function() {
-	$('#submit').click(function() {
+	$('#form_submit').submit(function(e) {
+		e.preventDefault();
 		var data = [],
-		i = 0;
+		i = 0,
+		link = $(this).attr('action');
+
 		$('.question_item').each(function() {
 			data[i] = packedQuestion($(this));
 			i++;
 		});
-		console.log(data);
+
+		$.ajax({
+			type: "POST",
+			url: link,
+			data: {'_token' : $('#token').val(), 'data' : data},
+		  		success: function(){
+		  			location.reload();
+		  		},
+		});
 	});
 });
 function packedQuestion(objectQuestion)

@@ -23,40 +23,43 @@
     </div>
     <br>
 	<div class="box-body" id='question_field'>
-		@if ($data)
-			@foreach ($data as $item)
-				<div class="form-group {{ (App\Subquestion::isBigQuestion($item->id)) ? '' : 'question_item' }} ">
-					<label for="inputEmail3" class="control-label">Question {{ $item->id }}</label>
-					<input type="text" class='question' value="{{ $item->id }}" hidden>
-					<textarea class='form-control' type='text' disabled> {{ $item->content }} </textarea>
+		<form id='form_submit' action='/user/contest/{{ $contest_id }}/submit' method="POST">
+			@if ($data)
+				<input type="text" name="token" id='token' value="{{ csrf_token() }}" hidden>
+				@foreach ($data as $item)
+					<div class="form-group {{ (App\Subquestion::isBigQuestion($item->id)) ? '' : 'question_item' }} ">
+						<label for="inputEmail3" class="control-label">Question {{ $item->id }}</label>
+						<input type="text" class='question' value="{{ $item->id }}" hidden>
+						<textarea class='form-control' type='text' disabled> {{ $item->content }} </textarea>
+						<br>
+							@if (App\Subquestion::isBigQuestion($item->id))
+		                        This question is based on those answers: 
+		                        @php
+		                            $subquestion = App\Subquestion::getAllSubquestion($item->id);
+		                            foreach($subquestion as $val) {
+		                                 echo $val->subquestion_id . ' ';
+		                            }        
+		                         @endphp
+		                    @endif
+							@if($answers = App\Answer::get_all_answers($item->id))
+				                @foreach($answers as $ans)
+					                <div class='input-group answers_group' name='answers_group'>
+						                    <input class='input-group-addon flat-red right-answer' name = '{{ "right-answer".$item->id }}' type='radio' {{ (App\UserRecord::getAnswer(\Auth::user()->id, $contest_id, $item->id)) ? (((App\UserRecord::getAnswer(\Auth::user()->id, $contest_id, $item->id))->answer_id == $ans->id ) ? 'checked' : '') : '' }} >
+						                    <input class="form-control answer" type="text" value="{{ $ans->content }}" disabled>
+						                    <input class='form-control answer_id' type='text' value="{{ $ans->id }}" hidden >
+					                </div>
+				                @endforeach
+			            	@endif
+					</div>
 					<br>
-						@if (App\Subquestion::isBigQuestion($item->id))
-	                        This question is based on those answers: 
-	                        @php
-	                            $subquestion = App\Subquestion::getAllSubquestion($item->id);
-	                            foreach($subquestion as $val) {
-	                                 echo $val->subquestion_id . ' ';
-	                            }        
-	                         @endphp
-	                    @endif
-						@if($answers = App\Answer::get_all_answers($item->id))
-		                @foreach($answers as $ans)
-		                    <div class='input-group answers_group' name='answers_group'>
-			                    <input class='input-group-addon flat-red right-answer' name = '{{ "right-answer".$item->id }}' type='radio'>
-			                    <input class="form-control answer" type="text" value="{{ $ans->content }}" disabled>
-			                    <input class='form-control answer_id' type='text' value="{{ $ans->id }}" hidden >
-		                    </div>
-		                @endforeach
-		            @endif
-				</div>
-				<br>
-	            <p>-------------------</p>
-			@endforeach
-			<p>This is the end of the test. Check your answer and submit. Good luck!</p>
-			<div class="box-footer">
-		        <button type="submit" id='submit' class="btn btn-info">Submit</button>
-		    </div>
-		@endif
+		            <p>-------------------</p>
+				@endforeach
+				<p>This is the end of the test. Check your answers and submit. Good luck!</p>
+				<div class="box-footer">
+			        <button type="submit" id='submit' class="btn btn-info">Submit</button>
+			    </div>
+			@endif
+		</form>
 	</div>
 </div>
 <br>
