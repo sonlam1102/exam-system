@@ -32,7 +32,7 @@ class UserRecord extends Model
         if (!$user_id || !$contest_id)
             return null;
 
-        $data = self::select()
+        $data = self::select('answer_id')
                     ->where('user_id', '=', $user_id)
                     ->where('contest_id', '=', $contest_id);
         return ($data) ? $data->get() : null;

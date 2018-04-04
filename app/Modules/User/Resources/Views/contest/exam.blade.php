@@ -26,6 +26,9 @@
 		<form id='form_submit' action='/user/contest/{{ $contest_id }}/submit' method="POST">
 			@if ($data)
 				<input type="text" name="token" id='token' value="{{ csrf_token() }}" hidden>
+				@if ($lasted)
+					<p class="card-text">Result: {{ $lasted }} </p>
+				@endif
 				@foreach ($data as $item)
 					<div class="form-group {{ (App\Subquestion::isBigQuestion($item->id)) ? '' : 'question_item' }} ">
 						<label for="inputEmail3" class="control-label">Question {{ $item->id }}</label>

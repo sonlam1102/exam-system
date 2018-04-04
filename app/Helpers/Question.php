@@ -29,10 +29,20 @@ class Question
 		$result = Result::getAllResult($contest_id);
 		$record = UserRecord::getAllUserRecord($user_id, $contest_id);
 
+		if (!$result || !$record)
+			return null;
+
 		$total = $result->count();
+		$count = 0;
 		
-		foreach ($record as $item) {
-			
+		foreach ($record->toArray() as $item) {
+			if (in_array($item, $result->toArray()))
+				$count = $count + 1;
 		}
+
+		return array(
+			'right' => $count,
+			'total' => $total,
+		);
 	}
 }

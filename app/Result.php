@@ -27,7 +27,7 @@ class Result extends Model
     {
         if (!$contest_id)
             return null;
-        $data = self::select()->where('contest_id', '=', $contest_id);
+        $data = self::select('answer_id')->where('contest_id', '=', $contest_id);
 
         return ($data) ? $data->get() : null;
     }

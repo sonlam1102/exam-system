@@ -8,6 +8,8 @@ use App\Contests;
 use App\Questions;
 use App\UserRecord;
 use Auth;
+use App\Helpers;
+use App\UserLog;
 
 class ContestController extends Controller
 {
@@ -19,7 +21,8 @@ class ContestController extends Controller
     public function index()
     {
     	$data = Contests::select()->get();
-    	return view('user::contest.list')->with('data', $data);
+    	return view('user::contest.list')
+            ->with('data', $data);
     }
 
     public function exam($id)
@@ -29,10 +32,13 @@ class ContestController extends Controller
 
     	$data = Questions::getAllQuestion($id);
         $info = Contests::find($id);
+
+        $lasted = UserLog::getLastedLog(\Auth::user()->id, $id);
     	return view('user::contest.exam')
             ->with('data', $data)
             ->with('info', $info)
-            ->with('contest_id', $id);
+            ->with('contest_id', $id)
+            ->with('lasted', ($lasted) ? $lasted->result : null);
     }
 
     public function submit($id, Request $request)
@@ -57,5 +63,10 @@ class ContestController extends Controller
             ];
             UserRecord::addRecord($temp);
         }
+
+        $evaluate = Helpers\Question::evaluateAnswer(\Auth::user()->id, $id);
+
+        $string = (isset($evaluate['right']) && isset($evaluate['total'])) ? $evaluate['right'].'/'.$evaluate['total'] : '';
+        UserLog::addUserLog(\Auth::user()->id, $id, $string);
     }
 }
