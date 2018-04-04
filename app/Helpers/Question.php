@@ -20,4 +20,19 @@ class Question
 
 		return ((int)$userAnswer->answer_id == (int)$resultAnswer->answer_id) ? 1 : 0;
 	}
+	
+	public static function evaluateAnswer($user_id, $contest_id)
+	{
+		if (!$user_id || !$contest_id)
+			return null;
+
+		$result = Result::getAllResult($contest_id);
+		$record = UserRecord::getAllUserRecord($user_id, $contest_id);
+
+		$total = $result->count();
+		
+		foreach ($record as $item) {
+			
+		}
+	}
 }

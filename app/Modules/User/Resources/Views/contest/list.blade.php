@@ -16,8 +16,12 @@
 		              <p class="card-text">Date Begin: {{ ($item->date) ? date('d/m/Y', strtotime($item->date)) : '' }} </p>
 		              <p class="card-text">Subject: {{ App\Subjects::getName($item->subject_id) }} </p>
 		              <p class="card-text">Number questions: {{ App\Questions::countQuestionByContest($item->id) }} </p>
-		            </div>      
-		            <a href="/user/contest/{{ $item->id }}"><button type="submit" class="btn btn-info">Do it!</button></a>
+		            </div>
+		            @if (!App\UserRecord::isTookTheContest(\Auth::user()->id, $item->id))      
+		            	<a href="/user/contest/{{ $item->id }}"><button type="submit" class="btn btn-info">Do it!</button></a>
+		            @else
+		            	<a href="/user/contest/{{ $item->id }}"><button type="submit" class="btn btn-info">Check answer</button></a>
+		            @endif
 		        </div>
 		    </div>
  		@endforeach

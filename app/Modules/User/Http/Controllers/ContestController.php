@@ -43,7 +43,7 @@ class ContestController extends Controller
             return;       
         }
 
-        if (UserRecord::checkOldResult(Auth::user()->id, $id)) {
+        if (UserRecord::isTookTheContest(Auth::user()->id, $id)) {
             UserRecord::deleteRecordByContest(Auth::user()->id, $id);
         }
 

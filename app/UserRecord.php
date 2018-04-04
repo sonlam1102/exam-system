@@ -27,6 +27,17 @@ class UserRecord extends Model
     	return $userRecord->save();
     }
 
+    public static function getAllUserRecord($user_id, $contest_id)
+    {
+        if (!$user_id || !$contest_id)
+            return null;
+
+        $data = self::select()
+                    ->where('user_id', '=', $user_id)
+                    ->where('contest_id', '=', $contest_id);
+        return ($data) ? $data->get() : null;
+    }
+
     public static function getAnswer($user_id, $contest_id, $question_id)
     {
     	if (!$user_id || !$contest_id || !$question_id)
@@ -40,7 +51,7 @@ class UserRecord extends Model
     	return ($data) ? $data->first() : null;
     }
 
-    public static function checkOldResult($user_id, $contest_id)
+    public static function isTookTheContest($user_id, $contest_id)
     {
         if (!$user_id || !$contest_id)
             return false;
@@ -48,7 +59,7 @@ class UserRecord extends Model
         $data = self::select()
                     ->where('user_id', '=', $user_id)
                     ->where('contest_id', '=', $contest_id);
-        return ($data) ? true : false;
+        return ($data && $data->first()) ? true : false;
     }
 
     public static function deleteRecordByContest($user_id, $contest_id)

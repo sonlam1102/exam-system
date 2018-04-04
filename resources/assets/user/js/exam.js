@@ -15,7 +15,7 @@ $(document).ready(function() {
 			url: link,
 			data: {'_token' : $('#token').val(), 'data' : data},
 		  		success: function(){
-		  			location.reload();
+		  			location.href = '/user/contest';
 		  		},
 		});
 	});

@@ -23,6 +23,15 @@ class Result extends Model
     	return ($data) ? $data->first() : null;
     }
 
+    public static function getAllResult($contest_id)
+    {
+        if (!$contest_id)
+            return null;
+        $data = self::select()->where('contest_id', '=', $contest_id);
+
+        return ($data) ? $data->get() : null;
+    }
+
     public static function addResultOfQuestion($question_id, $contest_id, $answer_id) 
     {
         if (!$question_id || !$contest_id || !$answer_id)
@@ -44,11 +53,17 @@ class Result extends Model
 
     public static function deleteByQuestion($questionId)
     {
+        if (!$questionId)
+            return false;
+
         return self::where('question_id', '=', $questionId)->delete();
     }
 
     public static function deleteByContest($contest_id)
     {
+        if (!$contest_id)
+            return false;
+        
         return self::where('contest_id', '=', $contest_id)->delete();
     }
 }

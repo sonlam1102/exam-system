@@ -29,15 +29,17 @@
 				@foreach ($data as $item)
 					<div class="form-group {{ (App\Subquestion::isBigQuestion($item->id)) ? '' : 'question_item' }} ">
 						<label for="inputEmail3" class="control-label">Question {{ $item->id }}</label>
-						@php 
-							$check = App\Helpers\Question::checkRightAnswer(\Auth::user()->id, $item->id, $contest_id);
-							if ($check === 1)
-								echo App\Helpers\Message::getNotify(0);
-							if ($check === 0)
-								echo App\Helpers\Message::getNotify(2);
-							if ($check === -1)
-								echo App\Helpers\Message::getNotify(1);
-						@endphp
+						@if ((App\UserRecord::isTookTheContest(\Auth::user()->id, $contest_id)))
+							@php 
+								$check = App\Helpers\Question::checkRightAnswer(\Auth::user()->id, $item->id, $contest_id);
+								if ($check === 1)
+									echo App\Helpers\Message::getNotify(0);
+								if ($check === 0)
+									echo App\Helpers\Message::getNotify(2);
+								if ($check === -1)
+									echo App\Helpers\Message::getNotify(1);						
+							@endphp
+						@endif
 						<input type="text" class='question' value="{{ $item->id }}" hidden>
 						<textarea class='form-control' type='text' disabled> {{ $item->content }} </textarea>
 						<br>
@@ -64,9 +66,11 @@
 		            <p>-------------------</p>
 				@endforeach
 				<p>This is the end of the test. Check your answers and submit. Good luck!</p>
-				<div class="box-footer">
-			        <button type="submit" id='submit' class="btn btn-info">Submit</button>
-			    </div>
+				@if (!(App\UserRecord::isTookTheContest(\Auth::user()->id, $contest_id)))
+					<div class="box-footer">
+				        <button type="submit" id='submit' class="btn btn-info">Submit</button>
+				    </div>
+			    @endif
 			@endif
 		</form>
 	</div>
