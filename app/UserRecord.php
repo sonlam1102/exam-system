@@ -39,4 +39,25 @@ class UserRecord extends Model
 
     	return ($data) ? $data->first() : null;
     }
+
+    public static function checkOldResult($user_id, $contest_id)
+    {
+        if (!$user_id || !$contest_id)
+            return false;
+
+        $data = self::select()
+                    ->where('user_id', '=', $user_id)
+                    ->where('contest_id', '=', $contest_id);
+        return ($data) ? true : false;
+    }
+
+    public static function deleteRecordByContest($user_id, $contest_id)
+    {
+        if (!$user_id || !$contest_id)
+            return false;
+        $data = self::select()
+                    ->where('user_id', '=', $user_id)
+                    ->where('contest_id', '=', $contest_id);
+        return $data->delete();
+    }
 }

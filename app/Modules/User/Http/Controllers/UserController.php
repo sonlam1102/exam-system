@@ -16,8 +16,8 @@ class UserController extends Controller
 
     public function index() 
     {
-    	if(!Auth::check()) {
-            return redirect('/login');
+    	if(!Auth::check() || Auth::user()->type != 0) {
+            return redirect('/');
         }
     	return view('user::index.index');
     }

@@ -39,17 +39,23 @@ class ContestController extends Controller
     {
         $data = isset($request->data) ? $request->data : null;
 
-        if ($data) {
-            $user_id = Auth::user()->id;
-            foreach ($data as $item) {
-                $temp = [
-                    'user_id' => $user_id,
-                    'contest_id' => $id,
-                    'question_id' => $item['question_id'],
-                    'answer_id' => $item['answer_id']
-                ];
-                UserRecord::addRecord($temp);
-            }
+        if (!$data) {
+            return;       
+        }
+
+        if (UserRecord::checkOldResult(Auth::user()->id, $id)) {
+            UserRecord::deleteRecordByContest(Auth::user()->id, $id);
+        }
+
+        $user_id = Auth::user()->id;
+        foreach ($data as $item) {
+            $temp = [
+                'user_id' => $user_id,
+                'contest_id' => $id,
+                'question_id' => $item['question_id'],
+                'answer_id' => $item['answer_id']
+            ];
+            UserRecord::addRecord($temp);
         }
     }
 }
