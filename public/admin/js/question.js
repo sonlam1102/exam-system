@@ -115,7 +115,8 @@ $(document).ready(function () {
 
 	$("#question-form").submit(function (e) {
 		var data = [];
-		dataUpdate = [], actionLink = $(this).attr('action'), i = 0, j = 0;
+		dataUpdate = [], actionLink = $(this).attr('action');
+		submit = {}, i = 0, j = 0;
 		e.preventDefault();
 
 		$('.question_pack').each(function (key, value) {
@@ -126,11 +127,12 @@ $(document).ready(function () {
 			dataUpdate[j] = packedQuestion($(this), 1);
 			j++;
 		});
+		if ($('.question_pack').length > 0) submit = { '_token': $('#token').val(), 'data': data };else submit = { '_token': $('#token').val(), 'update': dataUpdate };
 
 		$.ajax({
 			type: "POST",
 			url: actionLink,
-			data: { '_token': $('#token').val(), 'data': data, 'update': dataUpdate },
+			data: submit,
 			success: function success() {
 				location.reload();
 			}

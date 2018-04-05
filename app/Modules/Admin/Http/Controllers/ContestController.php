@@ -11,6 +11,8 @@ use App\Questions;
 use App\Result;
 use App\Answer;
 use App\Subquestion;
+use App\UserLog;
+use App\UserRecord;
 
 class ContestController extends Controller
 {
@@ -145,8 +147,9 @@ class ContestController extends Controller
         Questions::deleteByContest($id);
         Answer::deleteByContest($id);
         Result::deleteByContest($id);
-
-        $contest->delete();
+        UserRecord::deleteAllRecordByContest($id);
+        if ($contest)
+            $contest->delete();
 
         return redirect('admin/contest');
     }
@@ -155,10 +158,12 @@ class ContestController extends Controller
     {
         if (!$id)
             abort('404');
-        if ($subquestion = Subquestion::getAllSubquestion($id)) {
+        if (Subquestion::isBigQuestion($id)) {
+            $subquestion = Subquestion::getAllSubquestion($id);
             foreach ($subquestion as $item) {
                 $subQuestion = Questions::find($item->subquestion_id);
-                $subQuestion->delete();
+                if ($subQuestion)
+                    $subQuestion->delete();
                 Answer::deleteByQuestion($item->subquestion_id);
                 Result::deleteByQuestion($item->subquestion_id);
             }
@@ -167,11 +172,21 @@ class ContestController extends Controller
             $question->delete();
         } else {           
             Answer::deleteByQuestion($id);
+            Subquestion::deleteSubQuestion($id);
             Result::deleteByQuestion($id);
             $question = Questions::find($id);
-            $question->delete();
-        }
-
-        
+            if ($question)
+                $question->delete();
+        }   
     }
+
+    public static function listCandidate($id)
+    {
+        if (!$id)
+            abort('404');
+
+        $data = UserLog::getAllLogByContest($id);
+        return view('admin::contest.candidate')->with('data', $data);
+    }
+
 }

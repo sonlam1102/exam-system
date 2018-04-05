@@ -7,7 +7,8 @@ Route::group(['prefix' => 'admin'], function () {
     Route::post('/update/{id}', 'AdminController@update')->where('id', '[0-9]+');
 
     //User info
-    Route::get('/user/list', 'UserController@index');
+    Route::get('/user/list', 'UserController@index');   //List users
+    Route::get('/user/info/{id}', 'UserController@info')->where('id', '[0-9]+');    //User info
 
     //Contest Info
     Route::get('/contest', 'ContestController@index');
@@ -18,4 +19,5 @@ Route::group(['prefix' => 'admin'], function () {
     Route::post('/contest/edit/{id}/question', 'ContestController@add_question')->where('id', '[0-9]+');  //add question request
     Route::delete('/contest/delete/{id}', 'ContestController@deleteContest')->where('id', '[0-9]+');  //delete contest by id
     Route::delete('/contest/delete/{id}/question', 'ContestController@deleteQuestion')->where('id', '[0-9]+');  //delete question by id
+    Route::get('/contest/{id}/candidate', 'ContestController@listCandidate')->where('id', '[0-9]+');  //get candidtes of contest
 });

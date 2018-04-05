@@ -38,4 +38,24 @@ class UserLog extends Model
 
     	return ($data) ? $data->first() : null;
     }
+
+    public static function getAllLogByContest($contest_id)
+    {
+        if (!$contest_id)
+            return null;
+
+        $data = self::select()->where('contest_id', '=', $contest_id);
+
+        return ($data) ? $data->get() : null;
+    }
+
+    public static function getAllLogByUser($user_id)
+    {
+        if (!$user_id)
+            return null;
+
+        $data = self::select()->where('user_id', '=', $user_id);
+
+        return ($data) ? $data->get() : null;
+    }
 }

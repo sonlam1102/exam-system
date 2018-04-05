@@ -34,6 +34,11 @@ class Subquestion extends Model
         return self::where('question_id', '=', $question_id)->delete();
     }
 
+    public static function deleteSubQuestion($question_id)
+    {
+        return self::where('subquestion_id', '=', $question_id)->delete();
+    }
+
     public static function isBigQuestion($question_id)
     {
         if (!$question_id)

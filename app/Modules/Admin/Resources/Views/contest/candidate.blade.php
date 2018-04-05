@@ -1,14 +1,13 @@
 @extends('admin::main')
-
 @section('content')
-<div>
 	<section class="content-header">
       <h1>
-        User accounts
+        List candidte
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="#"><i class="fa fa-dashboard"></i> User accounts</a></li>
+        <li><a href="#"><i class="fa fa-dashboard"></i> Contest</a></li>
+        <li><a href="#"><i class="fa fa-dashboard"></i> Contest's candidates</a></li>
       </ol>
       <div class="box-primary">
         <div class="col-xs-12">
@@ -18,24 +17,18 @@
               <table class="table table-hover">
                 <tbody>
                   <tr>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Address</th>
-                    <th>Birthday</th>
-                    <th>Action</th>
+                    <th>User ID</th>
+                    <th>Contest ID</th>
+                    <th>Result</th>
+                    <th>Date</th>
                   </tr>
                   @if ($data)
                     @foreach($data as $item)
                       <tr>
-                        <td> {{ $item->id }}</td>
-                        <td> {{ $item->name }}</td>
-                        <td> {{ $item->email }}</td>
-                        <td> {{ $item->address }}</td>
-                        <td> {{ ($item->birthday) ? date('d/m/Y', strtotime($item->birthday)) : '' }}</td>
-                        <td>
-                          <a href="/admin/user/info/{{ $item->id }}"><button type="button" class="btn btn-primary">Info</button>
-                        </td>
+                        <td> <a href="/admin/user/info/{{ $item->user_id }}"> {{ $item->user_id }} </a> </td>
+                        <td> <a href="/admin/contest/edit/{{ $item->contest_id }}"> {{ $item->contest_id }} </a> </td>
+                        <td> {{ $item->result }}</td>
+                        <td> {{ date('d/m/Y', strtotime($item->date)) }}</td>
                       </tr>
                     @endforeach
                   @endif
@@ -48,5 +41,4 @@
         </div>
       </div>
     </section>
-</div>
-@endsection
+@stop
