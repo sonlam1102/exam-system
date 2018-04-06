@@ -23,6 +23,7 @@
                     <th>Email</th>
                     <th>Address</th>
                     <th>Birthday</th>
+                    <th>Action</th>
                   </tr>
                   @if ($data)
                     @foreach($data as $item)
@@ -32,6 +33,9 @@
                         <td> {{ $item->email }}</td>
                         <td> {{ $item->address }}</td>
                         <td> {{ ($item->birthday) ? date('d/m/Y', strtotime($item->birthday)) : '' }}</td>
+                        <td>
+                          <a href="/admin/user/info/{{ $item->id }}"><button type="button" class="btn btn-primary">Info</button>
+                        </td>
                       </tr>
                     @endforeach
                   @endif
