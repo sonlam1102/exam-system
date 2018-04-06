@@ -132,10 +132,27 @@ class ContestController extends Controller
             abort('404');
 
         $question = Questions::select()->where('contest_id', '=', $id)->get();
+        $answer = Answer::select()->where('contest_id', '=', $id)->get();
+        $result = Result::select('question_id', 'answer_id')->where('contest_id', '=', $id)->get();
+        $subquestion = Subquestion::select('question_id')->get();
+
+        if ($result)
+            $result = $result->toArray();
+        else
+            $result = [];
+
+        if ($subquestion)
+            $subquestion = $subquestion->toArray();
+        else
+            $subquestion = [];
+
         return view('admin::contest.question')
             ->with('id', $id)
             ->with('data', $contest)->with('subject', $subject)
-            ->with('questions', $question);
+            ->with('questions', $question)
+            ->with('answers', $answer)
+            ->with('result', $result)
+            ->with('subquestion', $subquestion);
     }
 
     public function deleteContest($id)
@@ -166,6 +183,7 @@ class ContestController extends Controller
                     $subQuestion->delete();
                 Answer::deleteByQuestion($item->subquestion_id);
                 Result::deleteByQuestion($item->subquestion_id);
+                UserRecord::deleteRecordByQuestion($item->subquestion_id);
             }
             Subquestion::deleteMainQuestion($id);
             $question = Questions::find($id);
@@ -174,6 +192,8 @@ class ContestController extends Controller
             Answer::deleteByQuestion($id);
             Subquestion::deleteSubQuestion($id);
             Result::deleteByQuestion($id);
+            UserRecord::deleteRecordByQuestion($id);
+
             $question = Questions::find($id);
             if ($question)
                 $question->delete();

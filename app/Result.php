@@ -11,18 +11,6 @@ class Result extends Model
 
     public $timestamps = false;
 
-    public static function checkResultOfQuestion($question_id, $contest_id)
-    {
-    	if (!$question_id || !$contest_id)
-    		return null;
-
-    	$data = self::select('answer_id')
-    				->where('question_id', '=', $question_id)
-    				->where('contest_id', '=', $contest_id);
-    				
-    	return ($data) ? $data->first() : null;
-    }
-
     public static function getAllResult($contest_id)
     {
         if (!$contest_id)

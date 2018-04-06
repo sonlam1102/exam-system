@@ -30,23 +30,24 @@
 					<p class="card-text">Result: {{ $lasted }} </p>
 				@endif
 				@foreach ($data as $item)
-					<div class="form-group {{ (App\Subquestion::isBigQuestion($item->id)) ? '' : 'question_item' }} ">
+					@if ($took)	
+						@php
+							$check = App\Helpers\Question::checkRightAnswer($item->id, $record, $result);
+							if ($check == 1)
+								echo App\Helpers\Message::getNotify(0);
+							if ($check == 0)
+								echo App\Helpers\Message::getNotify(2);
+							if ($check == -1)
+								echo App\Helpers\Message::getNotify(1);
+						@endphp
+					@endif
+					<div class="form-group {{ (!empty($subquestion) && in_array(['question_id' => $item->id], $subquestion)) ? '' : 'question_item' }} ">
 						<label for="inputEmail3" class="control-label">Question {{ $item->id }}</label>
-						@if ((App\UserRecord::isTookTheContest(\Auth::user()->id, $contest_id)))
-							@php 
-								$check = App\Helpers\Question::checkRightAnswer(\Auth::user()->id, $item->id, $contest_id);
-								if ($check === 1)
-									echo App\Helpers\Message::getNotify(0);
-								if ($check === 0)
-									echo App\Helpers\Message::getNotify(2);
-								if ($check === -1)
-									echo App\Helpers\Message::getNotify(1);						
-							@endphp
-						@endif
+						
 						<input type="text" class='question' value="{{ $item->id }}" hidden>
 						<textarea class='form-control' type='text' disabled> {{ $item->content }} </textarea>
 						<br>
-							@if (App\Subquestion::isBigQuestion($item->id))
+							@if (!empty($subquestion) && in_array(['question_id' => $item->id], $subquestion))
 		                        This question is based on those answers: 
 		                        @php
 		                            $subquestion = App\Subquestion::getAllSubquestion($item->id);
@@ -55,13 +56,15 @@
 		                            }        
 		                         @endphp
 		                    @endif
-							@if($answers = App\Answer::get_all_answers($item->id))
+							@if($answers)
 				                @foreach($answers as $ans)
-					                <div class='input-group answers_group' name='answers_group'>
-						                    <input class='input-group-addon flat-red right-answer' name = '{{ "right-answer".$item->id }}' type='radio' {{ (App\UserRecord::getAnswer(\Auth::user()->id, $contest_id, $item->id)) ? (((App\UserRecord::getAnswer(\Auth::user()->id, $contest_id, $item->id))->answer_id == $ans->id ) ? 'checked' : '') : '' }} >
-						                    <input class="form-control answer" type="text" value="{{ $ans->content }}" disabled>
-						                    <input class='form-control answer_id' type='text' value="{{ $ans->id }}" hidden >
-					                </div>
+				                	@if ($ans->question_id == $item->id )
+						                <div class='input-group answers_group' name='answers_group'>
+							                    <input class='input-group-addon flat-red right-answer' name = '{{ "right-answer".$item->id }}' type='radio' {{ App\Helpers\Question::checkBox($item->id, $ans->id, $record) }} >
+							                    <input class="form-control answer" type="text" value="{{ $ans->content }}" disabled>
+							                    <input class='form-control answer_id' type='text' value="{{ $ans->id }}" hidden >
+						                </div>
+					                @endif
 				                @endforeach
 			            	@endif
 					</div>
@@ -69,7 +72,7 @@
 		            <p>-------------------</p>
 				@endforeach
 				<p>This is the end of the test. Check your answers and submit. Good luck!</p>
-				@if (!(App\UserRecord::isTookTheContest(\Auth::user()->id, $contest_id)))
+				@if (!$took)
 					<div class="box-footer">
 				        <button type="submit" id='submit' class="btn btn-info">Submit</button>
 				    </div>

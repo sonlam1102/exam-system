@@ -72,7 +72,7 @@
                           <textarea class='form-control question' type='text'> {{ $item->content }} </textarea>
                           <label class='col-sm-2 control-label'>Answers</label>
                           <p>
-                            @if (App\Subquestion::isBigQuestion($item->id))
+                            @if (!empty($subquestion) && in_array(['question_id' => $item->id], $subquestion))
                               This question is based on those answers: 
                               @php
                                 $subquestion = App\Subquestion::getAllSubquestion($item->id);
@@ -82,13 +82,15 @@
                               @endphp
                             @endif
                           </p>
-                          @if($answers = App\Answer::get_all_answers($item->id))
+                          @if($answers)
                             @foreach($answers as $ans)
-                              <div class='input-group answers_group' name='answers_group'>
-                                <input class='input-group-addon flat-red right-answer' name = '{{ "right-answer".$item->id }}' type='radio' {{ (App\Result::checkResultOfQuestion($item->id, $id)) ? (((App\Result::checkResultOfQuestion($item->id, $id))->answer_id == $ans->id ) ? 'checked' : '') : '' }} >
-                                <input class="form-control answer" type="text" value="{{ $ans->content }}">
-                                <input class='form-control answer_id' type='text' value="{{ $ans->id }}" hidden >
-                              </div>
+                              @if ($ans->question_id == $item->id)
+                                <div class='input-group answers_group' name='answers_group'>
+                                  <input class='input-group-addon flat-red right-answer' name = '{{ "right-answer".$item->id }}' type='radio' {{ App\Helpers\Question::checkBox($item->id, $ans->id, $result) }} >
+                                  <input class="form-control answer" type="text" value="{{ $ans->content }}">
+                                  <input class='form-control answer_id' type='text' value="{{ $ans->id }}" hidden >
+                                </div>
+                              @endif
                             @endforeach
                         @endif
                       </div>

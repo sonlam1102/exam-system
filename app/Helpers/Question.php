@@ -5,20 +5,26 @@ use App\UserRecord;
 
 class Question
 {
-	public static function checkRightAnswer ($userId, $questionId, $contest_id)
+	public static function checkRightAnswer ($question_id, $recordArr, $resultArr)
 	{
-		if (!$userId || !$questionId || !$contest_id)
+		if (!$question_id || empty($recordArr) || empty($resultArr))
 			return -1;
 
-		$resultAnswer = Result::checkResultOfQuestion($questionId, $contest_id);
-		$userAnswer = UserRecord::getAnswer($userId, $contest_id, $questionId);
-		if (!$resultAnswer)
+		$data = [];
+		foreach ($recordArr as $item) {
+			if ($item['question_id'] == $question_id) {
+				$data = [
+					'question_id' => $item['question_id'],
+					'answer_id' => $item['answer_id']
+				];
+				break;
+			}
+		}
+		
+		if (empty($data))
 			return -1;
 
-		if (!$userAnswer)
-			return 0;
-
-		return ((int)$userAnswer->answer_id == (int)$resultAnswer->answer_id) ? 1 : 0;
+		return (in_array($data, $resultArr)) ? 1 : 0;
 	}
 	
 	public static function evaluateAnswer($user_id, $contest_id)
@@ -44,5 +50,18 @@ class Question
 			'right' => $count,
 			'total' => $total,
 		);
+	}
+
+	public static function checkBox($question_id, $answer_id, $resultArr)
+	{
+		if (!$question_id || empty($answer_id) || empty($resultArr))
+			return '';
+
+		$data = [
+			'question_id' => $question_id,
+			'answer_id' => $answer_id
+		];
+
+		return (in_array($data, $resultArr)) ? 'checked' : '';
 	}
 }

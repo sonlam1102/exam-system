@@ -9,14 +9,6 @@ class Answer extends Model
     protected $table = "answers";
     public $timestamps = false;
 
-    public static function get_all_answers($questionId)
-    {
-    	if (!$questionId)
-    		return null;
-
-    	$data = self::select()->where('question_id', '=', $questionId);
-    	return ($data) ? $data->get() : null;
-    }
 
     public static function addAnswer($question_id, $constest_id, $content) {
     	if (!$question_id || !$constest_id)

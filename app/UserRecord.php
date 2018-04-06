@@ -71,6 +71,14 @@ class UserRecord extends Model
                     ->where('contest_id', '=', $contest_id);
         return $data->delete();
     }
+    public static function deleteRecordByQuestion($question_id)
+    {
+        if (!$question_id)
+            return false;
+        $data = self::select()
+                    ->where('question_id', '=', $question_id);
+        return $data->delete();
+    }
 
     public static function deleteAllRecordByContest($contest_id)
     {
