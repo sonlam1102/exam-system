@@ -75,8 +75,8 @@
                             @if (!empty($subquestion) && in_array(['question_id' => $item->id], $subquestion))
                               This question is based on those answers: 
                               @php
-                                $subquestion = App\Subquestion::getAllSubquestion($item->id);
-                                foreach($subquestion as $val) {
+                                $subquestionData = App\Subquestion::getAllSubquestion($item->id);
+                                foreach($subquestionData as $val) {
                                       echo $val->subquestion_id . ' ';
                                  }        
                               @endphp
