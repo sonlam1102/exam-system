@@ -57,3 +57,8 @@ textarea {
   background-color: #d9534f;
 }
 
+.feedback {
+  height: 400px;
+  width: 100%;
+}
+

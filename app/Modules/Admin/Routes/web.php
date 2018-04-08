@@ -20,4 +20,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::delete('/contest/delete/{id}', 'ContestController@deleteContest')->where('id', '[0-9]+');  //delete contest by id
     Route::delete('/contest/delete/{id}/question', 'ContestController@deleteQuestion')->where('id', '[0-9]+');  //delete question by id
     Route::get('/contest/{id}/candidate', 'ContestController@listCandidate')->where('id', '[0-9]+');  //get candidtes of contest
+
+    //Feedback
+    Route::get('/feedback', 'FeedBackController@index');
 });

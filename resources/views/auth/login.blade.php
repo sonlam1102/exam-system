@@ -36,7 +36,7 @@
                             <div class="col-md-6 justify-content-center">
                                 @if (\Session::has('error'))
                                     <span>
-                                            <strong>{!!Session::get('error')!!}</strong>
+                                        <strong>{!!Session::get('error')!!}</strong>
                                     </span>
                                 @endif
                             </div>
