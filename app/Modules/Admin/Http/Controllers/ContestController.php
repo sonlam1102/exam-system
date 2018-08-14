@@ -165,6 +165,7 @@ class ContestController extends Controller
         Answer::deleteByContest($id);
         Result::deleteByContest($id);
         UserRecord::deleteAllRecordByContest($id);
+        UserLog::deleteAllUserLogByContest($id);
         if ($contest)
             $contest->delete();
 

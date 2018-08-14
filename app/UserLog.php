@@ -58,4 +58,14 @@ class UserLog extends Model
 
         return ($data) ? $data->get() : null;
     }
+
+    public static function deleteAllUserLogByContest($contest_id)
+    {
+        if (!$contest_id)
+            return null;
+        
+        $data = self::select()->where('contest_id', '=', $contest_id);
+
+        return $data->delete();
+    }
 }

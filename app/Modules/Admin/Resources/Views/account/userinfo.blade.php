@@ -42,8 +42,9 @@
                 </div>
 
               </div>
-              <label>Contest done</label>
+              <!-- <label>Contest done</label> -->
               <div class="box-body">
+                <label for="inputEmail3" class="col-sm-2 control-label">Contest done</label>
                 <table class="table table-hover">
                   <tbody>
                     <tr>
@@ -63,7 +64,6 @@
                   </tbody>
                 </table>
             </div>
-
         </div>
     </section>
 @stop
