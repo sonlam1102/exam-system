@@ -9,8 +9,6 @@ class UserRecord extends Model
     protected $table = "user_record";
     protected $primaryKey = 'user_id';
 
-    public $timestamps = false;
-
     public static function addRecord($data)
     {
     	if (!isset($data['user_id']) || !isset($data['contest_id']) || !isset($data['question_id']) || !isset($data['answer_id']))

@@ -6,8 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Answer extends Model
 {
-    protected $table = "answers";
-    public $timestamps = false;
+    protected $table = "answer";
 
     public function contest() {
         return $this->belongsTo('App\Contest', 'contest_id');

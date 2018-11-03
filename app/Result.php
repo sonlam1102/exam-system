@@ -9,7 +9,17 @@ class Result extends Model
     protected $table = "result";
     protected $primaryKey = 'question_id';
 
-    public $timestamps = false;
+    public function question() {
+        return $this->belongsTo('App\Question', 'question_id');
+    }
+
+    public function answer() {
+        return $this->belongsTo('App\Answer', 'answer_id');
+    }
+
+    public function contest() {
+        return $this->belongsTo('App\Contests', 'contest_id');
+    }
 
     public static function getAllResult($contest_id)
     {

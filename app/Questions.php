@@ -6,8 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Questions extends Model
 {
-    protected $table = "questions";
-    public $timestamps = false;
+    protected $table = "question";
 
     public function subquestions() {
         return $this->hasMany('App\Subquestion', 'question_id');
@@ -16,7 +15,11 @@ class Questions extends Model
     public function answers() {
         return $this->hasMany('App\Answer', 'question_id');
     }
-    
+
+    public function result() {
+        return $this->hasOne('App\Result', 'question_id');
+    }
+
     public static function add_question($contest_id, $content) {
     	if (!$contest_id)
     		return false;
