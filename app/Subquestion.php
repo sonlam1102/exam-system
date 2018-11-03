@@ -53,4 +53,13 @@ class Subquestion extends Model
         $question = self::find($question_id);
         return ($question) ? true : false;
     }
+
+    public static function isSubQuestion($question_id)
+    {
+        if (!$question_id)
+            return false;
+
+        $question = self::where('subquestion_id', '=', $question_id)->first();
+        return ($question) ? true : false;
+    }
 }

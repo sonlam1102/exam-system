@@ -24,6 +24,10 @@ class Contests extends Model
         return $this->hasMany('App\Result', 'contest_id');
     }
 
+    public function records() {
+        return $this->hasMany('App\UserRecord', 'contest_id');
+    }
+
     public static function add($data)
     {
     	if (!isset($data['subject_id']) || !isset($data['title']) || !isset($data['date']))

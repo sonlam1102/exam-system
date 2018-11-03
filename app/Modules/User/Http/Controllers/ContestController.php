@@ -33,25 +33,11 @@ class ContestController extends Controller
     	if (!$id)
     		abort(404);
 
-    	$data = Questions::getAllQuestion($id);
-        $answer = Answer::select()->where('contest_id', '=', $id)->get();
-        $result = Result::select('question_id', 'answer_id')->where('contest_id', '=', $id)->get();
-        $record = UserRecord::select('question_id', 'answer_id')
-                            ->where('contest_id', '=', $id)
-                            ->where('user_id', '=', Auth::user()->id)
-                            ->get();
+    	$contest = Contests::find($id);
+
+    	$question = $contest->questions;
         $took = UserRecord::isTookTheContest(\Auth::user()->id, $id);
         $subquestion = Subquestion::select('question_id')->get();
-
-        if ($record)
-            $record = $record->toArray();
-        else
-            $record = [];
-
-        if ($result)
-            $result = $result->toArray();
-        else
-            $result = [];
 
         if ($subquestion)
             $subquestion = $subquestion->toArray();
@@ -62,13 +48,10 @@ class ContestController extends Controller
 
         $lasted = UserLog::getLastedLog(\Auth::user()->id, $id);
     	return view('user::contest.exam')
-            ->with('data', $data)
+            ->with('contest', $contest)
+            ->with('questions', $question)
             ->with('info', $info)
-            ->with('contest_id', $id)
             ->with('lasted', ($lasted) ? $lasted->result : null)
-            ->with('answers', $answer)
-            ->with('result', $result)
-            ->with('record', $record)
             ->with('took', $took)
             ->with('subquestion', $subquestion);
     }

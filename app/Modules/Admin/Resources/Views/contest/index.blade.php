@@ -32,7 +32,7 @@
                         <td> {{ $item->id }}</td>
                         <td> {{ $item->title }}</td>
                         <td> {{ $item->subject_id }}</td>
-                        <td> {{ $item->question ? $item->question->count() : "0" }}</td>
+                        <td> {{ $item->questions->count() }}</td>
                         <td> {{ date('d/m/Y', strtotime($item->date)) }}</td>
                         <td>
                           <a href="/admin/contest/edit/{{ $item->id }}"><button type="button" class="btn btn-success">Edit</button></a>

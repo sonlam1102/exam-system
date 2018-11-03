@@ -12,6 +12,10 @@ class Questions extends Model
         return $this->hasMany('App\Subquestion', 'question_id');
     }
 
+    public function questionparent() {
+        return $this->hasOne('App\Subquestion', 'subquestion_id');
+    }
+
     public function answers() {
         return $this->hasMany('App\Answer', 'question_id');
     }

@@ -5,12 +5,23 @@ use App\UserRecord;
 
 class Question
 {
-	public static function checkRightAnswer ($question_id, $recordArr, $resultArr)
+	public static function checkRightAnswer ($question_id, $records, $results)
 	{
+        $recordArr = $records->toArray();
+        $resultArr = $results->ToArray();
 		if (!$question_id || empty($recordArr) || empty($resultArr))
 			return -1;
 
 		$data = [];
+        $resultData = [];
+        foreach ($resultArr as $result) {
+            $temp = [
+                'question_id' => $result['question_id'],
+                'answer_id'=> $result['answer_id']
+            ];
+            array_push($resultData, $temp);
+        }
+
 		foreach ($recordArr as $item) {
 			if ($item['question_id'] == $question_id) {
 				$data = [
@@ -24,7 +35,7 @@ class Question
 		if (empty($data))
 			return -1;
 
-		return (in_array($data, $resultArr)) ? 1 : 0;
+		return (in_array($data, $resultData)) ? 1 : 0;
 	}
 	
 	public static function evaluateAnswer($user_id, $contest_id)
