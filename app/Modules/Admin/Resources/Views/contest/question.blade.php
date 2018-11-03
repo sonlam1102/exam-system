@@ -72,7 +72,7 @@
                           <textarea class='form-control question' type='text'> {{ $item->content }} </textarea>
                           <label class='col-sm-2 control-label'>Answers</label>
                           <p>
-                            @if (!empty($item->subquestions->toArray()) && $item->subquestions)
+                            @if (\App\Subquestion::isBigQuestion($item->id))
                                   <a href='javascript:void(0)' class='add_one_new_subquestion'>Add 1 sub question question</a>
                                   <input class='form-control big_question' type='text' value="{{ $item->id }}" hidden >
                                   <br>

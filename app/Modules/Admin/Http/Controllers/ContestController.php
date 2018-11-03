@@ -71,10 +71,6 @@ class ContestController extends Controller
                     $subQuestion = null;
                 }
 
-                if (isset($item['big_question_id']) && $item['big_question_id']) {
-                    Subquestion::addSubQuestion($item['big_question_id'], $questionId);
-                }
-
                 foreach ($item['answer'] as $value) {
                     $answerId = Answer::addAnswer($questionId, $id, $value['answer_content']);
                     if ($value['right_answer'] != 'true' || !$answerId) {
@@ -84,7 +80,11 @@ class ContestController extends Controller
                 }
                 if ($mainQuestion && $subQuestion)  {
                     Subquestion::addSubQuestion($mainQuestion, $subQuestion);
-                }                  
+                }
+
+                if (isset($item['big_question_id']) && $item['big_question_id']) {
+                    Subquestion::addSubQuestion($item['big_question_id'], $questionId);
+                }
             }
         }
 
