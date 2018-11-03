@@ -14,4 +14,10 @@ class Subjects extends Model
 
     	return ($subject) ? $subject->name : null;
     }
+
+    public static function addSubject($data) {
+        $subject = new Subjects();
+        $subject->name = $data['name'];
+        return $subject->save();
+    }
 }

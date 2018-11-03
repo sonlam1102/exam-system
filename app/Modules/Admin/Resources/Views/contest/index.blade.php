@@ -10,7 +10,7 @@
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
         <li><a href="#"><i class="fa fa-dashboard"></i> Contest</a></li>
       </ol>
-          <a href="/admin/contest/add"><button type="button" class="btn btn-block btn-primary" style="width:50px">Add</button></a>
+        <a href="/admin/contest/add"><button type="button" class="btn btn-block btn-primary" style="width:50px">Add</button></a>
       <div class="box-primary">
         <div class="col-xs-12">
           <div class="box">

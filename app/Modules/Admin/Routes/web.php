@@ -23,4 +23,9 @@ Route::group(['prefix' => 'admin'], function () {
 
     //Feedback
     Route::get('/feedback', 'FeedBackController@index');
+
+    //Subject
+    Route::get('/subject', 'SubjectController@index');
+    Route::get('/subject/add', 'SubjectController@add');
+    Route::post('/subject/add', 'SubjectController@add');
 });

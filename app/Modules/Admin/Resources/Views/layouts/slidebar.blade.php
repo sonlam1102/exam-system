@@ -26,8 +26,8 @@
         </span>
       </a>
       <ul class="treeview-menu">
-        <li><a href="/admin/contest"><i class="fa fa-circle-o"></i> List contest </a></li>
-        <!-- <li><a href="/admin/user/list"><i class="fa fa-circle-o"></i>User account</a></li> -->
+          <li><a href="/admin/subject"><i class="fa fa-circle-o"></i> List subject </a></li>
+          <li><a href="/admin/contest"><i class="fa fa-circle-o"></i> List contest </a></li>
       </ul>
     </li>
 

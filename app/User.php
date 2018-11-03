@@ -23,7 +23,10 @@ class User extends Authenticatable
         $this->name = $array_info['name'];
         $this->address = $array_info['address'];
         $this->birthday = $array_info['birthday'];
-        $this->img = $array_info['img'];
+
+        if ($array_info['img']) {
+            $this->img = $array_info['img'];
+        }
 
         return $this->save();
     }
