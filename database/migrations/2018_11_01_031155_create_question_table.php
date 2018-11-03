@@ -17,7 +17,7 @@ class CreateQuestionTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('contest_id');
             $table->foreign('contest_id')->references('id')->on('contest')->onDelete('cascade');
-            $table->string('content');
+            $table->longText('content');
             $table->timestamps();
         });
     }

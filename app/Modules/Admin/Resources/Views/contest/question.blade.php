@@ -59,8 +59,8 @@
                   <a href="javascript:void(0)" id="add_new_big_question">Add 1 big question</a>
                 </div>
                 <div class="box-body" id='question_field'>
-                    @if ($questions)
-                      @foreach($questions as $item)
+                    @if ($data->questions)
+                      @foreach($data->questions as $item)
                        <div class='form-group question_item'>
                           <div class="delete_question"> 
                             <input type="text" name="token" id='token' value="{{ csrf_token() }}" hidden> 
@@ -72,21 +72,21 @@
                           <textarea class='form-control question' type='text'> {{ $item->content }} </textarea>
                           <label class='col-sm-2 control-label'>Answers</label>
                           <p>
-                            @if (!empty($subquestion) && in_array(['question_id' => $item->id], $subquestion))
+                            @if (!empty($item->subquestions))
                               This question is based on those answers: 
                               @php
-                                $subquestionData = App\Subquestion::getAllSubquestion($item->id);
+                                $subquestionData = $item->subquestions;
                                 foreach($subquestionData as $val) {
                                       echo $val->subquestion_id . ' ';
                                  }        
                               @endphp
                             @endif
                           </p>
-                          @if($answers)
-                            @foreach($answers as $ans)
+                          @if($data->answers)
+                            @foreach($data->answers as $ans)
                               @if ($ans->question_id == $item->id)
                                 <div class='input-group answers_group' name='answers_group'>
-                                  <input class='input-group-addon flat-red right-answer' name = '{{ "right-answer".$item->id }}' type='radio' {{ App\Helpers\Question::checkBox($item->id, $ans->id, $result) }} >
+                                  <input class='input-group-addon flat-red right-answer' name = '{{ "right-answer".$item->id }}' type='radio' {{ App\Helpers\Question::checkBox($item->id, $ans->id, $data->results) }} >
                                   <input class="form-control answer" type="text" value="{{ $ans->content }}">
                                   <input class='form-control answer_id' type='text' value="{{ $ans->id }}" hidden >
                                 </div>

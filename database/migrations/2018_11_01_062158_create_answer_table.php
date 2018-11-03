@@ -19,7 +19,7 @@ class CreateAnswerTable extends Migration
             $table->foreign('contest_id')->references('id')->on('contest')->onDelete('cascade');
             $table->unsignedInteger('question_id');
             $table->foreign('question_id')->references('id')->on('question')->onDelete('cascade');
-            $table->string('content');
+            $table->longText('content');
             $table->timestamps();
         });
     }

@@ -52,9 +52,19 @@ class Question
 		);
 	}
 
-	public static function checkBox($question_id, $answer_id, $resultArr)
+	public static function checkBox($question_id, $answer_id, $result)
 	{
-		if (!$question_id || empty($answer_id) || empty($resultArr))
+        $resultArr = $result ? $result->toArray() : [];
+        $resultData = [];
+        foreach ($resultArr as $result) {
+            $temp = [
+                'question_id' => $result['question_id'],
+                'answer_id'=> $result['answer_id']
+            ];
+            array_push($resultData, $temp);
+        }
+
+		if (!$question_id || empty($answer_id) || empty($resultData))
 			return '';
 
 		$data = [
@@ -62,6 +72,6 @@ class Question
 			'answer_id' => $answer_id
 		];
 
-		return (in_array($data, $resultArr)) ? 'checked' : '';
+		return (in_array($data, $resultData)) ? 'checked' : '';
 	}
 }

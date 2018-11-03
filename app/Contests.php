@@ -12,8 +12,16 @@ class Contests extends Model
         return $this->belongsTo('App\Subject', 'subject_id');
     }
 
-    public function question() {
+    public function questions() {
         return $this->hasMany('App\Questions', 'contest_id');
+    }
+
+    public function answers() {
+        return $this->hasMany('App\Answer', 'contest_id');
+    }
+
+    public function results() {
+        return $this->hasMany('App\Result', 'contest_id');
     }
 
     public static function add($data)
