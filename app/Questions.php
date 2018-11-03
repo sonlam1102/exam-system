@@ -8,6 +8,14 @@ class Questions extends Model
 {
     protected $table = "questions";
     public $timestamps = false;
+
+    public function subquestions() {
+        return $this->hasMany('App\Subquestion', 'question_id');
+    }
+
+    public function answers() {
+        return $this->hasMany('App\Answer', 'question_id');
+    }
     
     public static function add_question($contest_id, $content) {
     	if (!$contest_id)

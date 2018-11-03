@@ -9,6 +9,13 @@ class Answer extends Model
     protected $table = "answers";
     public $timestamps = false;
 
+    public function contest() {
+        return $this->belongsTo('App\Contest', 'contest_id');
+    }
+
+    public function question() {
+        return $this->belongsTo('App\Question', 'question_id');
+    }
 
     public static function addAnswer($question_id, $constest_id, $content) {
     	if (!$question_id || !$constest_id)

@@ -9,7 +9,13 @@ class Subquestion extends Model
     protected $table = "subquestion";
     protected $primaryKey = 'question_id';
 
-    public $timestamps = false;
+    public function question() {
+        return $this->belongsTo('App\Question', 'question_id');
+    }
+
+    public function subquestion() {
+        return $this->belongsTo('App\Question', 'subquestion_id');
+    }
 
     public static function addSubQuestion($question_id, $subquestion_id)
     {

@@ -7,7 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 class Contests extends Model
 {
     protected $table = "contest";
-    public $timestamps = false;
+
+    public function subject() {
+        return $this->belongsTo('App\Subject', 'subject_id');
+    }
+
     public static function add($data)
     {
     	if (!isset($data['subject_id']) || !isset($data['title']) || !isset($data['date']))
