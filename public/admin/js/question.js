@@ -91,6 +91,12 @@ $(document).ready(function () {
 		});
 	});
 
+	$('.add_one_new_subquestion').click(function () {
+		var big_question = $(this).parent().find('.big_question').val();
+		$('#question_field').append(subQuestionPackGenerate(num, big_question));
+		num++;
+	});
+
 	$('.delete_question #delete').click(function () {
 		var id = $(this).data('qid'),
 		    data = {},
@@ -162,10 +168,18 @@ function packedQuestion(objectQuestion) {
 			answer_list[j] = packedAnswer($(this), update);
 			j++;
 		});
-		json_array = {
-			"question": objectQuestion.find('.question').val(),
-			"answer": answer_list
-		};
+		if ($.trim(objectQuestion.find('.big_question_id').val()) != "undefined" && $.trim(objectQuestion.find('.big_question_id').val()) != "") {
+			json_array = {
+				"question": objectQuestion.find('.question').val(),
+				"answer": answer_list,
+				"big_question_id": $.trim(objectQuestion.find('.big_question_id').val())
+			};
+		} else {
+			json_array = {
+				"question": objectQuestion.find('.question').val(),
+				"answer": answer_list
+			};
+		}
 	}
 	if (objectQuestion.parent().attr('class') == 'big_question') json_array['big_question'] = 'true';
 	return json_array;
@@ -196,6 +210,13 @@ function questionPackGenerate() {
 }
 function bigQuestionGenerate() {
 	var content = "<div class='big_question'>" + "<div class='form-group question_pack'>" + "<label class='col-sm-2 control-label'>Big Question</label>" + "<textarea class='form-control question'></textarea>" + "</div>" + "<a href='javascript:void(0)' id='add_new_subquestion'>Add 1 sub question question</a>" + "</div>";
+	return content;
+}
+function subQuestionPackGenerate() {
+	var i = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
+	var big_question_id = arguments[1];
+
+	var content = "<div class='form-group question_pack'>" + "<label class='col-sm-2 control-label'>Question</label>" + "<input class='form-control big_question_id' type='text' value=\" " + big_question_id + " \" hidden >" + "<textarea class='form-control question'></textarea>" + "<label class='col-sm-2 control-label'>Answers</label>" + "<div class='input-group answers_group'>" + "<input class='input-group-addon flat-red right-answer' name ='answers_group " + i + "' type='radio'>" + "<input class='form-control answer type='text'> " + "</div>" + "<div class='input-group answers_group'>" + "<input class='input-group-addon flat-red right-answer' name ='answers_group " + i + "' type='radio'>" + "<input class='form-control answer type='text' >" + "</div>" + "<div class='input-group answers_group'>" + "<input class='input-group-addon flat-red right-answer' name ='answers_group " + i + "' type='radio'>" + "<input class='form-control answer type='text' >" + "</div>" + "<div class='input-group answers_group'>" + "<input class='input-group-addon flat-red right-answer' name ='answers_group " + i + "' type='radio'>" + "<input class='form-control answer type='text' >" + "</div>" + "</div>";
 	return content;
 }
 
