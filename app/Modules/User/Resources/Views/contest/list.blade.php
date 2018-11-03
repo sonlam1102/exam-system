@@ -15,7 +15,7 @@
 		              </h4>
 		              <p class="card-text">Date Begin: {{ ($item->date) ? date('d/m/Y', strtotime($item->date)) : '' }} </p>
 		              <p class="card-text">Subject: {{ App\Subjects::getName($item->subject_id) }} </p>
-		              <p class="card-text">Number questions: {{ App\Questions::countQuestionByContest($item->id) }} </p>
+		              <p class="card-text">Number questions: {{ $item->question->count() }} </p>
 		              @if ($lasted = App\UserLog::getLastedLog(\Auth::user()->id, $item->id))
 		               <p class="card-text">Result: {{ $lasted->result }} </p>
 		              @endif

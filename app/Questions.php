@@ -40,12 +40,6 @@ class Questions extends Model
         return $this->save();
     }
 
-    public static function countQuestionByContest($contest_id)
-    {
-        $question = self::select()->where('contest_id', '=', $contest_id);
-        return $question->count();
-    }
-
     public function deleteQuestion()
     {
         return $this->delete();   

@@ -29,6 +29,7 @@ class ContestController extends Controller
     			'subject_id' => $request->subject,
     			'title' => $request->title,
     			'date' => $request->date,
+                'user_id' => \Auth::user()->id
     		);
     		$check = Contests::add($data);
     		if ($check)
