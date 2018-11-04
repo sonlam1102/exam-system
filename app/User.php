@@ -16,6 +16,10 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    public function logs() {
+        return $this->hasMany('App\UserLog', 'user_id');
+    }
+
     public function update_info ($array_info) {
 
         if (!isset($array_info['name']) || !isset($array_info['address']) || !isset($array_info['birthday']) || !isset($array_info['img']))

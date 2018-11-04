@@ -8,6 +8,10 @@ class Feedback extends Model
 {
     protected $table = "feedback";
 
+    public function user() {
+        return $this->belongsTo('App\User', 'user_id');
+    }
+
     public static function getAllFeedback()
     {
     	$data = self::select();

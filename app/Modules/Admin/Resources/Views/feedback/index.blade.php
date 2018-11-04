@@ -26,7 +26,7 @@
                     @foreach($data as $item)
                       <tr>
                         <td> {{ $item->id }}</td>
-                        <td> <a href="/admin/user/info/{{ $item->user_id }}"> {{ $item->user_id }}</td>
+                        <td> <a href="/admin/user/info/{{ $item->user_id }}"> {{ $item->user->name }}</td>
                         <td> {{ $item->content }}</td>
                       </tr>
                     @endforeach

@@ -27,9 +27,8 @@ class UserController extends Controller
             abort('404');
 
         $data = User::find($id);
-        $log = UserLog::getAllLogByUser($id);
+        $log = $data->logs;
         return view('admin::account.userinfo')  
-            ->with('data', $data)
-            ->with('log', $log);
+            ->with('data', $data);
     }
 }

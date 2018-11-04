@@ -200,8 +200,9 @@ class ContestController extends Controller
         if (!$id)
             abort('404');
 
-        $data = UserLog::getAllLogByContest($id);
-        return view('admin::contest.candidate')->with('data', $data);
+        $data = Contests::find($id);
+        $user_log = $data->userslog;
+        return view('admin::contest.candidate')->with('data', $user_log);
     }
 
 }

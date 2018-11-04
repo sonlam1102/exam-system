@@ -9,6 +9,14 @@ class UserLog extends Model
     protected $table = "user_log";
     protected $primaryKey = 'user_id';
 
+    public function user() {
+        return $this->belongsTo('App\User', 'user_id');
+    }
+
+    public function contest() {
+        return $this->belongsTo('App\Contests', 'contest_id');
+    }
+
     public static function addUserLog($user_id, $contest_id, $result)
     {
     	if (!$user_id || !$contest_id)

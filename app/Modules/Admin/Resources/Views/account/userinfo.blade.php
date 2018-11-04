@@ -52,10 +52,10 @@
                       <th>Result</th>
                       <th>Date</th>
                     </tr>
-                    @if ($log)
-                      @foreach($log as $item)
+                    @if ($data->logs)
+                      @foreach($data->logs as $item)
                         <tr>
-                          <td> <a href="/admin/contest/edit/{{ $item->contest_id }}"> {{ $item->contest_id }} </a> </td>
+                          <td> <a href="/admin/contest/edit/{{ $item->contest_id }}"> {{ $item->contest->title }} </a> </td>
                           <td> {{ $item->result }}</td>
                           <td> {{ date('d/m/Y', strtotime($item->date)) }}</td>
                         </tr>
