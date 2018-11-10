@@ -60,78 +60,76 @@
                 </div>
                 <div class="box-body" id='question_field'>
                     @if ($data->questions)
-                      @foreach($data->questions as $item)
-                       <div class='form-group question_item'>
-                          <p>
-                           @if (\App\Subquestion::isBigQuestion($item->id))
-                               <div class="delete_question">
-                                   <input type="text" name="token" id='token' value="{{ csrf_token() }}" hidden>
-                                   <input type="hidden" name="_method" id='method' value="delete" />
-                                   <label for="inputEmail3" class="control-label">Big Question #{{ $item->id }}</label>
-                                   <button type="button" class="btn btn-sm btn-danger" id='delete' data-qid = '{{ $item->id }} '>Delete</button>
-                               </div>
-                               <input class='form-control question_id' type='text' value="{{ $item->id }}" hidden >
-                               <textarea class='form-control question' type='text'> {{ $item->content }} </textarea>
-                               <label class='col-sm-2 control-label'>Answers</label>
+                        @foreach($data->questions as $item)
+                            <div class='form-group question_item'>
+                                @if (\App\Subquestion::isBigQuestion($item->id))
+                                    <div class="delete_question">
+                                        <input type="text" name="token" id='token' value="{{ csrf_token() }}" hidden>
+                                        <input type="hidden" name="_method" id='method' value="delete" />
+                                        <label for="inputEmail3" class="control-label">Big Question #{{ $item->id }}</label>
+                                        <button type="button" class="btn btn-sm btn-danger" id='delete' data-qid = '{{ $item->id }} '>Delete</button>
+                                    </div>
+                                    <input class='form-control question_id' type='text' value="{{ $item->id }}" hidden >
+                                    <textarea class='form-control question' type='text'> {{ $item->content }} </textarea>
+                                    <label class='col-sm-2 control-label'>Answers</label>
 
-                                  <a href='javascript:void(0)' class='add_one_new_subquestion'>Add 1 sub question question</a>
-                                  <input class='form-control big_question' type='text' value="{{ $item->id }}" hidden >
-                                  <br>
-                                  This question is based on those answers:
-                              @php
-                                $subquestionData = $item->subquestions;
-                                foreach($subquestionData as $val) {
-                                      echo $val->subquestion_id . ' ';
-                                 }
-                              @endphp
-                              @elseif(\App\Subquestion::isSubQuestion($item->id))
-                               <div class="delete_question">
-                                   <input type="text" name="token" id='token' value="{{ csrf_token() }}" hidden>
-                                   <input type="hidden" name="_method" id='method' value="delete" />
-                                   <label for="inputEmail3" class="control-label">Question #{{ $item->id }} (refernece to Question #{{ $item->questionparent->question_id }}) </label>
-                                   <button type="button" class="btn btn-sm btn-danger" id='delete' data-qid = '{{ $item->id }} '>Delete</button>
-                               </div>
-                               <input class='form-control question_id' type='text' value="{{ $item->id }}" hidden >
-                               <textarea class='form-control question' type='text'> {{ $item->content }} </textarea>
-                               <label class='col-sm-2 control-label'>Answers</label>
+                                    <a href='javascript:void(0)' class='add_one_new_subquestion'>Add 1 sub question question</a>
+                                    <input class='form-control big_question' type='text' value="{{ $item->id }}" hidden >
+                                    <br>
+                                    This question is based on those answers:
+                                    @php
+                                        $subquestionData = $item->subquestions;
+                                        foreach($subquestionData as $val) {
+                                        echo $val->subquestion_id . ' ';
+                                        }
+                                    @endphp
+                                @elseif(\App\Subquestion::isSubQuestion($item->id))
+                                    <div class="delete_question">
+                                       <input type="text" name="token" id='token' value="{{ csrf_token() }}" hidden>
+                                       <input type="hidden" name="_method" id='method' value="delete" />
+                                       <label for="inputEmail3" class="control-label">Question #{{ $item->id }} (refernece to Question #{{ $item->questionparent->question_id }}) </label>
+                                       <button type="button" class="btn btn-sm btn-danger" id='delete' data-qid = '{{ $item->id }} '>Delete</button>
+                                   </div>
+                                   <input class='form-control question_id' type='text' value="{{ $item->id }}" hidden >
+                                   <textarea class='form-control question' type='text'> {{ $item->content }} </textarea>
+                                   <label class='col-sm-2 control-label'>Answers</label>
                                 @else
-                               <div class="delete_question">
-                                   <input type="text" name="token" id='token' value="{{ csrf_token() }}" hidden>
-                                   <input type="hidden" name="_method" id='method' value="delete" />
-                                   <label for="inputEmail3" class="control-label">Question #{{ $item->id }}</label>
-                                   <button type="button" class="btn btn-sm btn-danger" id='delete' data-qid = '{{ $item->id }} '>Delete</button>
-                               </div>
-                               <input class='form-control question_id' type='text' value="{{ $item->id }}" hidden >
-                               <textarea class='form-control question' type='text'> {{ $item->content }} </textarea>
-                               <label class='col-sm-2 control-label'>Answers</label>
-                              @endif
-                          </p>
-                          @if($data->answers)
-                            @foreach($data->answers as $ans)
-                              @if ($ans->question_id == $item->id)
-                                <div class='input-group answers_group' name='answers_group'>
-                                  <input class='input-group-addon flat-red right-answer' name = '{{ "right-answer".$item->id }}' type='radio' {{ App\Helpers\Question::checkBox($item->id, $ans->id, $data->results) }} >
-                                  <input class="form-control answer" type="text" value="{{ $ans->content }}">
-                                  <input class='form-control answer_id' type='text' value="{{ $ans->id }}" hidden >
-                                </div>
-                              @endif
-                            @endforeach
-                        @endif
-                      </div>
-                      <br>
-                      @endforeach
+                                    <div class="delete_question">
+                                        <input type="text" name="token" id='token' value="{{ csrf_token() }}" hidden>
+                                        <input type="hidden" name="_method" id='method' value="delete" />
+                                        <label for="inputEmail3" class="control-label">Question #{{ $item->id }}</label>
+                                        <button type="button" class="btn btn-sm btn-danger" id='delete' data-qid = '{{ $item->id }} '>Delete</button>
+                                    </div>
+                                    <input class='form-control question_id' type='text' value="{{ $item->id }}" hidden >
+                                    <textarea class='form-control question' type='text' > {{ $item->content }} </textarea>
+                                    <label class='col-sm-2 control-label'>Answers</label>
+                                @endif
+
+                                @if($data->answers)
+                                        @foreach($data->answers as $ans)
+                                            @if ($ans->question_id == $item->id)
+                                                <div class='input-group answers_group' name='answers_group'>
+                                                    <input class='input-group-addon flat-red right-answer' name = '{{ "right-answer".$item->id }}' type='radio' {{ App\Helpers\Question::checkBox($item->id, $ans->id, $data->results) }} >
+                                                    <input class="form-control answer" type="text" value="{{ $ans->content }}">
+                                                    <input class='form-control answer_id' type='text' value="{{ $ans->id }}" hidden >
+                                                </div>
+                                            @endif
+                                        @endforeach
+                                    @endif
+                            </div>
+                            <br>
+                        @endforeach
                     @endif
                 </div>
-                <input type="text" name="data" id='data' hidden>
-                <div class="box-footer">
-                 <button type="submit" id='submit' class="btn btn-info pull-left">Add question</button>
-                </div>
+                  <input type="text" name="data" id='data' hidden>
+                  <div class="box-footer">
+                      <button type="submit" id='submit' class="btn btn-info pull-left">Add question</button>
+                  </div>
               </form>
             </div>
-          </div>
         </div>
       </div>
-    </section>
+  </section>
 </div>
 @endsection
 @section('javascript')
