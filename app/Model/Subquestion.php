@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -10,11 +10,11 @@ class Subquestion extends Model
     protected $primaryKey = 'question_id';
 
     public function question() {
-        return $this->belongsTo('App\Question', 'question_id');
+        return $this->belongsTo('App\Model\Question', 'question_id');
     }
 
     public function subquestion() {
-        return $this->belongsTo('App\Question', 'subquestion_id');
+        return $this->belongsTo('App\Model\Question', 'subquestion_id');
     }
 
     public static function addSubQuestion($question_id, $subquestion_id)

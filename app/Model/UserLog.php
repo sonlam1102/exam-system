@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -14,7 +14,7 @@ class UserLog extends Model
     }
 
     public function contest() {
-        return $this->belongsTo('App\Contests', 'contest_id');
+        return $this->belongsTo('App\Model\Contests', 'contest_id');
     }
 
     public static function addUserLog($user_id, $contest_id, $result)

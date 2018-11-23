@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -9,27 +9,27 @@ class Contests extends Model
     protected $table = "contest";
 
     public function subject() {
-        return $this->belongsTo('App\Subject', 'subject_id');
+        return $this->belongsTo('App\Model\Subject', 'subject_id');
     }
 
     public function questions() {
-        return $this->hasMany('App\Questions', 'contest_id');
+        return $this->hasMany('App\Model\Questions', 'contest_id');
     }
 
     public function answers() {
-        return $this->hasMany('App\Answer', 'contest_id');
+        return $this->hasMany('App\Model\Answer', 'contest_id');
     }
 
     public function results() {
-        return $this->hasMany('App\Result', 'contest_id');
+        return $this->hasMany('App\Model\Result', 'contest_id');
     }
 
     public function records() {
-        return $this->hasMany('App\UserRecord', 'contest_id');
+        return $this->hasMany('App\Model\UserRecord', 'contest_id');
     }
 
     public function userslog() {
-        return $this->hasMany('App\UserLog', 'contest_id');
+        return $this->hasMany('App\Model\UserLog', 'contest_id');
     }
 
     public static function add($data)

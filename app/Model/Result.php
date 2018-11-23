@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -10,15 +10,15 @@ class Result extends Model
     protected $primaryKey = 'question_id';
 
     public function question() {
-        return $this->belongsTo('App\Question', 'question_id');
+        return $this->belongsTo('App\Model\Question', 'question_id');
     }
 
     public function answer() {
-        return $this->belongsTo('App\Answer', 'answer_id');
+        return $this->belongsTo('App\Model\Answer', 'answer_id');
     }
 
     public function contest() {
-        return $this->belongsTo('App\Contests', 'contest_id');
+        return $this->belongsTo('App\Model\Contests', 'contest_id');
     }
 
     public static function getAllResult($contest_id)

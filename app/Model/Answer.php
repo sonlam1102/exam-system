@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -9,11 +9,11 @@ class Answer extends Model
     protected $table = "answer";
 
     public function contest() {
-        return $this->belongsTo('App\Contest', 'contest_id');
+        return $this->belongsTo('App\Model\Contest', 'contest_id');
     }
 
     public function question() {
-        return $this->belongsTo('App\Question', 'question_id');
+        return $this->belongsTo('App\Model\Question', 'question_id');
     }
 
     public static function addAnswer($question_id, $constest_id, $content) {

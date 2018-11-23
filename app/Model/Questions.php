@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -9,19 +9,19 @@ class Questions extends Model
     protected $table = "question";
 
     public function subquestions() {
-        return $this->hasMany('App\Subquestion', 'question_id');
+        return $this->hasMany('App\Model\Subquestion', 'question_id');
     }
 
     public function questionparent() {
-        return $this->hasOne('App\Subquestion', 'subquestion_id');
+        return $this->hasOne('App\Model\Subquestion', 'subquestion_id');
     }
 
     public function answers() {
-        return $this->hasMany('App\Answer', 'question_id');
+        return $this->hasMany('App\Model\Answer', 'question_id');
     }
 
     public function result() {
-        return $this->hasOne('App\Result', 'question_id');
+        return $this->hasOne('App\Model\Result', 'question_id');
     }
 
     public static function add_question($contest_id, $content) {
