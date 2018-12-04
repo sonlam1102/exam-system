@@ -5,14 +5,14 @@ namespace App\Modules\Admin\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Controllers\Controller;
-use App\Contests;
-use App\Subjects;
-use App\Questions;
-use App\Result;
-use App\Answer;
-use App\Subquestion;
-use App\UserLog;
-use App\UserRecord;
+use App\Model\Contests;
+use App\Model\Subjects;
+use App\Model\Questions;
+use App\Model\Result;
+use App\Model\Answer;
+use App\Model\Subquestion;
+use App\Model\UserLog;
+use App\Model\UserRecord;
 
 class ContestController extends Controller
 {
@@ -90,14 +90,12 @@ class ContestController extends Controller
 
         if ($update) {
             foreach ($update as $item) {
-                $question = Questions::find($item['id'])->edit_question($item['question']);
                 if (!isset($item['answer']))
                     continue;
                 foreach ($item['answer'] as $value) {
-                    $answer = Answer::find($value['id'])->editAnswer($value['answer_content']);
-
                     if ($value['right_answer'] == 'true') {
-                        $result = Result::where('question_id', '=', $item['id'])
+                        $q = Answer::find($value['id'])->question->id;
+                        $result = Result::where('question_id', '=', $q)
                                         ->where('contest_id', '=', $id)
                                         ->first();                   
                         ($result) ? $result->editResult($value['id']) : Result::addResultOfQuestion($item['id'], $id, $value['id']);

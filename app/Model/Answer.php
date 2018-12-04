@@ -13,7 +13,7 @@ class Answer extends Model
     }
 
     public function question() {
-        return $this->belongsTo('App\Model\Question', 'question_id');
+        return $this->belongsTo('App\Model\Questions', 'question_id');
     }
 
     public static function addAnswer($question_id, $constest_id, $content) {
