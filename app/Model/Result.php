@@ -10,7 +10,7 @@ class Result extends Model
     protected $primaryKey = 'question_id';
 
     public function question() {
-        return $this->belongsTo('App\Model\Question', 'question_id');
+        return $this->belongsTo('App\Model\Questions', 'question_id');
     }
 
     public function answer() {

@@ -3,16 +3,13 @@
 namespace App\Modules\User\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use App\Contests;
-use App\Questions;
-use App\UserRecord;
 use Auth;
+use App\Http\Controllers\Controller;
+use App\Model\Contests;
+use App\Model\UserRecord;
 use App\Helpers;
-use App\UserLog;
-use App\Answer;
-use App\Result;
-use App\Subquestion;
+use App\Model\UserLog;
+use App\Model\Subquestion;
 
 class ContestController extends Controller
 {

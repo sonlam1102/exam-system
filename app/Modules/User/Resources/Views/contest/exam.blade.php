@@ -17,7 +17,7 @@
         </div>
 
         <div class="form-group">
-            <label for="inputEmail3" class="col-sm-2 control-label">Subject: {{ App\Subjects::getName($info->subject_id) }} </label>
+            <label for="inputEmail3" class="col-sm-2 control-label">Subject: {{ App\Model\Subjects::getName($info->subject_id) }} </label>
         </div>
 
     </div>
@@ -30,7 +30,7 @@
 					<p class="card-text">Result: {{ $lasted }} </p>
 				@endif
 				@foreach ($questions as $item)
-					@if ($took && !\App\Subquestion::isBigQuestion($item->id))
+					@if ($took && !\App\Model\Subquestion::isBigQuestion($item->id))
 						@php
 							$check = App\Helpers\Question::checkRightAnswer($item->id, $contest->records->where('user_id', '=', \Auth::user()->id), $contest->results);
 							if ($check == 1)
@@ -42,7 +42,7 @@
 						@endphp
 					@endif
 					<div class="form-group {{ (!empty($subquestion) && in_array(['question_id' => $item->id], $subquestion)) ? '' : 'question_item' }} ">
-						@if(\App\Subquestion::isBigQuestion($item->id))
+						@if(\App\Model\Subquestion::isBigQuestion($item->id))
 							<label for="inputEmail3" class="control-label">Big Question #{{ $item->id }}</label>
 
 							<input type="text" class='question' value="{{ $item->id }}" hidden>
@@ -51,14 +51,14 @@
 							@if (!empty($subquestion) && in_array(['question_id' => $item->id], $subquestion))
 								This question is based on those answers:
 								@php
-									$subquestionData = App\Subquestion::getAllSubquestion($item->id);
+									$subquestionData = App\Model\Subquestion::getAllSubquestion($item->id);
                                     foreach($subquestionData as $val) {
                                          echo $val->subquestion_id . ' ';
                                     }
 								@endphp
 							@endif
 
-						@elseif(\App\Subquestion::isSubQuestion($item->id))
+						@elseif(\App\Model\Subquestion::isSubQuestion($item->id))
 							<label for="inputEmail3" class="control-label">Question #{{ $item->id }} (reference from #Question {{ $item->questionparent->id }})</label>
 							<input type="text" class='question' value="{{ $item->id }}" hidden>
 							<textarea class='form-control' type='text' disabled> {{ $item->content }} </textarea>

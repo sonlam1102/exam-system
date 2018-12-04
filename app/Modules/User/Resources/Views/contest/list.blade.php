@@ -14,13 +14,13 @@
 		                <label>{{ $item->title }}</label>
 		              </h4>
 		              <p class="card-text">Date Begin: {{ ($item->date) ? date('d/m/Y', strtotime($item->date)) : '' }} </p>
-		              <p class="card-text">Subject: {{ App\Subjects::getName($item->subject_id) }} </p>
+		              <p class="card-text">Subject: {{ App\Model\Subjects::getName($item->subject_id) }} </p>
 		              <p class="card-text">Number questions: {{ $item->questions->count() }} </p>
-		              @if ($lasted = App\UserLog::getLastedLog(\Auth::user()->id, $item->id))
+		              @if ($lasted = App\Model\UserLog::getLastedLog(\Auth::user()->id, $item->id))
 		               <p class="card-text">Result: {{ $lasted->result }} </p>
 		              @endif
 		            </div>
-		            @if (!App\UserRecord::isTookTheContest(\Auth::user()->id, $item->id))      
+		            @if (!App\Model\UserRecord::isTookTheContest(\Auth::user()->id, $item->id))
 		            	<a href="/user/contest/{{ $item->id }}"><button type="submit" class="btn btn-info">Do it!</button></a>
 		            @else
 		            	<a href="/user/contest/{{ $item->id }}"><button type="submit" class="btn btn-info">Check answer</button></a>
