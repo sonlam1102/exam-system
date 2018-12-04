@@ -151,7 +151,7 @@
                 url: link,
                 data: {'_token' : $('#token').val(), 'data' : data},
                 success: function(){
-                    // location.href = '/user/contest';
+                    location.href = '/user/contest';
                 },
             });
         });
