@@ -4,7 +4,7 @@ namespace App\Modules\User\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Feedback;
+use App\Model\Feedback;
 
 class FeedBackController extends Controller
 {
@@ -15,15 +15,15 @@ class FeedBackController extends Controller
 
     public function add($id, Request $request)
     {
-//    	if (!$id)
-//    		abort('404');
-//
-//    	$content = ($request->content) ? $request->content : null;
-//    	$check = Feedback::add($id, $content);
-//
-//    	if ($check)
-//    		\Session::flash('success','Feedback sent');
-//
-//    	return redirect('user/feedback');
+        $content = $request->post('content');
+    	if (!$id)
+    		abort('404');
+
+    	$check = Feedback::add($id, $content);
+
+    	if ($check)
+    		\Session::flash('success','Feedback sent');
+
+    	return redirect('user/feedback');
     }
 }
