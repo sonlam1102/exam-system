@@ -94,8 +94,7 @@ class ContestController extends Controller
                     continue;
                 foreach ($item['answer'] as $value) {
                     if ($value['right_answer'] == 'true') {
-                        $q = Answer::find($value['id'])->question->id;
-                        $result = Result::where('question_id', '=', $q)
+                        $result = Result::where('question_id', '=', $item['id'])
                                         ->where('contest_id', '=', $id)
                                         ->first();                   
                         ($result) ? $result->editResult($value['id']) : Result::addResultOfQuestion($item['id'], $id, $value['id']);
