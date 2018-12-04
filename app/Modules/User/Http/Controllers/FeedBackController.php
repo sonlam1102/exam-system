@@ -15,15 +15,15 @@ class FeedBackController extends Controller
 
     public function add($id, Request $request)
     {
-    	if (!$id)
-    		abort('404');
-
-    	$content = ($request->content) ? $request->content : null;
-    	$check = Feedback::add($id, $content);
-
-    	if ($check)
-    		\Session::flash('success','Feedback sent');
-
-    	return redirect('user/feedback');
+//    	if (!$id)
+//    		abort('404');
+//
+//    	$content = ($request->content) ? $request->content : null;
+//    	$check = Feedback::add($id, $content);
+//
+//    	if ($check)
+//    		\Session::flash('success','Feedback sent');
+//
+//    	return redirect('user/feedback');
     }
 }

@@ -1,7 +1,7 @@
 <?php
 namespace App\Helpers;
-use App\Result;
-use App\UserRecord;
+use App\Model\Result;
+use App\Model\UserRecord;
 
 class Question
 {

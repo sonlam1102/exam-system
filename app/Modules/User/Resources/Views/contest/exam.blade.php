@@ -30,22 +30,21 @@
 					<p class="card-text">Result: {{ $lasted }} </p>
 				@endif
 				@foreach ($questions as $item)
-					@if ($took && !\App\Model\Subquestion::isBigQuestion($item->id))
-						@php
-							$check = App\Helpers\Question::checkRightAnswer($item->id, $contest->records->where('user_id', '=', \Auth::user()->id), $contest->results);
-							if ($check == 1)
-								echo App\Helpers\Message::getNotify(0);
-							if ($check == 0)
-								echo App\Helpers\Message::getNotify(2);
-							if ($check == -1)
-								echo App\Helpers\Message::getNotify(1);
-						@endphp
-					@endif
-					<div class="form-group {{ (!empty($subquestion) && in_array(['question_id' => $item->id], $subquestion)) ? '' : 'question_item' }} ">
+					{{--@if ($took && !\App\Model\Subquestion::isBigQuestion($item->id))--}}
+						{{--@php--}}
+							{{--$check = App\Helpers\Question::checkRightAnswer($item->id, $contest->records->where('user_id', '=', \Auth::user()->id), $contest->results);--}}
+							{{--if ($check == 1)--}}
+								{{--echo App\Helpers\Message::getNotify(0);--}}
+							{{--if ($check == 0)--}}
+								{{--echo App\Helpers\Message::getNotify(2);--}}
+							{{--if ($check == -1)--}}
+								{{--echo App\Helpers\Message::getNotify(1);--}}
+						{{--@endphp--}}
+					{{--@endif--}}
+					<div class="form-group">
 						@if(\App\Model\Subquestion::isBigQuestion($item->id))
 							<label for="inputEmail3" class="control-label">Big Question #{{ $item->id }}</label>
-
-							<input type="text" class='question' value="{{ $item->id }}" hidden>
+							<input type="text" class='big-question' value="{{ $item->id }}" hidden>
 							<textarea class='form-control' type='text' disabled> {{ $item->content }} </textarea>
 							<br>
 							@if (!empty($subquestion) && in_array(['question_id' => $item->id], $subquestion))
@@ -57,41 +56,69 @@
                                     }
 								@endphp
 							@endif
+							<br>
+							@foreach ($item->subquestions as $sub)
+                                @if($took)
+                                    @php
+                                        $check = App\Helpers\Question::checkRightAnswer($sub->subquestion->id, $contest->records->where('user_id', '=', \Auth::user()->id), $contest->results);
+                                        if ($check == 1)
+                                            echo App\Helpers\Message::getNotify(0);
+                                        if ($check == 0)
+                                            echo App\Helpers\Message::getNotify(2);
+                                        if ($check == -1)
+                                            echo App\Helpers\Message::getNotify(1);
+                                    @endphp
+                                @endif
+								<div class="question_item">
+									<label for="inputEmail3" class="control-label">Question #{{ $sub->subquestion->id }} (reference from #Question {{ $item->id }})</label>
+									<input type="text" class='question' value="{{ $sub->subquestion->id }}" hidden>
+									<textarea class='form-control' type='text' disabled> {{ $sub->subquestion->content }} </textarea>
+									@if($sub->subquestion->answers)
+										@foreach($sub->subquestion->answers as $ans)
+											<div class='input-group answers_group' name='answers_group'>
+												<input class='input-group-addon flat-red right-answer' name = '{{ "right-answer".$sub->subquestion->id }}' type='radio' {{ App\Helpers\Question::checkBox($sub->subquestion->id, $ans->id, $contest->records->where('user_id', '=', \Auth::user()->id)) }} >
+												<input class="form-control answer" type="text" value="{{ $ans->content }}" disabled>
+												<input class='form-control answer_id' type='text' value="{{ $ans->id }}" hidden >
+											</div>
+										@endforeach
+									@endif
+								</div>
 
-						@elseif(\App\Model\Subquestion::isSubQuestion($item->id))
-							<label for="inputEmail3" class="control-label">Question #{{ $item->id }} (reference from #Question {{ $item->questionparent->id }})</label>
-							<input type="text" class='question' value="{{ $item->id }}" hidden>
-							<textarea class='form-control' type='text' disabled> {{ $item->content }} </textarea>
-							@if($item->answers)
-								@foreach($item->answers as $ans)
-									@if ($ans->question_id == $item->id )
-										<div class='input-group answers_group' name='answers_group'>
-											<input class='input-group-addon flat-red right-answer' name = '{{ "right-answer".$item->id }}' type='radio' {{ App\Helpers\Question::checkBox($item->id, $ans->id, $contest->records->where('user_id', '=', \Auth::user()->id)) }} >
-											<input class="form-control answer" type="text" value="{{ $ans->content }}" disabled>
-											<input class='form-control answer_id' type='text' value="{{ $ans->id }}" hidden >
-										</div>
-									@endif
-								@endforeach
-							@endif
-						@else
-							<label for="inputEmail3" class="control-label">Question #{{ $item->id }}</label>
-							<input type="text" class='question' value="{{ $item->id }}" hidden>
-							<textarea class='form-control' type='text' disabled> {{ $item->content }} </textarea>
-							@if($item->answers)
-								@foreach($item->answers as $ans)
-									@if ($ans->question_id == $item->id )
-										<div class='input-group answers_group' name='answers_group'>
-											<input class='input-group-addon flat-red right-answer' name = '{{ "right-answer".$item->id }}' type='radio' {{ App\Helpers\Question::checkBox($item->id, $ans->id, $item->records) }} >
-											<input class="form-control answer" type="text" value="{{ $ans->content }}" disabled>
-											<input class='form-control answer_id' type='text' value="{{ $ans->id }}" hidden >
-										</div>
-									@endif
-								@endforeach
-							@endif
+							@endforeach
+							<p>-------------------</p>
+
+						@elseif(!\App\Model\Subquestion::isSubQuestion($item->id))
+                            @if($took)
+                                @php
+                                    $check = App\Helpers\Question::checkRightAnswer($item->id, $contest->records->where('user_id', '=', \Auth::user()->id), $contest->results);
+                                    if ($check == 1)
+                                        echo App\Helpers\Message::getNotify(0);
+                                    if ($check == 0)
+                                        echo App\Helpers\Message::getNotify(2);
+                                    if ($check == -1)
+                                        echo App\Helpers\Message::getNotify(1);
+                                @endphp
+                            @endif
+							<div class="question_item">
+								<label for="inputEmail3" class="control-label">Question #{{ $item->id }}</label>
+								<input type="text" class='question' value="{{ $item->id }}" hidden>
+								<textarea class='form-control' type='text' disabled> {{ $item->content }} </textarea>
+								@if($item->answers)
+									@foreach($item->answers as $ans)
+										@if ($ans->question_id == $item->id )
+											<div class='input-group answers_group' name='answers_group'>
+												<input class='input-group-addon flat-red right-answer' name = '{{ "right-answer".$item->id }}' type='radio' {{ App\Helpers\Question::checkBox($item->id, $ans->id, $contest->records->where('user_id', '=', \Auth::user()->id)) }} >
+												<input class="form-control answer" type="text" value="{{ $ans->content }}" disabled>
+												<input class='form-control answer_id' type='text' value="{{ $ans->id }}" hidden >
+											</div>
+										@endif
+									@endforeach
+								@endif
+							</div>
+							<p>-------------------</p>
 						@endif
 					</div>
 					<br>
-		            <p>-------------------</p>
 				@endforeach
 				<p>This is the end of the test. Check your answers and submit. Good luck!</p>
 				@if (!$took)
@@ -106,5 +133,43 @@
 <br>
 @endsection
 @section('javascript')
-<script src="/user/js/exam.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#form_submit').submit(function(e) {
+            e.preventDefault();
+            var data = [],
+                i = 0,
+                link = $(this).attr('action');
+
+            $('.question_item').each(function() {
+                data[i] = packedQuestion($(this));
+                i++;
+            });
+
+            $.ajax({
+                type: "POST",
+                url: link,
+                data: {'_token' : $('#token').val(), 'data' : data},
+                success: function(){
+                    // location.href = '/user/contest';
+                },
+            });
+        });
+    });
+    function packedQuestion(objectQuestion)
+    {
+        var answerObj = objectQuestion.find('.answers_group'),
+            answer_id = '';
+
+        answerObj.each(function(key, value) {
+            if ($(this).find('.right-answer').is(':checked'))
+                answer_id = $(this).find('.answer_id').val();
+        });
+        json_array = {
+            "question_id" : objectQuestion.find('.question').val(),
+            "answer_id" : answer_id
+        };
+        return json_array;
+    }
+</script>
 @stop
