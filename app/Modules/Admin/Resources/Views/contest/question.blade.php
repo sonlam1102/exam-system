@@ -61,7 +61,7 @@
                 <div class="box-body" id='question_field'>
                     @if ($data->questions)
                         @foreach($data->questions as $item)
-                            <div class='form-group question_item'>
+                            <div class='form-group'>
                                 @if (\App\Model\Subquestion::isBigQuestion($item->id))
                                     <div class="delete_question">
                                         <input type="text" name="token" id='token' value="{{ csrf_token() }}" hidden>
@@ -84,44 +84,48 @@
                                         }
                                     @endphp
                                     @foreach($item->subquestions as $subs)
+                                        <div class="question_item">
+                                            <div class="delete_question">
+                                                <input type="text" name="token" id='token' value="{{ csrf_token() }}" hidden>
+                                                <input type="hidden" name="_method" id='method' value="delete" />
+                                                <label for="inputEmail3" class="control-label">Question #{{ $subs->subquestion->id }} (refernece to Question #{{ $item->id }}) </label>
+                                                <button type="button" class="btn btn-sm btn-danger" id='delete' data-qid = '{{ $subs->subquestion->id }} '>Delete</button>
+                                            </div>
+                                            <input class='form-control question_id' type='text' value="{{ $subs->subquestion->id }}" hidden >
+                                            <textarea class='form-control question' type='text'> {{ $subs->subquestion->content }} </textarea>
+                                            <label class='col-sm-2 control-label'>Answers</label>
+                                            @if($subs->subquestion->answers)
+                                                @foreach($subs->subquestion->answers as $subsansw)
+                                                    <div class='input-group answers_group' name='answers_group'>
+                                                        <input class='input-group-addon flat-red right-answer' name = '{{ "right-answer".$subs->subquestion->id }}' type='radio' {{ App\Helpers\Question::checkBox($subs->subquestion->id, $subsansw->id, $data->results) }} >
+                                                        <input class="form-control answer" type="text" value="{{ $subsansw->content }}">
+                                                        <input class='form-control answer_id' type='text' value="{{ $subsansw->id }}" hidden >
+                                                    </div>
+                                                @endforeach
+                                            @endif
+                                        </div>
+                                    @endforeach
+                                @elseif(!\App\Model\Subquestion::isSubQuestion($item->id))
+                                    <div class="question_item">
                                         <div class="delete_question">
                                             <input type="text" name="token" id='token' value="{{ csrf_token() }}" hidden>
                                             <input type="hidden" name="_method" id='method' value="delete" />
-                                            <label for="inputEmail3" class="control-label">Question #{{ $subs->subquestion->id }} (refernece to Question #{{ $item->id }}) </label>
-                                            <button type="button" class="btn btn-sm btn-danger" id='delete' data-qid = '{{ $subs->subquestion->id }} '>Delete</button>
+                                            <label for="inputEmail3" class="control-label">Question #{{ $item->id }}</label>
+                                            <button type="button" class="btn btn-sm btn-danger" id='delete' data-qid = '{{ $item->id }} '>Delete</button>
                                         </div>
-                                        <input class='form-control question_id' type='text' value="{{ $subs->subquestion->id }}" hidden >
-                                        <textarea class='form-control question' type='text'> {{ $subs->subquestion->content }} </textarea>
+                                        <input class='form-control question_id' type='text' value="{{ $item->id }}" hidden >
+                                        <textarea class='form-control question' type='text' > {{ $item->content }} </textarea>
                                         <label class='col-sm-2 control-label'>Answers</label>
-                                        @if($subs->subquestion->answers)
-                                            @foreach($subs->subquestion->answers as $subsansw)
+                                        @if($item->answers)
+                                            @foreach($item->answers as $ans)
                                                 <div class='input-group answers_group' name='answers_group'>
-                                                    <input class='input-group-addon flat-red right-answer' name = '{{ "right-answer".$subs->subquestion->id }}' type='radio' {{ App\Helpers\Question::checkBox($subs->subquestion->id, $subsansw->id, $data->results) }} >
-                                                    <input class="form-control answer" type="text" value="{{ $subsansw->content }}">
-                                                    <input class='form-control answer_id' type='text' value="{{ $subsansw->id }}" hidden >
+                                                    <input class='input-group-addon flat-red right-answer' name = '{{ "right-answer".$item->id }}' type='radio' {{ App\Helpers\Question::checkBox($item->id, $ans->id, $data->results) }} >
+                                                    <input class="form-control answer" type="text" value="{{ $ans->content }}">
+                                                    <input class='form-control answer_id' type='text' value="{{ $ans->id }}" hidden >
                                                 </div>
                                             @endforeach
                                         @endif
-                                    @endforeach
-                                @elseif(!\App\Model\Subquestion::isSubQuestion($item->id))
-                                    <div class="delete_question">
-                                        <input type="text" name="token" id='token' value="{{ csrf_token() }}" hidden>
-                                        <input type="hidden" name="_method" id='method' value="delete" />
-                                        <label for="inputEmail3" class="control-label">Question #{{ $item->id }}</label>
-                                        <button type="button" class="btn btn-sm btn-danger" id='delete' data-qid = '{{ $item->id }} '>Delete</button>
                                     </div>
-                                    <input class='form-control question_id' type='text' value="{{ $item->id }}" hidden >
-                                    <textarea class='form-control question' type='text' > {{ $item->content }} </textarea>
-                                    <label class='col-sm-2 control-label'>Answers</label>
-                                    @if($item->answers)
-                                        @foreach($item->answers as $ans)
-                                            <div class='input-group answers_group' name='answers_group'>
-                                                <input class='input-group-addon flat-red right-answer' name = '{{ "right-answer".$item->id }}' type='radio' {{ App\Helpers\Question::checkBox($item->id, $ans->id, $data->results) }} >
-                                                <input class="form-control answer" type="text" value="{{ $ans->content }}">
-                                                <input class='form-control answer_id' type='text' value="{{ $ans->id }}" hidden >
-                                            </div>
-                                        @endforeach
-                                    @endif
                                 @endif
                             </div>
                             <br>
