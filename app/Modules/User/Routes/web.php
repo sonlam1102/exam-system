@@ -17,12 +17,17 @@ Route::group(['prefix' => 'user', 'middleware' => ['auth', 'type']], function ()
     Route::get('/info', 'UserController@info');
     Route::post('/update/{id}', 'UserController@update')->where('id', '[0-9]+');
 
-    //question
-    Route::get('/contest', 'ContestController@index');
-    Route::get('/contest/{id}', 'ContestController@exam')->where('id', '[0-9]+');
-    Route::post('/contest/{id}/submit', 'ContestController@submit')->where('id', '[0-9]+');
+    //contest
+    Route::group(['prefix' => 'contest'], function () {
+        Route::get('/', 'ContestController@index');
+        Route::get('/{id}', 'ContestController@exam')->where('id', '[0-9]+');
+        Route::post('/{id}/submit', 'ContestController@submit')->where('id', '[0-9]+');
+    });
 
     //feedback
-    Route::get('/feedback', 'FeedBackController@index');
-    Route::post('/feedback/add/{id}', 'FeedBackController@add')->where('id', '[0-9]+');
+    Route::group(['prefix' => 'feedback'], function () {
+        Route::get('/', 'FeedBackController@index');
+        Route::post('/add/{id}', 'FeedBackController@add')->where('id', '[0-9]+');
+    });
+
 });

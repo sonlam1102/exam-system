@@ -11,13 +11,8 @@ use App\Helpers;
 use App\Model\UserLog;
 use App\Model\Subquestion;
 
-class ContestController extends Controller
+class ContestController extends UserController
 {
-    public function __construct()
-    {
-        //Constructor
-    }
-
     public function index()
     {
     	$data = Contests::select()->get();
