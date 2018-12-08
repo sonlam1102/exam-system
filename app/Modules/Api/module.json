@@ -1,0 +1,6 @@
+{
+    "name": "Api",
+    "slug": "api",
+    "version": "1.0",
+    "description": "This module will create api for customer"
+}
