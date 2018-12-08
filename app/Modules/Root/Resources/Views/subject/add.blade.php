@@ -1,4 +1,4 @@
-@extends('admin::main')
+@extends('root::main')
 
 @section('content')
     <div>
@@ -12,7 +12,7 @@
                 <li><a href="#"><i class="fa fa-dashboard"></i> Subject</a></li>
             </ol>
             <div class="box box-primary">
-                <form class="form-horizontal" method="POST" action="/admin/subject/add">
+                <form class="form-horizontal" method="POST" action="/root/subject/add">
                     @csrf
                     <div class="box-body">
 

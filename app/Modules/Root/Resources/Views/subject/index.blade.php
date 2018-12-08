@@ -1,4 +1,4 @@
-@extends('admin::main')
+@extends('root::main')
 
 @section('content')
     <div>
@@ -11,7 +11,7 @@
                 <li><a href="#"><i class="fa fa-dashboard"></i> Contest</a></li>
                 <li><a href="#"><i class="fa fa-dashboard"></i> Subject</a></li>
             </ol>
-            <a href="/admin/subject/add"><button type="button" class="btn btn-block btn-primary" style="width:50px">Add</button></a>
+            <a href="/root/subject/add"><button type="button" class="btn btn-block btn-primary" style="width:50px">Add</button></a>
             <div class="box-primary">
                 <div class="col-xs-12">
                     <div class="box">

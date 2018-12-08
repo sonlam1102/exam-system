@@ -1,19 +1,18 @@
 <?php
 
-namespace App\Modules\Admin\Http\Controllers;
+namespace App\Modules\Root\Http\Controllers;
 
 use App\Model\Subjects;
+use App\Modules\Root\Http\Controllers\RootController;
 use Illuminate\Http\Request;
 
-use App\Http\Controllers\Controller;
-
-class SubjectController extends AdminController
+class SubjectController extends RootController
 {
     public function index()
     {
         $data = Subjects::all();
 
-        return view('admin::subject.index')->with('data', $data);
+        return view('root::subject.index')->with('data', $data);
     }
 
     public function add(Request $request) {
@@ -26,8 +25,8 @@ class SubjectController extends AdminController
 
             Subjects::addSubject($data);
 
-            return redirect('/admin/subject');
+            return redirect('/root/subject');
         }
-        return view('admin::subject.add');
+        return view('root::subject.add');
     }
 }

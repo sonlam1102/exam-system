@@ -22,4 +22,10 @@ Route::group(['prefix' => 'root', 'middleware' => ['auth', 'root']], function ()
         Route::get('/add', 'UserController@add');
         Route::post('/add', 'UserController@add');
     });
+
+    Route::group(['prefix' => 'subject'], function () {
+        Route::get('/', 'SubjectController@index');
+        Route::get('/add', 'SubjectController@add');
+        Route::post('/add', 'SubjectController@add');
+    });
 });

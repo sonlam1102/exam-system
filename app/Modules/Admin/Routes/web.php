@@ -30,10 +30,4 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function 
         Route::get('/', 'FeedBackController@index');
     });
 
-    //Subject
-    Route::group(['prefix' => 'subject'], function () {
-        Route::get('/', 'SubjectController@index');
-        Route::get('/add', 'SubjectController@add');
-        Route::post('/add', 'SubjectController@add');
-    });
 });
