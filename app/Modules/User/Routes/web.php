@@ -11,7 +11,7 @@
 |
 */
 
-Route::group(['prefix' => 'user', 'middleware' => ['auth', 'type']], function () {
+Route::group(['prefix' => 'user', 'middleware' => ['auth', 'customer']], function () {
 	//user
     Route::get('/home', 'UserController@index');
     Route::get('/info', 'UserController@info');

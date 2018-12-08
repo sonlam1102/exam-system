@@ -4,11 +4,13 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Facades\Hash;
 
 class User extends Authenticatable
 {
     const TYPE_USER = 0;
     const TYPE_ADMIN = 1;
+    const TYPE_ROOT = 2;
 
     use Notifiable;
     protected $fillable = [
@@ -36,5 +38,14 @@ class User extends Authenticatable
         }
 
         return $this->save();
+    }
+
+    public static function add_admin($email, $name) {
+        return User::create([
+            'name' => $name,
+            'email' => $email,
+            'password' => Hash::make('123456'),
+            'type' => User::TYPE_ADMIN,
+        ]);
     }
 }

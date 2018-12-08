@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Auth;
@@ -25,16 +26,14 @@ class HomeController extends Controller
      */
     public function index()
     {
-        if(!\Auth::check()){
-            return view('auth.login');
+        if (\Auth::user()->type == User::TYPE_USER) {
+            return redirect('/user/home');
         }
-        else {
-            if (\Auth::user()->type == 0) {
-                 return redirect('/user/home');
-            }
-            else {
-                return redirect('/admin/home');
-            }
+        elseif (\Auth::user()->type == User::TYPE_ADMIN) {
+            return redirect('/admin/home');
+        }
+        elseif (\Auth::user()->type == User::TYPE_ROOT) {
+            return redirect('/root/home');
         }
     }
     public function login(Request $request)

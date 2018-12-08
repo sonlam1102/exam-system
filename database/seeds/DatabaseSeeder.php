@@ -16,14 +16,14 @@ class DatabaseSeeder extends Seeder
             'name' => 'admin',
             'email' => 'admin@admin.com',
             'password' => bcrypt('123456'),
-            'type' => \App\Tool\UserType::TYPE_ADMIN,
+            'type' => \App\User::TYPE_ROOT,
         ]);
         DB::table('users')->insert([
             'name' => 'root',
             'email' => 'root@root.com',
             'password' => bcrypt('123456'),
             'type' => 0,
-            'type' => \App\Tool\UserType::TYPE_ADMIN,
+            'type' => \App\User::TYPE_ROOT,
         ]);
     }
 }

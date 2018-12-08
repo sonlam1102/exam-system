@@ -1,6 +1,6 @@
 <?php
 
-Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'type']], function () {
+Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function () {
 	//Admin info
     Route::get('/home', 'AdminController@index');
     Route::get('/info', 'AdminController@admin');

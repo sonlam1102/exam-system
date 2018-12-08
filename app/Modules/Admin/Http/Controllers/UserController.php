@@ -9,7 +9,7 @@ class UserController extends AdminController
     public function index()
     {
     	$mdlUser = new User();
-    	$user = $mdlUser->where('type', 0)->get();
+    	$user = $mdlUser->where('type', User::TYPE_USER)->get();
 
     	return view('admin::account.user')->with('data', $user);
     }

@@ -13,7 +13,7 @@
 
 Auth::routes();
 
-Route::get('/', 'HomeController@index')->name('home');
+Route::get('/', 'HomeController@index')->middleware('auth');
 Route::post('/login', 'HomeController@login')->name('login');
 Route::get('/login', 'HomeController@login');
 Route::post('/register', 'HomeController@register')->name('register');

@@ -11,8 +11,15 @@
 |
 */
 
-Route::group(['prefix' => 'root'], function () {
-    Route::get('/', function () {
-        dd('This is the Root module index page. Build something great!');
+Route::group(['prefix' => 'root', 'middleware' => ['auth', 'root']], function () {
+    Route::get('/home', 'RootController@index');
+    Route::get('/info', 'RootController@account');
+    Route::post('/update/{id}', 'RootController@update')->where('id', '[0-9]+');
+
+    Route::group(['prefix' => 'user'], function () {
+        Route::get('/list', 'UserController@index');   //List users
+        Route::get('/info/{id}', 'UserController@info')->where('id', '[0-9]+');    //User info
+        Route::get('/add', 'UserController@add');
+        Route::post('/add', 'UserController@add');
     });
 });
