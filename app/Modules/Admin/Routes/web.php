@@ -3,7 +3,7 @@
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'type']], function () {
 	//Admin info
     Route::get('/home', 'AdminController@index');
-    Route::get('/info', 'AdminController@info');
+    Route::get('/info', 'AdminController@admin');
     Route::post('/update/{id}', 'AdminController@update')->where('id', '[0-9]+');
 
     //User info

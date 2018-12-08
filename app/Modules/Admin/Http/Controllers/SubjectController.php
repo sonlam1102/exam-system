@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Controllers\Controller;
 
-class SubjectController extends Controller
+class SubjectController extends AdminController
 {
     public function index()
     {

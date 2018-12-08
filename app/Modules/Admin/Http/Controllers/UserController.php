@@ -2,17 +2,10 @@
 
 namespace App\Modules\Admin\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use App\User;
-use App\UserLog;
 
-class UserController extends Controller
+class UserController extends AdminController
 {
-    public function __construct()
-    {
-        //Constructor
-    }
     public function index()
     {
     	$mdlUser = new User();

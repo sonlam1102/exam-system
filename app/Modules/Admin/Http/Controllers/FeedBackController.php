@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 Use App\Model\Feedback;
 
-class FeedBackController extends Controller
+class FeedBackController extends AdminController
 {
     public function index()
     {

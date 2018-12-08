@@ -21,11 +21,13 @@ class AdminController extends Controller
         }
     	return view('admin::index.index');
     }
-    public function info(Request $request)
+
+    public function admin(Request $request)
     {
         $data = Auth::user();
         return view('admin::account.info')->with('data', $data);
     }
+
     public function update($id, Request $request)
     {
         if ($request->isMethod('post')) {

@@ -7,6 +7,9 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
+    const TYPE_USER = 0;
+    const TYPE_ADMIN = 1;
+
     use Notifiable;
     protected $fillable = [
         'id', 'name', 'email', 'password', 'address', 'birthday', 'img', 'updated_at', 'created_at', 'type'
@@ -17,7 +20,7 @@ class User extends Authenticatable
     ];
 
     public function logs() {
-        return $this->hasMany('App\UserLog', 'user_id');
+        return $this->hasMany('App\Model\UserLog', 'user_id');
     }
 
     public function update_info ($array_info) {

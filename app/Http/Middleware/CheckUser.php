@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\User;
 use Closure;
 
 class CheckUser
@@ -21,10 +22,10 @@ class CheckUser
         if (!\Auth::check())
             return redirect('/');
 
-        if (\Auth::user()->type == 0 && $type != 'user')
+        if (\Auth::user()->type == User::TYPE_USER && $type != 'user')
             return redirect('/');
 
-        if (\Auth::user()->type == 1 && $type != 'admin')
+        if (\Auth::user()->type == User::TYPE_ADMIN && $type != 'admin')
             return redirect('/');
 
         return $next($request);

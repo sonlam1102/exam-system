@@ -14,7 +14,7 @@ use App\Model\Subquestion;
 use App\Model\UserLog;
 use App\Model\UserRecord;
 
-class ContestController extends Controller
+class ContestController extends AdminController
 {
     //
     public function index()
