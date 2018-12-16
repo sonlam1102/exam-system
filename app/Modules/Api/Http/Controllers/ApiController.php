@@ -54,7 +54,8 @@ class ApiController extends Controller
         $user->clearApiToken();
 
         $data = [
-            'auth' => false
+            'auth' => false,
+            'success' => true
         ];
 
         return response()->json($data);
@@ -66,5 +67,21 @@ class ApiController extends Controller
         $user = User::getAuthUserByToken($token);
 
         return $user;
+    }
+
+    public function get_user_info(Request $request) {
+        $token = $request->header('Token');
+
+        $user = User::getAuthUserByToken($token);
+
+        $data = [
+            'name' => $user->name,
+            'email' => $user->email,
+            'address' => $user->address,
+            'birthday' => $user->birthday,
+            'img' => $user->img
+        ];
+
+        return $data;
     }
 }

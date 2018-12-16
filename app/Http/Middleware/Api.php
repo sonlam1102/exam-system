@@ -16,7 +16,7 @@ class Api
     public function handle($request, Closure $next)
     {
         $token = $request->header('Token');
-        if (!\App\User::checkToken($token))
+        if (!\App\User::checkToken($token) || !$token)
         {
             return redirect('/api/error');
         }

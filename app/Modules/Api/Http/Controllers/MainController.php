@@ -12,15 +12,11 @@ class MainController extends ApiController
 {
     public function index(Request $request) {
         $user = $this->get_user($request);
+        $user_info_data = $this->get_user_info($request);
+
         $contests = Contests::all();
 
-        $data = [
-            'name' => $user->name,
-            'email' => $user->email,
-            'address' => $user->address,
-            'birthday' => $user->birthday,
-            'img' => $user->img
-        ];
+        $data['user'] = $user_info_data;
 
         $contest_data = [];
         foreach ($contests as $item) {
