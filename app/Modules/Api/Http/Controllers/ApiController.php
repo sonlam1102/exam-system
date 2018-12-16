@@ -2,7 +2,7 @@
 
 namespace App\Modules\Api\Http\Controllers;
 
-use Dirape\Token\Token;
+use App\User;
 use Illuminate\Http\Request;
 
 use App\Http\Controllers\Controller;
@@ -23,6 +23,7 @@ class ApiController extends Controller
         if (Auth::attempt($credential)) {
             Auth::user()->setApiToken();
             $data = [
+                'auth' => true,
                 'success' => true,
                 'access_token' => Auth::user()->api_token
             ];
@@ -30,7 +31,8 @@ class ApiController extends Controller
         }
         else {
             $data = [
-                'success' => false
+                'auth' => false,
+                'success' => false,
             ];
         }
         return response()->json($data);
@@ -38,13 +40,31 @@ class ApiController extends Controller
 
     public function auth_error() {
         $data = [
-            'success' => false
+            'auth' => false
         ];
 
         return response()->json($data);
     }
 
-    public function index() {
-        dd('Hi');
+    public function logout(Request $request) {
+        $token = $request->header('Token');
+
+        $user = User::getAuthUserByToken($token);
+
+        $user->clearApiToken();
+
+        $data = [
+            'auth' => false
+        ];
+
+        return response()->json($data);
+    }
+
+    public function get_user(Request $request) {
+        $token = $request->header('Token');
+
+        $user = User::getAuthUserByToken($token);
+
+        return $user;
     }
 }

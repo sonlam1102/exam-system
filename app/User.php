@@ -56,9 +56,20 @@ class User extends Authenticatable
         return $user ? true : false;
     }
 
+    public static function getAuthUserByToken($token) {
+        $user = self::where('api_token',$token)->first();
+
+        return $user;
+    }
+
     public function setApiToken() {
         $token = new Token();
         $this->api_token = $token->unique('users', 'api_token', 100);
+        $this->save();
+    }
+
+    public function clearApiToken() {
+        $this->api_token = null;
         $this->save();
     }
 }
