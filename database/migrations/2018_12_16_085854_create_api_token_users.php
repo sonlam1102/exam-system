@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateColumnsImgUsers extends Migration
+class CreateApiTokenUsers extends Migration
 {
     /**
      * Run the migrations.
@@ -14,8 +14,8 @@ class CreateColumnsImgUsers extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            if (!Schema::hasColumn('users', 'img')) {
-                $table->string('img')->nullable();
+            if (!Schema::hasColumn('users', 'api_token')) {
+                $table->string('api_token', 100)->nullable();
             }
         });
     }
@@ -28,8 +28,8 @@ class CreateColumnsImgUsers extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
-            if (Schema::hasColumn('users', 'img')) {
-                $table->dropColumn('img');
+            if (Schema::hasColumn('users', 'api_token')) {
+                $table->dropColumn('api_token');
             }
         });
     }

@@ -28,6 +28,11 @@ class CreateColumnUserContest extends Migration
      */
     public function down()
     {
-        //
+        Schema::table('contest', function (Blueprint $table) {
+            if (Schema::hasColumn('contest', 'user_id')) {
+                $table->dropForeign(['user_id']);
+                $table->dropColumn('user_id');
+            }
+        });
     }
 }

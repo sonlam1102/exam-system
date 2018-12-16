@@ -27,6 +27,10 @@ class CreateColumnsImgQuestion extends Migration
      */
     public function down()
     {
-        //
+        Schema::table('question', function (Blueprint $table) {
+            if (Schema::hasColumn('question', 'img')) {
+                $table->dropColumn('img');
+            }
+        });
     }
 }

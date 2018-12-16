@@ -27,6 +27,10 @@ class CreateColumnContentAnswer extends Migration
      */
     public function down()
     {
-        //
+        Schema::table('answer', function (Blueprint $table) {
+            if (Schema::hasColumn('answer', 'content')) {
+                $table->dropColumn('content');
+            }
+        });
     }
 }

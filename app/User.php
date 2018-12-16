@@ -48,4 +48,10 @@ class User extends Authenticatable
             'type' => User::TYPE_ADMIN,
         ]);
     }
+
+    public static function checkToken($token) {
+        $user = self::where('api_token',$token)->first();
+
+        return $user ? true : false;
+    }
 }
