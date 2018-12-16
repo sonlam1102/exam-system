@@ -209,6 +209,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'GraphQL' => Folklore\GraphQL\Support\Facades\GraphQL::class,
+        'Token'=>\Dirape\Token\Facades\Facade::class,
     ],
 
 ];

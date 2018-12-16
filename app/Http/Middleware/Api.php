@@ -18,7 +18,7 @@ class Api
         $token = $request->header('Token');
         if (!\App\User::checkToken($token))
         {
-            return redirect('/');
+            return redirect('/api/error');
         }
 
         return $next($request);

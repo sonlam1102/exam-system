@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Dirape\Token\Token;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Facades\Hash;
@@ -53,5 +54,11 @@ class User extends Authenticatable
         $user = self::where('api_token',$token)->first();
 
         return $user ? true : false;
+    }
+
+    public function setApiToken() {
+        $token = new Token();
+        $this->api_token = $token->unique('users', 'api_token', 100);
+        $this->save();
     }
 }
