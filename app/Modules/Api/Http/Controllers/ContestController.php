@@ -3,11 +3,9 @@
 namespace App\Modules\Api\Http\Controllers;
 
 use App\Model\Contests;
-use App\Model\Questions;
+use App\Model\UserRecord;
 use App\Model\Subquestion;
 use Illuminate\Http\Request;
-
-use App\Http\Controllers\Controller;
 
 class ContestController extends ApiController
 {
@@ -16,6 +14,7 @@ class ContestController extends ApiController
         $user_info_data = $this->get_user_info($request);
 
         $contest = Contests::find($id);
+        $took = UserRecord::isTookTheContest($user->id, $contest->id);
 
         $data['user'] = $user_info_data;
 
@@ -25,6 +24,10 @@ class ContestController extends ApiController
             'date' => $contest->date,
             'question' => $contest->questions->count(),
         ];
+
+        if ($took) {
+            $data['contest']['is_took'] = $took;
+        }
 
         $questions = [];
         foreach ($contest->questions as $item) {
@@ -38,12 +41,29 @@ class ContestController extends ApiController
             elseif (Subquestion::isSubQuestion($item->id)) {
                 $temp['parent_question'] = $item->questionparent->question->id;
             }
+            if ($took and !Subquestion::isBigQuestion($item->id)) {
+                $check = \App\Helpers\Question::checkRightAnswer($item->id, $contest->records->where('user_id', '=', $user->id), $contest->results);
+                if ($check === 1) {
+                    $temp['result'] = true;
+                }
+                else {
+                    $temp['result'] = false;
+                }
+            }
             $answers = [];
             foreach ($item->answers as $ans) {
                 $ans_item = [
                     'id' => $ans->id,
                     'content' => $ans->content
                 ];
+                if ($took) {
+                    if ($ans->question->result->answer_id == $ans->id) {
+                        $ans_item['chose'] = true;
+                    }
+                    else {
+                        $ans_item['chose'] = false;
+                    }
+                }
                 array_push($answers, $ans_item);
             }
             $temp['answers'] = $answers;
