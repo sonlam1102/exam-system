@@ -51,10 +51,16 @@ class ApiController extends Controller
 
         $user = User::getAuthUserByToken($token);
 
+        if (!$user) {
+            $data = [
+                'success' => false
+            ];
+            return response()->json($data);
+        }
+
         $user->clearApiToken();
 
         $data = [
-            'auth' => false,
             'success' => true
         ];
 

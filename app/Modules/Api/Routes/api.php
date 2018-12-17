@@ -14,8 +14,11 @@ use Illuminate\Http\Request;
 */
 
 Route::post('/login', 'ApiController@login');
-Route::post('/exit', 'ApiController@logout')->middleware('api_auth');
 Route::get('/error', 'ApiController@auth_error');
+Route::post('/logout', 'ApiController@logout');
 
-Route::get('/main', 'MainController@index')->middleware('api_auth');
-Route::get('/contest/{id}', 'ContestController@index')->where('id', '[0-9]+')->middleware('api_auth');
+Route::get('/', 'MainController@index')->middleware('api_auth');
+
+Route::group(['prefix' => 'contest'], function (){
+    Route::get('/{id}', 'ContestController@index')->where('id', '[0-9]+')->middleware('api_auth');
+});
