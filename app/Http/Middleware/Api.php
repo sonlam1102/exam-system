@@ -20,6 +20,11 @@ class Api
         {
             return redirect('/api/error');
         }
+        elseif (\App\User::getAuthUserByToken($token)->type != \App\User::TYPE_USER) {
+            \App\User::getAuthUserByToken($token)->clearApiToken();
+            return redirect('/api/error');
+
+        }
 
         return $next($request);
     }
