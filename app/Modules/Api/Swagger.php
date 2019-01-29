@@ -39,7 +39,7 @@
  *      summary="Get list of contests",
  *      description="Returns list of contests",
  *      @SWG\Parameter(
- *         name="header",
+ *         name="Token",
  *         in="header",
  *         description="User Token",
  *         required=true,
@@ -64,7 +64,7 @@
  *      summary="Logout user",
  *      description="logout the user in the system",
  *      @SWG\Parameter(
- *         name="header",
+ *         name="Token",
  *         in="header",
  *         description="User Token",
  *         required=true,
@@ -96,7 +96,7 @@
  *          in="path"
  *      ),
  *      @SWG\Parameter(
- *         name="header",
+ *         name="Token",
  *         in="header",
  *         description="User Token",
  *         required=true,
