@@ -7,26 +7,6 @@ use App\Model\UserRecord;
 use App\Model\Subquestion;
 use Illuminate\Http\Request;
 
-/**
- *     @SWG\Info(
- *         version="1.0.0",
- *         title="This is my website cool API",
- *         description="Api description...",
- *         termsOfService="",
- *         @SWG\Contact(
- *             email="contact@mysite.com"
- *         ),
- *         @SWG\License(
- *             name="Private License",
- *             url="URL to the license"
- *         )
- *     ),
- *     @SWG\ExternalDocumentation(
- *         description="Find out more about my website",
- *         url="http..."
- *     )
- * )
- */
 class ContestController extends ApiController
 {
     public function index(Request $request, $id) {

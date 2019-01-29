@@ -2,11 +2,11 @@
 return array(
 	'enable' => env('SWAGGER_ENABLE', null),
 
-	'middleware' => 'api',
+//	'middleware' => 'api',
 	'prefix' => 'api-docs',
 
 	'paths' => [
-		app_path(),
+		app_path('Modules/Api/'),
 		base_path('routes')
 	],
 	'exclude' => null,
