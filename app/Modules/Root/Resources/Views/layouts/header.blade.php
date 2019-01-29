@@ -1,6 +1,6 @@
 <header class="main-header">
     <a href="/root/home" class="logo">
-      <span class="logo-lg"><b>Exam System</b> Admin Page</span>
+      <span class="logo-lg"><b>Exam System</b> Root Page</span>
     </a>
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">

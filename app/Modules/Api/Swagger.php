@@ -38,6 +38,16 @@
  *      tags={"Contest"},
  *      summary="Get list of contests",
  *      description="Returns list of contests",
+ *      @SWG\Parameter(
+ *         name="header",
+ *         in="header",
+ *         description="User Token",
+ *         required=true,
+ *         type="string",
+ *         @SWG\Schema(
+ *            @SWG\Property(property="Token", type="string"),
+ *         ),
+ *       ),
  *      @SWG\Response(
  *          response=200,
  *          description="successful operation"
@@ -46,7 +56,6 @@
  *       @SWG\Response(response=500, description="Internal Server Errors")
  *     )
  */
-
 
 /**
  * @SWG\Post(
