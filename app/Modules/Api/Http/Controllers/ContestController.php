@@ -2,13 +2,17 @@
 
 namespace App\Modules\Api\Http\Controllers;
 
+use Illuminate\Http\Request;
+
 use App\Model\Contests;
 use App\Model\UserRecord;
 use App\Model\Subquestion;
-use Illuminate\Http\Request;
+use App\Helpers;
+use App\Model\UserLog;
 
 class ContestController extends ApiController
 {
+    // CHi tiet de thi
     public function index(Request $request, $id) {
         $user = $this->get_user($request);
         $user_info_data = $this->get_user_info($request);
@@ -72,5 +76,34 @@ class ContestController extends ApiController
         $data['questions'] = $questions;
 
         return response()->json($data);
+    }
+
+    public function submit(Request $request, $id) {
+        $user = $this->get_user($request);   //User info
+
+        $data = isset($request->data) ? $request->data : null;
+
+        if (!$data) {
+            return;
+        }
+
+        $user_id = $user->id;
+
+        foreach ($data as $item) {
+            $temp = [
+                'user_id' => $user_id,
+                'contest_id' => $id,
+                'question_id' => $item['question_id'],
+                'answer_id' => $item['answer_id']
+            ];
+            UserRecord::addRecord($temp);
+        }
+
+        // Danh gia so cau dung
+        $evaluate = Helpers\Question::evaluateAnswer($user_id, $id);
+
+        // So cau dung trong bai lam
+        $string = (isset($evaluate['right']) && isset($evaluate['total'])) ? $evaluate['right'].'/'.$evaluate['total'] : '';
+        UserLog::addUserLog($user_id, $id, $string);
     }
 }

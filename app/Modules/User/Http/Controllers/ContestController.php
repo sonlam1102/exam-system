@@ -2,9 +2,9 @@
 
 namespace App\Modules\User\Http\Controllers;
 
-use Illuminate\Http\Request;
 use Auth;
-use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+
 use App\Model\Contests;
 use App\Model\UserRecord;
 use App\Helpers;
@@ -48,6 +48,7 @@ class ContestController extends UserController
             ->with('subquestion', $subquestion);
     }
 
+    // Submit bai lam len he thong
     public function submit($id, Request $request)
     {
         $data = isset($request->data) ? $request->data : null;
@@ -71,8 +72,10 @@ class ContestController extends UserController
             UserRecord::addRecord($temp);
         }
 
+        // Danh gia so cau dung
         $evaluate = Helpers\Question::evaluateAnswer(\Auth::user()->id, $id);
 
+        // So cau dung trong bai lam
         $string = (isset($evaluate['right']) && isset($evaluate['total'])) ? $evaluate['right'].'/'.$evaluate['total'] : '';
         UserLog::addUserLog(\Auth::user()->id, $id, $string);
     }

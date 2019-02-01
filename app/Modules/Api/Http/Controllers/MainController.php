@@ -10,6 +10,7 @@ use App\Http\Controllers\Controller;
 
 class MainController extends ApiController
 {
+    // Danh sach de thi hien co
     public function index(Request $request) {
         $user = $this->get_user($request);
         $user_info_data = $this->get_user_info($request);
