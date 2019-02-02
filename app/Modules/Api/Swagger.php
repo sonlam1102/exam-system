@@ -80,7 +80,7 @@
 
 /**
  * @SWG\Get(
- *      path="/{id}",
+ *      path="/contest/{id}",
  *      tags={"Contest"},
  *      summary="Get contest info ",
  *      description="Returns contest info",
