@@ -109,3 +109,50 @@
  *       @SWG\Response(response=500, description="Internal Server Errors")
  *     )
  */
+
+/**
+ * @SWG\Post(
+ *      path="/contest/{id}/submit",
+ *      tags={"Contest"},
+ *      summary="Submit contest",
+ *      description="Submit the contest to system",
+ *      @SWG\Response(
+ *          response=200,
+ *          description="successful operation"
+ *       ),
+ *      @SWG\Parameter(
+ *          name="id",
+ *          description="contest ID",
+ *          required=true,
+ *          type="integer",
+ *          in="path"
+ *      ),
+ *      @SWG\Parameter(
+ *         name="Token",
+ *         in="header",
+ *         description="User Token",
+ *         required=true,
+ *         type="string",
+ *         @SWG\Schema(
+ *            @SWG\Property(property="Token", type="string"),
+ *         ),
+ *       ),
+ *      @SWG\Parameter(
+ *         name="body",
+ *         in="body",
+ *         required=true,
+ *         type="array",
+ *         @SWG\Property(
+ *             property="data",
+ *             type="array",
+ *             @SWG\Items(
+ *                type="object",
+ *                @SWG\Property(property="question_id", type="integer"),
+ *                 @SWG\Property(property="answer_id", type="integer"),
+ *             ),
+ *         ),
+ *       ),
+ *       @SWG\Response(response=400, description="Bad request"),
+ *       @SWG\Response(response=500, description="Internal Server Errors")
+ *     )
+ */

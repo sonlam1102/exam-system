@@ -15,6 +15,6 @@ mix.js('resources/assets/admin/js/question.js', 'public/admin/js/');
 mix.js('resources/assets/user/js/exam.js', 'public/user/js/');
 
 
-// mix.sass('resources/assets/app.scss', 'public/');
-// mix.sass('resources/assets/user/css/main.sass', 'public/user/css/');
-// mix.sass('resources/assets/admin/css/main.sass', 'public/admin/css/');
+mix.sass('resources/assets/app.scss', 'public/');
+mix.sass('resources/assets/user/css/main.sass', 'public/user/css/');
+mix.sass('resources/assets/admin/css/main.sass', 'public/admin/css/');
