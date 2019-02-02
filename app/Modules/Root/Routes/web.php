@@ -14,7 +14,7 @@
 Route::group(['prefix' => 'root', 'middleware' => ['auth', 'root']], function () {
     Route::get('/home', 'RootController@index');
     Route::get('/info', 'RootController@account');
-    Route::post('/update/{id}', 'RootController@update')->where('id', '[0-9]+');
+    Route::post('/update', 'RootController@update')->where('id', '[0-9]+');
 
     Route::group(['prefix' => 'user'], function () {
         Route::get('/list', 'UserController@index');   //List users

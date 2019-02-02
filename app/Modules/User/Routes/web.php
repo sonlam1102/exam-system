@@ -15,7 +15,7 @@ Route::group(['prefix' => 'user', 'middleware' => ['auth', 'customer']], functio
 	//user
     Route::get('/home', 'UserController@index');
     Route::get('/info', 'UserController@info');
-    Route::post('/update/{id}', 'UserController@update')->where('id', '[0-9]+');
+    Route::post('/update', 'UserController@update')->where('id', '[0-9]+');
 
     //contest
     Route::group(['prefix' => 'contest'], function () {

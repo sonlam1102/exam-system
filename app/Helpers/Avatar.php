@@ -8,7 +8,7 @@ use Imgur;
 class Avatar
 {
     # Upload to server
-    public static function imageUploadProfile($request, $user_id)
+    public static function imageUploadProfile($request, $user)
     {
         $file = $request->file('img');
 
@@ -26,7 +26,7 @@ class Avatar
         }
 
         try {
-            $imageName = $user_id.'.'.$file->getClientOriginalExtension();
+            $imageName = $user->id.'.'.$file->getClientOriginalExtension();
             $file->move(public_path('image/avatar'), $imageName);
             return '/image/avatar/'.$imageName;
         } catch (\Exception $e) {

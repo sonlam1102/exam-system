@@ -10,9 +10,19 @@
             <li><a href="#"><i class="fa fa-dashboard"></i> Account Info</a></li>
         </ol>
         <div class="box box-primary">
-            <form class="form-horizontal" method="POST" action="/root/update/{{ \Auth::user()->id }}">
+            <form class="form-horizontal" method="POST" action="/root/update" enctype="multipart/form-data">
                 @csrf
                 <div class="box-body">
+
+                    <div class="form-group">
+                        <div class="col-sm-10">
+                            <input type='file' onchange="readURL(this);" name="img" />
+
+                        </div>
+                        <div class="col-sm-10">
+                            <img id="blah" src="{{ \Auth::user()->img }}" alt="your image" onerror="this.src='/avatar.jpg'"/>
+                        </div>
+                    </div>
 
                     <div class="form-group">
                         <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
@@ -94,5 +104,18 @@
                 showDropdowns: true,
             });
         });
+
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#blah')
+                        .attr('src', e.target.result);
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
     </script>
 @stop

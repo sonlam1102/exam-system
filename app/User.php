@@ -28,8 +28,9 @@ class User extends Authenticatable
 
     public function update_info ($array_info) {
 
-        if (!isset($array_info['name']) || !isset($array_info['address']) || !isset($array_info['birthday']) || !isset($array_info['img']))
+        if (!isset($array_info['name']) || !isset($array_info['address']) || !isset($array_info['birthday']))
             return false;
+
         $this->name = $array_info['name'];
         $this->address = $array_info['address'];
         $this->birthday = $array_info['birthday'];
@@ -71,5 +72,10 @@ class User extends Authenticatable
     public function clearApiToken() {
         $this->api_token = null;
         $this->save();
+    }
+
+    public function changePassword($newpass) {
+        $this->password = bcrypt($newpass);
+        return $this->save();
     }
 }

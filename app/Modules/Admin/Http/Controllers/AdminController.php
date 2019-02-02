@@ -2,11 +2,10 @@
 
 namespace App\Modules\Admin\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use Auth;
-use App\User;
-use Carbon\Carbon;
+use Illuminate\Http\Request;
+use App\Helpers\Avatar;
+use App\Http\Controllers\Controller;
 
 class AdminController extends Controller
 {
@@ -29,23 +28,27 @@ class AdminController extends Controller
         return view('admin::account.info')->with('data', $data);
     }
 
-    public function update($id, Request $request)
+    public function update(Request $request)
     {
         if ($request->isMethod('post')) {
             $user = \Auth::user();
+
             $isSignOut = false;
             if ($request->password && $request->retype_password && $request->password == $request->retype_password) {
-                $user->password = bcrypt($request->password);
-                $user->save();
-                $isSignOut = true;
+                $isSignOut = $user->changePassword($request->password);
             }
+
+            $img_url = Avatar::imageUploadProfile($request, $user);
+
             $data = array(
                 'name' => ($request->name) ? $request->name : '',
                 'address' => ($request->address) ? $request->address : '',
                 'birthday' => ($request->birthday) ? date('Y-m-d', strtotime($request->birthday)) : '',
-                'img' => ($request->img) ? $request->img : '',
+                'img' => $img_url,
             );
-            $check = User::find($id)->update_info($data);
+
+            $check = $user->update_info($data);
+
             if (!$check)
                 $message = 'Update was failed';
             else
