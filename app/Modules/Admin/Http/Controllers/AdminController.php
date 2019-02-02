@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Auth;
 use App\User;
-use Carbon\Carbon; 
+use Carbon\Carbon;
 
 class AdminController extends Controller
 {
@@ -14,12 +14,13 @@ class AdminController extends Controller
     {
         //Constructor
     }
+
     public function index()
     {
-    	if(!Auth::check() || Auth::user()->type != 1) {
+        if (!Auth::check() || Auth::user()->type != 1) {
             return redirect('/');
         }
-    	return view('admin::index.index');
+        return view('admin::index.index');
     }
 
     public function admin(Request $request)
@@ -33,7 +34,7 @@ class AdminController extends Controller
         if ($request->isMethod('post')) {
             $user = \Auth::user();
             $isSignOut = false;
-            if ($request->password && $request->retype_password && $request->password == $request->retype_password ) {
+            if ($request->password && $request->retype_password && $request->password == $request->retype_password) {
                 $user->password = bcrypt($request->password);
                 $user->save();
                 $isSignOut = true;

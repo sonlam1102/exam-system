@@ -16,17 +16,17 @@
 </head>
 
 <body>
-    <!-- The navigator -->
-    @include('user::layouts.navigation')
+<!-- The navigator -->
+@include('user::layouts.navigation')
 
 
-    <!-- Page Content -->
-    <div class="container">
-        @yield('content')
-    </div>
-    
-    <!-- The footer -->
-    @include('user::layouts.footer')
+<!-- Page Content -->
+<div class="container">
+    @yield('content')
+</div>
+
+<!-- The footer -->
+@include('user::layouts.footer')
 
 </body>
 </html>
