@@ -210,6 +210,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'GraphQL' => Folklore\GraphQL\Support\Facades\GraphQL::class,
         'Token'=>\Dirape\Token\Facades\Facade::class,
+        'Imgur' => Yish\Imgur\Facades\Upload::class,
     ],
 
 ];

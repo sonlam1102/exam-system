@@ -30,19 +30,8 @@
 					<p class="card-text">Result: {{ $lasted }} </p>
 				@endif
 				@foreach ($questions as $item)
-					{{--@if ($took && !\App\Model\Subquestion::isBigQuestion($item->id))--}}
-						{{--@php--}}
-							{{--$check = App\Helpers\Question::checkRightAnswer($item->id, $contest->records->where('user_id', '=', \Auth::user()->id), $contest->results);--}}
-							{{--if ($check == 1)--}}
-								{{--echo App\Helpers\Message::getNotify(0);--}}
-							{{--if ($check == 0)--}}
-								{{--echo App\Helpers\Message::getNotify(2);--}}
-							{{--if ($check == -1)--}}
-								{{--echo App\Helpers\Message::getNotify(1);--}}
-						{{--@endphp--}}
-					{{--@endif--}}
 					<div class="form-group">
-						@if(\App\Model\Subquestion::isBigQuestion($item->id))
+						@if($item->isBigQuestion())
 							<label for="inputEmail3" class="control-label">Big Question #{{ $item->id }}</label>
 							<input type="text" class='big-question' value="{{ $item->id }}" hidden>
 							<textarea class='form-control' type='text' disabled> {{ $item->content }} </textarea>
@@ -50,9 +39,9 @@
 							@if (!empty($subquestion) && in_array(['question_id' => $item->id], $subquestion))
 								This question is based on those answers:
 								@php
-									$subquestionData = App\Model\Subquestion::getAllSubquestion($item->id);
+									$subquestionData = $item->subquestions;
                                     foreach($subquestionData as $val) {
-                                         echo $val->subquestion_id . ' ';
+                                         echo $val->id . ' ';
                                     }
 								@endphp
 							@endif
@@ -60,7 +49,7 @@
 							@foreach ($item->subquestions as $sub)
                                 @if($took)
                                     @php
-                                        $check = App\Helpers\Question::checkRightAnswer($sub->subquestion->id, $contest->records->where('user_id', '=', \Auth::user()->id), $contest->results);
+                                        $check = App\Helpers\Question::checkRightAnswer($sub->id, $contest->records->where('user_id', '=', \Auth::user()->id), $contest->results);
                                         if ($check == 1)
                                             echo App\Helpers\Message::getNotify(0);
                                         if ($check == 0)
@@ -70,13 +59,13 @@
                                     @endphp
                                 @endif
 								<div class="question_item">
-									<label for="inputEmail3" class="control-label">Question #{{ $sub->subquestion->id }} (reference from #Question {{ $item->id }})</label>
-									<input type="text" class='question' value="{{ $sub->subquestion->id }}" hidden>
-									<textarea class='form-control' type='text' disabled> {{ $sub->subquestion->content }} </textarea>
-									@if($sub->subquestion->answers)
-										@foreach($sub->subquestion->answers as $ans)
+									<label for="inputEmail3" class="control-label">Question #{{ $sub->id }} (reference from #Question {{ $item->id }})</label>
+									<input type="text" class='question' value="{{ $sub->id }}" hidden>
+									<textarea class='form-control' type='text' disabled> {{ $sub->content }} </textarea>
+									@if($sub->answers)
+										@foreach($sub->answers as $ans)
 											<div class='input-group answers_group' name='answers_group'>
-												<input class='input-group-addon flat-red right-answer' name = '{{ "right-answer".$sub->subquestion->id }}' type='radio' {{ App\Helpers\Question::checkBox($sub->subquestion->id, $ans->id, $contest->records->where('user_id', '=', \Auth::user()->id)) }} >
+												<input class='input-group-addon flat-red right-answer' name = '{{ "right-answer".$sub->id }}' type='radio' {{ App\Helpers\Question::checkBox($sub->id, $ans->id, $contest->records->where('user_id', '=', \Auth::user()->id)) }} >
 												<input class="form-control answer" type="text" value="{{ $ans->content }}" disabled>
 												<input class='form-control answer_id' type='text' value="{{ $ans->id }}" hidden >
 											</div>
@@ -87,7 +76,7 @@
 							@endforeach
 							<p>-------------------</p>
 
-						@elseif(!\App\Model\Subquestion::isSubQuestion($item->id))
+						@elseif(!$item->isSubQuestion())
                             @if($took)
                                 @php
                                     $check = App\Helpers\Question::checkRightAnswer($item->id, $contest->records->where('user_id', '=', \Auth::user()->id), $contest->results);

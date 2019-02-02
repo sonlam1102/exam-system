@@ -4,15 +4,16 @@ namespace App\Modules\Admin\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Http\Controllers\Controller;
 use App\Model\Contests;
 use App\Model\Subjects;
 use App\Model\Questions;
 use App\Model\Result;
 use App\Model\Answer;
-use App\Model\Subquestion;
 use App\Model\UserLog;
 use App\Model\UserRecord;
+
+use App\Helpers\Upload;
+
 
 class ContestController extends AdminController
 {
@@ -47,17 +48,18 @@ class ContestController extends AdminController
         $data = isset($request->data) ? $request->data : null;
         $update = isset($request->update) ? $request->update : null;
 
-        if ($data) {  
-            $mainQuestion = null;
-            $subQuestion = null;
-
+        if ($data) {
             foreach ($data as $item) {
                 if (!$item['question'] || $item['question'] == '')
                     continue;
+
                 $questionId = Questions::add_question($id, $item['question']);
+                $question = Questions::find($questionId);
+
                 if (!$questionId) {
                     continue;
                 }
+
                 if (isset($item['big_question']) && $item['big_question'] == 'true') {
                     if (!isset($item['answer']) || (isset($item['answer']) && empty($item['answer']))) {
                         $mainQuestion = $questionId;
@@ -79,11 +81,11 @@ class ContestController extends AdminController
                     Result::addResultOfQuestion($questionId, $id, $answerId);
                 }
                 if ($mainQuestion && $subQuestion)  {
-                    Subquestion::addSubQuestion($mainQuestion, $subQuestion);
+                    $question->addSubQuestion($mainQuestion);
                 }
 
                 if (isset($item['big_question_id']) && $item['big_question_id']) {
-                    Subquestion::addSubQuestion($item['big_question_id'], $questionId);
+                    $question->addSubQuestion($item['big_question_id']);
                 }
             }
         }
@@ -103,6 +105,7 @@ class ContestController extends AdminController
             }
         }
     }
+
     public function edit_info($id, Request $request)
     {
         if (!$id)
@@ -128,22 +131,16 @@ class ContestController extends AdminController
         if (!$id)
             abort('404');
 
-        $contest = Contests::select()->where('id', '=', $id)->first();
+        $contest = Contests::find($id);
         $subject = Subjects::select()->get();
         if (!$contest)
             abort('404');
 
-        $subquestion = Subquestion::select('question_id')->get();
-
-        if ($subquestion)
-            $subquestion = $subquestion->toArray();
-        else
-            $subquestion = [];
 
         return view('admin::contest.question')
             ->with('id', $id)
-            ->with('data', $contest)->with('subject', $subject)
-            ->with('subquestion', $subquestion);
+            ->with('data', $contest)
+            ->with('subject', $subject);
     }
 
     public function deleteContest($id)
@@ -167,29 +164,9 @@ class ContestController extends AdminController
     {
         if (!$id)
             abort('404');
-        if (Subquestion::isBigQuestion($id)) {
-            $subquestion = Subquestion::getAllSubquestion($id);
-            foreach ($subquestion as $item) {
-                $subQuestion = Questions::find($item->subquestion_id);
-                if ($subQuestion)
-                    $subQuestion->delete();
-                Answer::deleteByQuestion($item->subquestion_id);
-                Result::deleteByQuestion($item->subquestion_id);
-                UserRecord::deleteRecordByQuestion($item->subquestion_id);
-            }
-            Subquestion::deleteMainQuestion($id);
-            $question = Questions::find($id);
-            $question->delete();
-        } else {           
-            Answer::deleteByQuestion($id);
-            Subquestion::deleteSubQuestion($id);
-            Result::deleteByQuestion($id);
-            UserRecord::deleteRecordByQuestion($id);
 
-            $question = Questions::find($id);
-            if ($question)
-                $question->delete();
-        }   
+        $question = Questions::find($id);
+        $question->deleteQuestion();
     }
 
     public static function listCandidate($id)
@@ -202,4 +179,14 @@ class ContestController extends AdminController
         return view('admin::contest.candidate')->with('data', $user_log);
     }
 
+    public function uploadQuestionImage(Request $request, $id) {
+        $question = Questions::find($id);
+
+        if (!$question)
+            abort('404');
+
+        $question_img = Upload::questionImageUpload($request, $question);
+
+        $question->changeImage($question_img);
+    }
 }

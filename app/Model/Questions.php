@@ -8,12 +8,12 @@ class Questions extends Model
 {
     protected $table = "question";
 
-    public function subquestions() {
-        return $this->hasMany('App\Model\Subquestion', 'question_id');
+    public function contest() {
+        return $this->belongsTo('App\Model\Contest', 'contest_id');
     }
 
-    public function questionparent() {
-        return $this->hasOne('App\Model\Subquestion', 'subquestion_id');
+    public function subquestions() {
+        return $this->hasMany('App\Model\Questions', 'parent_question_id');
     }
 
     public function answers() {
@@ -23,6 +23,28 @@ class Questions extends Model
     public function result() {
         return $this->hasOne('App\Model\Result', 'question_id');
     }
+
+    public function isBigQuestion()
+    {
+        if($this->subquestions->isEmpty()) {
+            return false;
+        }
+
+        return true;
+    }
+
+    public function isSubQuestion() {
+        if ($this->parent_question_id) {
+            return true;
+        }
+        return false;
+    }
+
+    public function addSubQuestion($parent) {
+        $this->parent_question_id = $parent;
+        $this->save();
+    }
+
 
     public static function add_question($contest_id, $content) {
     	if (!$contest_id)
@@ -46,7 +68,26 @@ class Questions extends Model
 
     public function deleteQuestion()
     {
+        if ($this->isBigQuestion()) {
+            foreach ($this->subquestions as $item) {
+                foreach ($item->answers as $ans) {
+                    $ans->delete();
+                }
+                $item->delete();
+            }
+        }
+        else {
+            foreach ($this->answers as $ans) {
+                $ans->delete();
+            }
+        }
+
         return $this->delete();   
+    }
+
+    public function changeImage($img_link) {
+        $this->img = $img_link;
+        return $this->save();
     }
 
     public static function deleteByContest($contest_id)

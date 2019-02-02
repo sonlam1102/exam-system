@@ -62,7 +62,7 @@
                     @if ($data->questions)
                         @foreach($data->questions as $item)
                             <div class='form-group'>
-                                @if (\App\Model\Subquestion::isBigQuestion($item->id))
+                                @if ($item->isBigQuestion())
                                     <div class="delete_question">
                                         <input type="text" name="token" id='token' value="{{ csrf_token() }}" hidden>
                                         <input type="hidden" name="_method" id='method' value="delete" />
@@ -80,7 +80,7 @@
                                     @php
                                         $subquestionData = $item->subquestions;
                                         foreach($subquestionData as $val) {
-                                        echo $val->subquestion_id . ' ';
+                                        echo $val->id . ' ';
                                         }
                                     @endphp
                                     @foreach($item->subquestions as $subs)
@@ -88,16 +88,16 @@
                                             <div class="delete_question">
                                                 <input type="text" name="token" id='token' value="{{ csrf_token() }}" hidden>
                                                 <input type="hidden" name="_method" id='method' value="delete" />
-                                                <label for="inputEmail3" class="control-label">Question #{{ $subs->subquestion->id }} (refernece to Question #{{ $item->id }}) </label>
-                                                <button type="button" class="btn btn-sm btn-danger" id='delete' data-qid = '{{ $subs->subquestion->id }} '>Delete</button>
+                                                <label for="inputEmail3" class="control-label">Question #{{ $subs->id }} (refernece to Question #{{ $item->id }}) </label>
+                                                <button type="button" class="btn btn-sm btn-danger" id='delete' data-qid = '{{ $subs->id }} '>Delete</button>
                                             </div>
-                                            <input class='form-control question_id' type='text' value="{{ $subs->subquestion->id }}" hidden >
-                                            <textarea class='form-control question' type='text'> {{ $subs->subquestion->content }} </textarea>
+                                            <input class='form-control question_id' type='text' value="{{ $subs->id }}" hidden >
+                                            <textarea class='form-control question' type='text'> {{ $subs->content }} </textarea>
                                             <label class='col-sm-2 control-label'>Answers</label>
-                                            @if($subs->subquestion->answers)
-                                                @foreach($subs->subquestion->answers as $subsansw)
+                                            @if($subs->answers)
+                                                @foreach($subs->answers as $subsansw)
                                                     <div class='input-group answers_group' name='answers_group'>
-                                                        <input class='input-group-addon flat-red right-answer' name = '{{ "right-answer".$subs->subquestion->id }}' type='radio' {{ App\Helpers\Question::checkBox($subs->subquestion->id, $subsansw->id, $data->results) }} >
+                                                        <input class='input-group-addon flat-red right-answer' name = '{{ "right-answer".$subs->id }}' type='radio' {{ App\Helpers\Question::checkBox($subs->id, $subsansw->id, $data->results) }} >
                                                         <input class="form-control answer" type="text" value="{{ $subsansw->content }}">
                                                         <input class='form-control answer_id' type='text' value="{{ $subsansw->id }}" hidden >
                                                     </div>
@@ -105,7 +105,7 @@
                                             @endif
                                         </div>
                                     @endforeach
-                                @elseif(!\App\Model\Subquestion::isSubQuestion($item->id))
+                                @elseif(!$item->isSubQuestion())
                                     <div class="question_item">
                                         <div class="delete_question">
                                             <input type="text" name="token" id='token' value="{{ csrf_token() }}" hidden>

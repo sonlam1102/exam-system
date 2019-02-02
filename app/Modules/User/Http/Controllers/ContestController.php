@@ -9,7 +9,6 @@ use App\Model\Contests;
 use App\Model\UserRecord;
 use App\Helpers;
 use App\Model\UserLog;
-use App\Model\Subquestion;
 
 class ContestController extends UserController
 {
@@ -29,12 +28,7 @@ class ContestController extends UserController
 
     	$question = $contest->questions;
         $took = UserRecord::isTookTheContest(\Auth::user()->id, $id);
-        $subquestion = Subquestion::select('question_id')->get();
 
-        if ($subquestion)
-            $subquestion = $subquestion->toArray();
-        else
-            $subquestion = [];
 
         $info = Contests::find($id);
 
@@ -44,8 +38,7 @@ class ContestController extends UserController
             ->with('questions', $question)
             ->with('info', $info)
             ->with('lasted', ($lasted) ? $lasted->result : null)
-            ->with('took', $took)
-            ->with('subquestion', $subquestion);
+            ->with('took', $took);
     }
 
     // Submit bai lam len he thong
@@ -73,7 +66,7 @@ class ContestController extends UserController
         }
 
         // Danh gia so cau dung
-        $evaluate = Helpers\Question::evaluateAnswer(\Auth::user()->id, $id);
+        $evaluate = Helpers\Question::evaluateAnswer(Auth::user()->id, $id);
 
         // So cau dung trong bai lam
         $string = (isset($evaluate['right']) && isset($evaluate['total'])) ? $evaluate['right'].'/'.$evaluate['total'] : '';
