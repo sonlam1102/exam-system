@@ -11,5 +11,5 @@ return array(
 	],
 	'exclude' => null,
 
-	'title' => 'Swagger UI'
+	'title' => 'Exam System API'
 );
