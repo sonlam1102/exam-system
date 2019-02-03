@@ -37,6 +37,13 @@
                                 <label for="inputEmail3" class="control-label">Big Question #{{ $item->id }}</label>
                                 <input type="text" class='big-question' value="{{ $item->id }}" hidden>
                                 <textarea class='form-control' type='text' disabled> {{ $item->content }} </textarea>
+
+                                <p>
+                                    @if($item->img)
+                                        <img src="{{ $item->img }}" alt="Question #{{ $item->id }}" class="image_contest">
+                                    @endif
+                                </p>
+
                                 <br>
                                 @if (!empty($subquestion) && in_array(['question_id' => $item->id], $subquestion))
                                     This question is based on those answers:
@@ -66,6 +73,13 @@
                                         <input type="text" class='question' value="{{ $sub->id }}" hidden>
                                         <textarea class='form-control' type='text'
                                                   disabled> {{ $sub->content }} </textarea>
+
+                                        <p>
+                                            @if($sub->img)
+                                                <img src="{{ $sub->img }}" alt="Question #{{ $sub->id }}" class="image_contest">
+                                            @endif
+                                        </p>
+
                                         @if($sub->answers)
                                             @foreach($sub->answers as $ans)
                                                 <div class='input-group answers_group' name='answers_group'>
@@ -76,6 +90,11 @@
                                                            value="{{ $ans->content }}" disabled>
                                                     <input class='form-control answer_id' type='text'
                                                            value="{{ $ans->id }}" hidden>
+
+                                                    @if($ans->img)
+                                                        <img src="{{ $ans->img }}" alt="Answer #{{ $ans->id }}" class="image_contest">
+                                                    @endif
+
                                                 </div>
                                             @endforeach
                                         @endif
@@ -101,6 +120,13 @@
                                     <input type="text" class='question' value="{{ $item->id }}" hidden>
                                     <textarea class='form-control' type='text'
                                               disabled> {{ $item->content }} </textarea>
+
+                                    <p>
+                                        @if($item->img)
+                                            <img src="{{ $item->img }}" alt="Question #{{ $item->id }}" class="image_contest">
+                                        @endif
+                                    </p>
+
                                     @if($item->answers)
                                         @foreach($item->answers as $ans)
                                             @if ($ans->question_id == $item->id )
@@ -112,6 +138,11 @@
                                                            value="{{ $ans->content }}" disabled>
                                                     <input class='form-control answer_id' type='text'
                                                            value="{{ $ans->id }}" hidden>
+
+                                                    @if($ans->img)
+                                                        <img src="{{ $ans->img }}" alt="Answer #{{ $ans->id }}" class="image_contest">
+                                                    @endif
+
                                                 </div>
                                             @endif
                                         @endforeach

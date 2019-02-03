@@ -80,6 +80,13 @@
                                                        value="{{ $item->id }}" hidden>
                                                 <textarea class='form-control question'
                                                           type='text'> {{ $item->content }} </textarea>
+
+                                                <p>
+                                                    @if($item->img)
+                                                        <img src="{{ $item->img }}" alt="Question #{{ $item->id }}" class="image_contest">
+                                                    @endif
+                                                </p>
+
                                                 <label class='col-sm-2 control-label'>Answers</label>
 
                                                 <a href='javascript:void(0)' class='add_one_new_subquestion'>Add 1 sub
@@ -91,7 +98,7 @@
                                                 @php
                                                     $subquestionData = $item->subquestions;
                                                     foreach($subquestionData as $val) {
-                                                    echo $val->id . ' ';
+                                                        echo $val->id . ' ';
                                                     }
                                                 @endphp
                                                 @foreach($item->subquestions as $subs)
@@ -112,6 +119,13 @@
                                                                value="{{ $subs->id }}" hidden>
                                                         <textarea class='form-control question'
                                                                   type='text'> {{ $subs->content }} </textarea>
+
+                                                        <p>
+                                                            @if($subs->img)
+                                                                <img src="{{ $subs->img }}" alt="Question #{{ $subs->id }}" class="image_contest">
+                                                            @endif
+                                                        </p>
+
                                                         <label class='col-sm-2 control-label'>Answers</label>
                                                         @if($subs->answers)
                                                             @foreach($subs->answers as $subsansw)
@@ -124,6 +138,11 @@
                                                                            value="{{ $subsansw->content }}">
                                                                     <input class='form-control answer_id' type='text'
                                                                            value="{{ $subsansw->id }}" hidden>
+
+                                                                    @if($subsansw->img)
+                                                                        <img src="{{ $subsansw->img }}" alt="Answer #{{ $subsansw->id }}" class="image_contest">
+                                                                    @endif
+
                                                                 </div>
                                                             @endforeach
                                                         @endif
@@ -145,6 +164,13 @@
                                                            value="{{ $item->id }}" hidden>
                                                     <textarea class='form-control question'
                                                               type='text'> {{ $item->content }} </textarea>
+
+                                                   <p>
+                                                       @if($item->img)
+                                                           <img src="{{ $item->img }}" alt="Question #{{ $item->id }}" class="image_contest">
+                                                       @endif
+                                                   </p>
+
                                                     <label class='col-sm-2 control-label'>Answers</label>
                                                     @if($item->answers)
                                                         @foreach($item->answers as $ans)
@@ -156,6 +182,11 @@
                                                                        value="{{ $ans->content }}">
                                                                 <input class='form-control answer_id' type='text'
                                                                        value="{{ $ans->id }}" hidden>
+
+                                                                @if($ans->img)
+                                                                    <img src="{{ $ans->img }}" alt="Answer #{{ $ans->id }}" class="image_contest">
+                                                                @endif
+
                                                             </div>
                                                         @endforeach
                                                     @endif
