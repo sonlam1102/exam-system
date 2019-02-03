@@ -94,4 +94,17 @@ class User extends Authenticatable
 
         return parent::__get($key);
     }
+
+    public function resetPassword() {
+        $this->password = bcrypt("123456");
+        return $this->save();
+    }
+
+    public static function getAllAdminAccounts() {
+        return self::where('type', '=', self::TYPE_ADMIN)->get();
+    }
+
+    public static function getAllUserAccounts() {
+        return self::where('type', '=', self::TYPE_USER)->get();
+    }
 }

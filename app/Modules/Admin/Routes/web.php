@@ -10,6 +10,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function 
     Route::group(['prefix' => 'user'], function () {
         Route::get('/list', 'UserController@index');   //List users
         Route::get('/info/{id}', 'UserController@info')->where('id', '[0-9]+');    //User info
+        Route::post('/{id}/reset', 'UserController@reset');
     });
 
     //Contest Info

@@ -5,16 +5,22 @@ namespace App\Modules\Root\Http\Controllers;
 use App\User;
 use Illuminate\Http\Request;
 
-use App\Http\Controllers\Controller;
 
 class UserController extends RootController
 {
     public function index()
     {
-        $mdlUser = new User();
-        $user = $mdlUser->where('type', User::TYPE_ADMIN)->get();
-
+        $user = User::getAllAdminAccounts();
         return view('root::account.user')->with('data', $user);
+    }
+
+    public function reset($id) {
+        $user = User::find($id);
+        if ($user->type == User::TYPE_ADMIN) {
+            $user->resetPassword();
+        }
+
+        return redirect('/root/user/list');
     }
 
     public function info($id)

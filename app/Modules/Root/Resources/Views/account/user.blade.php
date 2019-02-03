@@ -36,6 +36,12 @@
                                             <td>
                                                 <a href="/root/user/info/{{ $item->id }}">
                                                     <button type="button" class="btn btn-primary">Info</button>
+                                                </a>
+
+                                                <form method="post" action="/root/user/{{ $item->id }}/reset">
+                                                    @csrf
+                                                    <button type="submit" class="btn btn-warning">Reset</button>
+                                                </form>
                                             </td>
                                         </tr>
                                     @endforeach

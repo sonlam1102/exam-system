@@ -8,10 +8,18 @@ class UserController extends AdminController
 {
     public function index()
     {
-    	$mdlUser = new User();
-    	$user = $mdlUser->where('type', User::TYPE_USER)->get();
+    	$user = User::getAllUserAccounts();
 
     	return view('admin::account.user')->with('data', $user);
+    }
+
+    public function reset($id) {
+        $user = User::find($id);
+        if ($user->type == User::TYPE_USER) {
+            $user->resetPassword();
+        }
+
+        return redirect('/admin/user/list');
     }
 
     public function info($id)
