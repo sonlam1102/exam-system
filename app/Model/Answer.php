@@ -53,4 +53,9 @@ class Answer extends Model
     {
         return self::where('contest_id', '=', $contest_id)->delete();
     }
+
+    public function changeImage($img_link) {
+        $this->img = $img_link;
+        return $this->save();
+    }
 }

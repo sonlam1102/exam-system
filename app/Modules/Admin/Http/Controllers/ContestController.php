@@ -92,9 +92,18 @@ class ContestController extends AdminController
 
         if ($update) {
             foreach ($update as $item) {
+                $question = Questions::find($item['id']);
+
+                $question->content = $item['question'];
+                $question->save();
+
                 if (!isset($item['answer']))
                     continue;
                 foreach ($item['answer'] as $value) {
+                    $answer = Answer::find($value['id']);
+                    $answer->content = $value['answer_content'];
+                    $answer->save();
+
                     if ($value['right_answer'] == 'true') {
                         $result = Result::where('question_id', '=', $item['id'])
                                         ->where('contest_id', '=', $id)
@@ -188,5 +197,20 @@ class ContestController extends AdminController
         $question_img = Upload::questionImageUpload($request, $question);
 
         $question->changeImage($question_img);
+
+        return redirect('/admin/contest/info/'.$id);
+    }
+
+    public function uploadAnswerImage(Request $request, $id) {
+        $answer = Answer::find($id);
+
+        if (!$answer)
+            abort('404');
+
+        $answer_img = Upload::answerImageUpload($request, $answer);
+
+        $answer->changeImage($answer_img);
+
+        return redirect('/admin/contest/info/'.$id);
     }
 }

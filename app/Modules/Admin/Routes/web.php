@@ -10,7 +10,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function 
     Route::group(['prefix' => 'user'], function () {
         Route::get('/list', 'UserController@index');   //List users
         Route::get('/info/{id}', 'UserController@info')->where('id', '[0-9]+');    //User info
-        Route::post('/{id}/reset', 'UserController@reset');
+        Route::post('/{id}/reset', 'UserController@reset')->where('id', '[0-9]+');
     });
 
     //Contest Info
@@ -24,6 +24,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function 
         Route::delete('/delete/{id}', 'ContestController@deleteContest')->where('id', '[0-9]+');  //delete contest by id
         Route::delete('/delete/{id}/question', 'ContestController@deleteQuestion')->where('id', '[0-9]+');  //delete question by id
         Route::get('/{id}/candidate', 'ContestController@listCandidate')->where('id', '[0-9]+');  //get candidtes of contest
+        Route::post('/{id}/question/image', 'ContestController@uploadQuestionImage')->where('id', '[0-9]+');
+        Route::post('/{id}/answer/image', 'ContestController@uploadAnswerImage')->where('id', '[0-9]+');
     });
 
     //Feedback
