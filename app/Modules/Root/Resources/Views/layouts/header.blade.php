@@ -20,7 +20,11 @@
                         <li class="user-header">
                             <p>
                                 {{ \Auth::user()->name }}
-                                <small>{{ (\Auth::user()->id == 0) ? 'User' : 'Administrator' }}</small>
+                                <small>{{ \Auth::user()->user_type }}</small>
+                            </p>
+
+                            <p class="img-responsive">
+                                <img src="{{ \Auth::user()->img }}" class="avatar" onerror="this.src='/avatar.jpg'">
                             </p>
                         </li>
                         <li class="user-footer">

@@ -22,6 +22,12 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    protected $type_name = [
+        self::TYPE_USER => 'User',
+        self::TYPE_ROOT => 'Root',
+        self::TYPE_ADMIN => 'Admin'
+    ];
+
     public function logs() {
         return $this->hasMany('App\Model\UserLog', 'user_id');
     }
@@ -77,5 +83,15 @@ class User extends Authenticatable
     public function changePassword($newpass) {
         $this->password = bcrypt($newpass);
         return $this->save();
+    }
+
+    public function __get($key)
+    {
+        if ($key == 'user_type')
+        {
+            return $this->type_name[$this->type];
+        }
+
+        return parent::__get($key);
     }
 }
