@@ -264,9 +264,16 @@
                                 @endif
                             </div>
                             <input type="text" name="data" id='data' hidden>
+
                             <div class="box-footer">
                                 <button type="submit" id='submit' class="btn btn-info pull-left">Add question</button>
                             </div>
+
+                            <div class="box-header">
+                                <a href="javascript:void(0)" id="add_new_question_last_page">Add 1 question</a>
+                                <a href="javascript:void(0)" id="add_new_big_question_last_page">Add 1 big question</a>
+                            </div>
+
                         </form>
                     </div>
                 </div>

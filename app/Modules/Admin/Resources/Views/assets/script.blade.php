@@ -36,7 +36,20 @@
             num++;
         });
 
+        $('#add_new_question_last_page').click(function () {
+            $('#question_field').append(questionPackGenerate(num));
+            num++;
+        });
+
         $('#add_new_big_question').click(function () {
+            $('#question_field').append(bigQuestionGenerate());
+            $('.big_question #add_new_subquestion').on("click", function () {
+                $(this).parent().append(questionPackGenerate(num));
+                num++;
+            });
+        });
+
+        $('#add_new_big_question_last_page').click(function () {
             $('#question_field').append(bigQuestionGenerate());
             $('.big_question #add_new_subquestion').on("click", function () {
                 $(this).parent().append(questionPackGenerate(num));
