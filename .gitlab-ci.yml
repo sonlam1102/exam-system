@@ -43,3 +43,6 @@ save:
   script:
     - apt-get update -qq && apt-get install -y -qq git
     - git push  https://$BITBUCKET_USER:$BITBUCKET_ACCESS_TOKEN@bitbucket.org/$BITBUCKET_USER/$BITBUCKET_APP_NAME.git HEAD:master
+  only:
+    refs:
+      - master
