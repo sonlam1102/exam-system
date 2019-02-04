@@ -42,4 +42,4 @@ save:
   stage: save
   script:
     - apt-get update -qq && apt-get install -y -qq git
-    - git push  https://x-token-auth:$BITBUCKET_ACCESS_TOKEN@bitbucket.org/$BITBUCKET_USER/$BITBUCKET_APP_NAME.git HEAD:master
+    - git push  https://$BITBUCKET_USER:$BITBUCKET_ACCESS_TOKEN@bitbucket.org/$BITBUCKET_USER/$BITBUCKET_APP_NAME.git HEAD:master
