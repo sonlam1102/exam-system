@@ -9,7 +9,7 @@ class Answer extends Model
     protected $table = "answer";
 
     public function contest() {
-        return $this->belongsTo('App\Model\Contest', 'contest_id');
+        return $this->belongsTo('App\Model\Contests', 'contest_id');
     }
 
     public function question() {

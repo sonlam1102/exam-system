@@ -198,7 +198,6 @@ class ContestController extends AdminController
 
         $question->changeImage($question_img);
 
-        return redirect('/admin/contest/info/'.$id);
     }
 
     public function uploadAnswerImage(Request $request, $id) {
@@ -211,6 +210,5 @@ class ContestController extends AdminController
 
         $answer->changeImage($answer_img);
 
-        return redirect('/admin/contest/info/'.$id);
     }
 }

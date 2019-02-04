@@ -50,6 +50,56 @@
             num++;
         });
 
+        $('.question_image #upload').click(function () {
+            let id = $(this).data('qid'),
+                token = $('.question_image #token').val(),
+                link = "/admin/contest/" + $.trim(id) + "/question/image";
+
+
+            let file_data = $("#quest_image"+id).prop('files')[0];
+            let form = new FormData();
+
+            form.append("question_img", file_data);
+            form.append("_token", token);
+
+
+            $.ajax({
+                type: "POST",
+                url: link,
+                data: form,
+                processData: false,
+                contentType: false,
+                success: function () {
+                    location.reload();
+                },
+            });
+        });
+
+        $('.answer_image #upload').click(function () {
+            let id = $(this).data('qid'),
+                token = $('.answer_image #token').val(),
+                link = "/admin/contest/" + $.trim(id) + "/answer/image";
+
+
+            let file_data = $("#answ_image"+id).prop('files')[0];
+            let form = new FormData();
+
+            form.append("answer_img", file_data);
+            form.append("_token", token);
+
+
+            $.ajax({
+                type: "POST",
+                url: link,
+                data: form,
+                processData: false,
+                contentType: false,
+                success: function () {
+                    location.reload();
+                },
+            });
+        });
+
         $('.delete_question #delete').click(function () {
             var id = $(this).data('qid'),
                 data = {},
@@ -73,7 +123,6 @@
         });
 
         $("#question-form").submit(function (e) {
-            console.log(2);
             var data = []
             dataUpdate = [],
                 actionLink = $(this).attr('action')

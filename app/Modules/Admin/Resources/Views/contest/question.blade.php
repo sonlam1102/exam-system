@@ -76,6 +76,18 @@
                                                             data-qid='{{ $item->id }} '>Delete
                                                     </button>
                                                 </div>
+
+                                                <div class="question_image">
+                                                    <input type="text" name="token" id='token'
+                                                           value="{{ csrf_token() }}" hidden>
+
+                                                    <input type='file' id="quest_image{{ $item->id }}">
+
+                                                    <button type="button" class="btn btn-sm btn-info" id='upload'
+                                                            data-qid='{{ $item->id }} '>Upload
+                                                    </button>
+                                                </div>
+
                                                 <input class='form-control question_id' type='text'
                                                        value="{{ $item->id }}" hidden>
                                                 <textarea class='form-control question'
@@ -115,13 +127,19 @@
                                                                     id='delete' data-qid='{{ $subs->id }} '>Delete
                                                             </button>
                                                             <br>
-
-                                                            {{--<form id="sub_quest_image" method="post" action="/admin/contest/{{ $subs->id }}/question/image" enctype="multipart/form-data">--}}
-                                                                {{--<input type='file' name="question_img" />--}}
-                                                                {{--<button type="submit" class="btn btn-sm btn-info">Upload</button>--}}
-                                                            {{--</form>--}}
-
                                                         </div>
+
+                                                        <div class="question_image">
+                                                            <input type="text" name="token" id='token'
+                                                                   value="{{ csrf_token() }}" hidden>
+
+                                                            <input type='file' id="quest_image{{ $subs->id }}">
+
+                                                            <button type="button" class="btn btn-sm btn-info" id='upload'
+                                                                    data-qid='{{ $subs->id }} '>Upload
+                                                            </button>
+                                                        </div>
+
                                                         <input class='form-control question_id' type='text'
                                                                value="{{ $subs->id }}" hidden>
                                                         <textarea class='form-control question'
@@ -151,6 +169,19 @@
                                                                     @endif
 
                                                                 </div>
+                                                                <br>
+
+                                                                <div class="input-group answer_image">
+                                                                    <input type="text" name="token" id='token'
+                                                                           value="{{ csrf_token() }}" hidden>
+
+                                                                    <input type='file' id="answ_image{{ $subsansw->id }}">
+
+                                                                    <button type="button" class="btn btn-sm btn-info" id='upload'
+                                                                            data-qid='{{ $subsansw->id }} '>Upload
+                                                                    </button>
+                                                                </div>
+                                                                <br>
                                                             @endforeach
                                                         @endif
                                                     </div>
@@ -167,12 +198,20 @@
                                                                 data-qid='{{ $item->id }} '>Delete
                                                         </button>
 
-                                                        {{--<form id="quest_image" method="post" action="/admin/contest/{{ $item->id }}/question/image" enctype="multipart/form-data">--}}
-                                                            {{--<input type='file' name="question_img" />--}}
-                                                            {{--<button type="submit" class="btn btn-sm btn-info">Upload</button>--}}
-                                                        {{--</form>--}}
-
                                                     </div>
+
+                                                    <div class="question_image">
+                                                        <input type="text" name="token" id='token'
+                                                               value="{{ csrf_token() }}" hidden>
+
+                                                        <input type='file' id="quest_image{{ $item->id }}">
+
+                                                        <button type="button" class="btn btn-sm btn-info" id='upload'
+                                                                data-qid='{{ $item->id }} '>Upload
+                                                        </button>
+                                                    </div>
+
+
                                                     <input class='form-control question_id' type='text'
                                                            value="{{ $item->id }}" hidden>
                                                     <textarea class='form-control question'
@@ -201,6 +240,20 @@
                                                                 @endif
 
                                                             </div>
+                                                            <br>
+
+                                                            <div class="input-group answer_image">
+                                                                <input type="text" name="token" id='token'
+                                                                       value="{{ csrf_token() }}" hidden>
+
+                                                                <input type='file' id="answ_image{{ $ans->id }}">
+
+                                                                <button type="button" class="btn btn-sm btn-info" id='upload'
+                                                                        data-qid='{{ $ans->id }} '>Upload
+                                                                </button>
+                                                            </div>
+                                                            <br>
+
                                                         @endforeach
                                                     @endif
                                                 </div>

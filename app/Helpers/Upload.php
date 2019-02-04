@@ -19,7 +19,7 @@ class Upload {
         }
 
         $request->validate([
-            'product_img' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'question_img' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
         if(!File::exists(public_path(self::$question_path))) {
@@ -31,7 +31,7 @@ class Upload {
         try {
             $imageName = $name.'.'.$file->getClientOriginalExtension();
             $file->move(public_path(self::$question_path), $imageName);
-            return self::$question_path.$imageName;
+            return self::$question_path."/".$imageName;
         } catch (\Exception $e) {
             Log::error($e);
             return null;
@@ -46,7 +46,7 @@ class Upload {
         }
 
         $request->validate([
-            'product_img' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'answer_img' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
         if(!File::exists(public_path(self::$answer_path))) {
@@ -58,7 +58,7 @@ class Upload {
         try {
             $imageName = $name.'.'.$file->getClientOriginalExtension();
             $file->move(public_path(self::$answer_path), $imageName);
-            return self::$answer_path.$imageName;
+            return self::$answer_path."/".$imageName;
         } catch (\Exception $e) {
             Log::error($e);
             return null;
@@ -72,7 +72,7 @@ class Upload {
         }
 
         $request->validate([
-            'product_img' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'question_img' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
         $img = Imgur::upload($file);
@@ -87,7 +87,7 @@ class Upload {
         }
 
         $request->validate([
-            'product_img' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'answer_img' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
         $img = Imgur::upload($file);
