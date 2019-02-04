@@ -16,7 +16,7 @@
                             <p class="card-text">Date
                                 Begin: {{ ($item->date) ? date('d/m/Y', strtotime($item->date)) : '' }} </p>
                             <p class="card-text">Subject: {{ App\Model\Subjects::getName($item->subject_id) }} </p>
-                            <p class="card-text">Number questions: {{ $item->questions->count() }} </p>
+                            <p class="card-text">Number questions: {{ $item->total_questions }} </p>
                             @if ($lasted = App\Model\UserLog::getLastedLog(\Auth::user()->id, $item->id))
                                 <p class="card-text">Result: {{ $lasted->result }} </p>
                             @endif

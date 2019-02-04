@@ -61,4 +61,23 @@ class Contests extends Model
 
         return $this->save();
     }
+
+    public function __get($key)
+    {
+        if ($key == 'total_questions')
+        {
+            $questions = $this->questions;
+
+            $num = 0;
+
+            foreach ($questions as $item) {
+                if (!$item->isBigQuestion()) {
+                    $num = $num + 1;
+                }
+            }
+            return $num;
+        }
+
+        return parent::__get($key);
+    }
 }

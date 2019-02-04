@@ -34,7 +34,7 @@
                                             <td> {{ $item->id }}</td>
                                             <td> {{ $item->title }}</td>
                                             <td> {{ $item->subject_id }}</td>
-                                            <td> {{ $item->questions->count() }}</td>
+                                            <td> {{ $item->total_questions }}</td>
                                             <td> {{ date('d/m/Y', strtotime($item->date)) }}</td>
                                             <td>
                                                 <a href="/admin/contest/edit/{{ $item->id }}">

@@ -1,5 +1,6 @@
 <?php
 namespace App\Helpers;
+use App\Model\Contests;
 use App\Model\Result;
 use App\Model\UserRecord;
 
@@ -46,10 +47,12 @@ class Question
 		$result = Result::getAllResult($contest_id);
 		$record = UserRecord::getAllUserRecord($user_id, $contest_id);
 
+		$contest = Contests::find($contest_id);
+
 		if (!$result || !$record)
 			return null;
 
-		$total = $result->count();
+		$total = $contest->total_questions;
 		$count = 0;
 		
 		foreach ($record->toArray() as $item) {
