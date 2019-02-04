@@ -36,7 +36,8 @@ class ContestController extends ApiController
         foreach ($contest->questions as $item) {
             $temp = [
                 'id' => $item->id,
-                'content' => $item->content
+                'content' => $item->content,
+                'img' => $item->img,
             ];
             if ($item->isBigQuestion($item->id)) {
                 $temp['big_question'] = true;
@@ -44,7 +45,7 @@ class ContestController extends ApiController
             elseif ($item->isSubQuestion($item->id)) {
                 $temp['parent_question'] = $item->parent_question_id;
             }
-            if ($took and !$item->isBigQuestion($item->id)) {
+            if ($took and !$item->isBigQuestion()) {
                 $check = \App\Helpers\Question::checkRightAnswer($item->id, $contest->records->where('user_id', '=', $user->id), $contest->results);
                 if ($check === 1) {
                     $temp['result'] = true;
@@ -57,7 +58,8 @@ class ContestController extends ApiController
             foreach ($item->answers as $ans) {
                 $ans_item = [
                     'id' => $ans->id,
-                    'content' => $ans->content
+                    'content' => $ans->content,
+                    'img' => $ans->img,
                 ];
                 if ($took) {
                     if ($ans->question->result->answer_id == $ans->id) {
