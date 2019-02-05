@@ -40,10 +40,10 @@ class UserController extends Controller
             }
 
             if (env('USE_IMGUR')) {
-                $img_url = Avatar::imageUploadProfile($request, $user);
+                $img_url = Avatar::imgurlUploadProfile($request);
             }
             else {
-                $img_url = Avatar::imgurlUploadProfile($request);
+                $img_url = Avatar::imageUploadProfile($request, $user);
             }
 
             $data = array(
