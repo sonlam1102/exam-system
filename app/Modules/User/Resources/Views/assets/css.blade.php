@@ -5,7 +5,7 @@
 <style>
     .image_contest {
         vertical-align: middle;
-        width: 100px;
-        height: 100px;
+        max-width: 300px;
+        max-height: 300px;
     }
 </style>
