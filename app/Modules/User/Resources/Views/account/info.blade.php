@@ -16,7 +16,7 @@
 
                             </div>
                             <div class="col-sm-10">
-                                <img id="blah" src="{{ \Auth::user()->img }}" alt="your image" onerror="this.src='/avatar.jpg'"/>
+                                <img id="blah" src="{{ \Auth::user()->img }}" alt="your image" onerror="this.src='/avatar.jpg'" width="200px" height="200px" />
                             </div>
                         </div>
 
