@@ -87,7 +87,7 @@
                                                     <input type='file' id="quest_image{{ $item->id }}">
 
                                                     <button type="button" class="btn btn-sm btn-info" id='upload'
-                                                            data-qid='{{ $item->id }} '>Upload
+                                                            data-qid='{{ $item->id }} '>Thêm hình câu hỏi
                                                     </button>
                                                 </div>
 
@@ -217,7 +217,7 @@
                                                         <input type='file' id="quest_image{{ $item->id }}">
 
                                                         <button type="button" class="btn btn-sm btn-info" id='upload'
-                                                                data-qid='{{ $item->id }} '>Upload
+                                                                data-qid='{{ $item->id }} '>Thêm hình câu hỏi
                                                         </button>
                                                     </div>
 
