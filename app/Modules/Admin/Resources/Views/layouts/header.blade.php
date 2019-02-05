@@ -29,12 +29,12 @@
                         </li>
                         <li class="user-footer">
                             <div class="pull-left">
-                                <a href="/admin/info" class="btn btn-default btn-flat">Profile</a>
+                                <a href="/admin/info" class="btn btn-default btn-flat">Tài khoản</a>
                             </div>
                             <div class="pull-right">
                                 <form method="POST" action="/logout">
                                     @csrf
-                                    <input type="submit" value="Sign out" class="btn btn-default btn-flat">
+                                    <input type="submit" value="Đăng xuất" class="btn btn-default btn-flat">
                                 </form>
                             </div>
                         </li>

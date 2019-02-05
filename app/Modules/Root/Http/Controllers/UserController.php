@@ -10,15 +10,13 @@ class UserController extends RootController
 {
     public function index()
     {
-        $user = User::getAllAdminAccounts();
+        $user = User::getAllAccounts();
         return view('root::account.user')->with('data', $user);
     }
 
     public function reset($id) {
         $user = User::find($id);
-        if ($user->type == User::TYPE_ADMIN) {
-            $user->resetPassword();
-        }
+        $user->resetPassword();
 
         return redirect('/root/user/list');
     }

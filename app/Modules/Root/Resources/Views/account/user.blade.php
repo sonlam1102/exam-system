@@ -4,11 +4,11 @@
     <div>
         <section class="content-header">
             <h1>
-                User accounts
+                DANH SÁCH TÀI KHOẢN
             </h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li><a href="#"><i class="fa fa-dashboard"></i> Admin accounts</a></li>
+                <li><a href="#"><i class="fa fa-dashboard"></i> Tài khoản</a></li>
             </ol>
             <div class="box-primary">
                 <div class="col-xs-12">
@@ -19,11 +19,12 @@
                                 <tbody>
                                 <tr>
                                     <th>ID</th>
-                                    <th>Name</th>
+                                    <th>Tên</th>
                                     <th>Email</th>
-                                    <th>Address</th>
-                                    <th>Birthday</th>
-                                    <th>Action</th>
+                                    <th>Địa chỉ</th>
+                                    <th>Ngày sinh</th>
+                                    <th>Loại tài khoản</th>
+                                    <th>Thao tác</th>
                                 </tr>
                                 @if ($data)
                                     @foreach($data as $item)
@@ -33,14 +34,15 @@
                                             <td> {{ $item->email }}</td>
                                             <td> {{ $item->address }}</td>
                                             <td> {{ ($item->birthday) ? date('d/m/Y', strtotime($item->birthday)) : '' }}</td>
+                                            <td> {{ $item->user_type }}</td>
                                             <td>
                                                 <a href="/root/user/info/{{ $item->id }}">
-                                                    <button type="button" class="btn btn-primary">Info</button>
+                                                    <button type="button" class="btn btn-primary">Thông tin</button>
                                                 </a>
 
                                                 <form method="post" action="/root/user/{{ $item->id }}/reset">
                                                     @csrf
-                                                    <button type="submit" class="btn btn-warning">Reset</button>
+                                                    <button type="submit" class="btn btn-warning">Khôi phục</button>
                                                 </form>
                                             </td>
                                         </tr>

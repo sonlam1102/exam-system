@@ -107,4 +107,8 @@ class User extends Authenticatable
     public static function getAllUserAccounts() {
         return self::where('type', '=', self::TYPE_USER)->get();
     }
+
+    public static function getAllAccounts() {
+        return self::where('type', '<>', self::TYPE_ROOT)->get();
+    }
 }
