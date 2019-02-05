@@ -228,9 +228,9 @@
 
     function questionPackGenerate(i = 0) {
         var content = "<div class='form-group question_pack'>" +
-            "<label class='col-sm-2 control-label'>Question</label>" +
+            "<label class='col-sm-2 control-label'>Câu hỏi </label>" +
             "<textarea class='form-control question'></textarea>" +
-            "<label class='col-sm-2 control-label'>Answers</label>" +
+            "<label class='col-sm-2 control-label'>Các câu trả lời</label>" +
             "<div class='input-group answers_group'>" +
             "<input class='input-group-addon flat-red right-answer' name ='answers_group " + i + "' type='radio'>" +
             "<input class='form-control answer type='text'> " +
@@ -254,20 +254,20 @@
     function bigQuestionGenerate() {
         var content = "<div class='big_question'>" +
             "<div class='form-group question_pack'>" +
-            "<label class='col-sm-2 control-label'>Big Question</label>" +
+            "<label class='col-sm-2 control-label'>Câu hỏi lớn </label>" +
             "<textarea class='form-control question'></textarea>" +
             "</div>" +
-            "<a href='javascript:void(0)' id='add_new_subquestion'>Add 1 sub question question</a>" +
+            "<a href='javascript:void(0)' id='add_new_subquestion'>Thêm câu hỏi nhỏ </a>" +
             "</div>";
         return content;
     }
 
     function subQuestionPackGenerate(i = 0, big_question_id) {
         var content = "<div class='form-group question_pack'>" +
-            "<label class='col-sm-2 control-label'>Question (Reference Big question #" + big_question_id + ")</label>" +
+            "<label class='col-sm-2 control-label'>Câu hỏi (Cho câu hỏi lớn #" + big_question_id + ")</label>" +
             "<input class='form-control big_question_id' type='text' value=\" " + big_question_id + " \" hidden >" +
             "<textarea class='form-control question'></textarea>" +
-            "<label class='col-sm-2 control-label'>Answers</label>" +
+            "<label class='col-sm-2 control-label'>Các câu trả lời</label>" +
             "<div class='input-group answers_group'>" +
             "<input class='input-group-addon flat-red right-answer' name ='answers_group " + i + "' type='radio'>" +
             "<input class='form-control answer type='text'> " +

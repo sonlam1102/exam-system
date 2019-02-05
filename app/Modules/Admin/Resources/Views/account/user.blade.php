@@ -4,11 +4,11 @@
     <div>
         <section class="content-header">
             <h1>
-                User accounts
+                DANH SÁCH TÀI KHOẢN THÍ SINH
             </h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li><a href="#"><i class="fa fa-dashboard"></i> User accounts</a></li>
+                <li><a href="#"><i class="fa fa-dashboard"></i> Tài khoản thí sinh</a></li>
             </ol>
             <div class="box-primary">
                 <div class="col-xs-12">
@@ -19,11 +19,11 @@
                                 <tbody>
                                 <tr>
                                     <th>ID</th>
-                                    <th>Name</th>
+                                    <th>Tên </th>
                                     <th>Email</th>
-                                    <th>Address</th>
-                                    <th>Birthday</th>
-                                    <th>Action</th>
+                                    <th>Địa chỉ</th>
+                                    <th>Ngày sinh</th>
+                                    <th>Các thao tác </th>
                                 </tr>
                                 @if ($data)
                                     @foreach($data as $item)
@@ -35,12 +35,12 @@
                                             <td> {{ ($item->birthday) ? date('d/m/Y', strtotime($item->birthday)) : '' }}</td>
                                             <td>
                                                 <a href="/admin/user/info/{{ $item->id }}">
-                                                    <button type="button" class="btn btn-primary">Info</button>
+                                                    <button type="button" class="btn btn-primary">Thông tin</button>
                                                 </a>
 
                                                 <form method="post" action="/admin/user/{{ $item->id }}/reset">
                                                     @csrf
-                                                    <button type="submit" class="btn btn-warning">Reset</button>
+                                                    <button type="submit" class="btn btn-warning">Khôi phục</button>
                                                 </form>
                                             </td>
                                         </tr>

@@ -4,14 +4,14 @@
     <div>
         <section class="content-header">
             <h1>
-                Contests
+                DANH SÁCH BÀI TẬP
             </h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li><a href="#"><i class="fa fa-dashboard"></i> Contest</a></li>
+                <li><a href="#"><i class="fa fa-dashboard"></i> Danh sách bài tập</a></li>
             </ol>
             <a href="/admin/contest/add">
-                <button type="button" class="btn btn-block btn-primary" style="width:50px">Add</button>
+                <button type="button" class="btn btn-block btn-primary" style="width:130px">Thêm bài tập</button>
             </a>
             <div class="box-primary">
                 <div class="col-xs-12">
@@ -22,11 +22,11 @@
                                 <tbody>
                                 <tr>
                                     <th>ID</th>
-                                    <th>Title</th>
-                                    <th>Field</th>
-                                    <th>Number questions</th>
-                                    <th>Date</th>
-                                    <th>Action</th>
+                                    <th>Tiêu đề </th>
+                                    <th>Môn học </th>
+                                    <th>Số câu hỏi </th>
+                                    <th>Ngày </th>
+                                    <th>Các thao tác</th>
                                 </tr>
                                 @if ($data)
                                     @foreach($data as $item)

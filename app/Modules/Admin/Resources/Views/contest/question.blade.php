@@ -4,11 +4,11 @@
     <div>
         <section class="content-header">
             <h1>
-                Contests
+                BÀI TẬP
             </h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li><a href="#"><i class="fa fa-dashboard"></i> Contest Info</a></li>
+                <li><a href="#"><i class="fa fa-dashboard"></i> Thông tin bài tập</a></li>
             </ol>
             <div class="box-primary">
                 <div class="col-xs-15">
@@ -19,7 +19,7 @@
                             <div class="box-body">
 
                                 <div class="form-group">
-                                    <label for="inputEmail3" class="col-sm-2 control-label">Title</label>
+                                    <label for="inputEmail3" class="col-sm-2 control-label"> Tên bài tập </label>
                                     <div class="col-sm-10">
                                         <input class="form-control" id="title" name="title" placeholder="Title"
                                                type="text" value="{{ $data->title }}">
@@ -28,7 +28,7 @@
 
 
                                 <div class="form-group">
-                                    <label for="inputEmail3" class="col-sm-2 control-label">Date</label>
+                                    <label for="inputEmail3" class="col-sm-2 control-label">Ngày </label>
                                     <div class="col-sm-10">
                                         <input class="form-control" id="startdate" name="startdate" placeholder="Date"
                                                type="text"
@@ -37,7 +37,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="inputEmail3" class="col-sm-2 control-label">Subject</label>
+                                    <label for="inputEmail3" class="col-sm-2 control-label">Môn học</label>
                                     <div class="col-sm-10">
                                         <select class="form-control" id='subject' name='subject'>
                                             <option value="" disabled>--Choose subject---</option>
@@ -58,8 +58,9 @@
                         <form id='question-form' action='/admin/contest/edit/{{ $id }}/question'>
                             <input type="text" name="token" id='token' value="{{ csrf_token() }}" hidden>
                             <div class="box-header">
-                                <a href="javascript:void(0)" id="add_new_question">Add 1 question</a>
-                                <a href="javascript:void(0)" id="add_new_big_question">Add 1 big question</a>
+                                <a href="javascript:void(0)" id="add_new_question">Thêm câu hỏi </a>
+                                <br>
+                                <a href="javascript:void(0)" id="add_new_big_question">Thêm câu hỏi lớn </a>
                             </div>
                             <div class="box-body" id='question_field'>
                                 @if ($data->questions)
@@ -70,14 +71,16 @@
                                                     <input type="text" name="token" id='token'
                                                            value="{{ csrf_token() }}" hidden>
                                                     <input type="hidden" name="_method" id='method' value="delete"/>
-                                                    <label for="inputEmail3" class="control-label">Big Question
-                                                        #{{ $item->id }}</label>
+                                                    <strong>
+                                                        <label for="inputEmail3" class="control-label">Câu hỏi lớn
+                                                            #{{ $item->id }}</label>
+                                                    </strong>
                                                     <button type="button" class="btn btn-sm btn-danger" id='delete'
-                                                            data-qid='{{ $item->id }} '>Delete
+                                                            data-qid='{{ $item->id }} '>Xoá
                                                     </button>
                                                 </div>
 
-                                                <div class="question_image">
+                                                <div class="question_image col-4">
                                                     <input type="text" name="token" id='token'
                                                            value="{{ csrf_token() }}" hidden>
 
@@ -101,18 +104,21 @@
 
                                                 <label class='col-sm-2 control-label'>Answers</label>
 
-                                                <a href='javascript:void(0)' class='add_one_new_subquestion'>Add 1 sub
-                                                    question question</a>
+                                                <a href='javascript:void(0)' class='add_one_new_subquestion'>Thêm câu hỏi nhỏ</a>
                                                 <input class='form-control big_question' type='text'
                                                        value="{{ $item->id }}" hidden>
                                                 <br>
-                                                This question is based on those answers:
-                                                @php
-                                                    $subquestionData = $item->subquestions;
-                                                    foreach($subquestionData as $val) {
-                                                        echo $val->id . ' ';
-                                                    }
-                                                @endphp
+                                                Câu hỏi lớn này gồm các câu hỏi sau:
+                                                <strong>
+                                                    @php
+                                                        $subquestionData = $item->subquestions;
+                                                        foreach($subquestionData as $val) {
+                                                            echo $val->id . ' ';
+                                                        }
+                                                    @endphp
+                                                </strong>
+                                                <br>
+                                                <br>
                                                 @foreach($item->subquestions as $subs)
                                                     <div class="question_item">
                                                         <div class="delete_question">
@@ -120,23 +126,25 @@
                                                                    value="{{ csrf_token() }}" hidden>
                                                             <input type="hidden" name="_method" id='method'
                                                                    value="delete"/>
-                                                            <label for="inputEmail3" class="control-label">Question
-                                                                #{{ $subs->id }} (refernece to Question #{{ $item->id }}
-                                                                ) </label>
+                                                            <strong>
+                                                                <label for="inputEmail3" class="control-label">Câu hỏi
+                                                                    #{{ $subs->id }} (Theo câu hỏi lớn #{{ $item->id }}
+                                                                    ) </label>
+                                                            </strong>
                                                             <button type="button" class="btn btn-sm btn-danger"
-                                                                    id='delete' data-qid='{{ $subs->id }} '>Delete
+                                                                    id='delete' data-qid='{{ $subs->id }} '>Xoá
                                                             </button>
                                                             <br>
                                                         </div>
 
-                                                        <div class="question_image">
+                                                        <div class="question_image col-4">
                                                             <input type="text" name="token" id='token'
                                                                    value="{{ csrf_token() }}" hidden>
 
                                                             <input type='file' id="quest_image{{ $subs->id }}">
 
                                                             <button type="button" class="btn btn-sm btn-info" id='upload'
-                                                                    data-qid='{{ $subs->id }} '>Upload
+                                                                    data-qid='{{ $subs->id }} '>Thêm hình ảnh
                                                             </button>
                                                         </div>
 
@@ -151,7 +159,7 @@
                                                             @endif
                                                         </p>
 
-                                                        <label class='col-sm-2 control-label'>Answers</label>
+                                                        <label class='col-sm-2 control-label'>Các câu trả lời: </label>
                                                         @if($subs->answers)
                                                             @foreach($subs->answers as $subsansw)
                                                                 <div class='input-group answers_group'
@@ -171,14 +179,14 @@
                                                                 </div>
                                                                 <br>
 
-                                                                <div class="input-group answer_image">
+                                                                <div class="input-group answer_image col-4">
                                                                     <input type="text" name="token" id='token'
                                                                            value="{{ csrf_token() }}" hidden>
 
                                                                     <input type='file' id="answ_image{{ $subsansw->id }}">
 
                                                                     <button type="button" class="btn btn-sm btn-info" id='upload'
-                                                                            data-qid='{{ $subsansw->id }} '>Upload
+                                                                            data-qid='{{ $subsansw->id }} '>Thêm hình ảnh
                                                                     </button>
                                                                 </div>
                                                                 <br>
@@ -192,15 +200,17 @@
                                                         <input type="text" name="token" id='token'
                                                                value="{{ csrf_token() }}" hidden>
                                                         <input type="hidden" name="_method" id='method' value="delete"/>
-                                                        <label for="inputEmail3" class="control-label">Question
-                                                            #{{ $item->id }}</label>
+                                                        <strong>
+                                                            <label for="inputEmail3" class="control-label">Câu hỏi
+                                                                #{{ $item->id }}</label>
+                                                        </strong>
                                                         <button type="button" class="btn btn-sm btn-danger" id='delete'
-                                                                data-qid='{{ $item->id }} '>Delete
+                                                                data-qid='{{ $item->id }} '>Xoá
                                                         </button>
 
                                                     </div>
 
-                                                    <div class="question_image">
+                                                    <div class="question_image col-4">
                                                         <input type="text" name="token" id='token'
                                                                value="{{ csrf_token() }}" hidden>
 
@@ -242,14 +252,14 @@
                                                             </div>
                                                             <br>
 
-                                                            <div class="input-group answer_image">
+                                                            <div class="input-group answer_image col-4">
                                                                 <input type="text" name="token" id='token'
                                                                        value="{{ csrf_token() }}" hidden>
 
                                                                 <input type='file' id="answ_image{{ $ans->id }}">
 
                                                                 <button type="button" class="btn btn-sm btn-info" id='upload'
-                                                                        data-qid='{{ $ans->id }} '>Upload
+                                                                        data-qid='{{ $ans->id }} '>Thêm hình ảnh
                                                                 </button>
                                                             </div>
                                                             <br>
@@ -259,19 +269,20 @@
                                                 </div>
                                             @endif
                                         </div>
-                                        <br>
+                                        <hr>
                                     @endforeach
                                 @endif
                             </div>
                             <input type="text" name="data" id='data' hidden>
 
                             <div class="box-footer">
-                                <button type="submit" id='submit' class="btn btn-info pull-left">Add question</button>
+                                <button type="submit" id='submit' class="btn btn-info pull-left">Cập nhật </button>
                             </div>
 
                             <div class="box-header">
-                                <a href="javascript:void(0)" id="add_new_question_last_page">Add 1 question</a>
-                                <a href="javascript:void(0)" id="add_new_big_question_last_page">Add 1 big question</a>
+                                <a href="javascript:void(0)" id="add_new_question_last_page">Thêm câu hỏi </a>
+                                <br>
+                                <a href="javascript:void(0)" id="add_new_big_question_last_page">Thêm câu hỏi lớn </a>
                             </div>
 
                         </form>

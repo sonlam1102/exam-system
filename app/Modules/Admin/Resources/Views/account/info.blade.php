@@ -3,11 +3,11 @@
 @section('content')
     <section class="content-header">
         <h1>
-            Account Info
+            THÔNG TIN TÀI KHOẢN
         </h1>
         <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li><a href="#"><i class="fa fa-dashboard"></i> Account Info</a></li>
+            <li><a href="#"><i class="fa fa-dashboard"></i> Thông tin tài khoản</a></li>
         </ol>
         <div class="box box-primary">
             <form class="form-horizontal" method="POST" action="/admin/update" enctype="multipart/form-data">
@@ -34,7 +34,7 @@
 
 
                     <div class="form-group">
-                        <label for="inputEmail3" class="col-sm-2 control-label">Name</label>
+                        <label for="inputEmail3" class="col-sm-2 control-label">Tên</label>
                         <div class="col-sm-10">
                             <input class="form-control" id="name" name="name" placeholder="Name" type="text"
                                    value="{{ $data->name }}">
@@ -42,7 +42,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="inputEmail3" class="col-sm-2 control-label">Address</label>
+                        <label for="inputEmail3" class="col-sm-2 control-label">Địa chỉ</label>
                         <div class="col-sm-10">
                             <input class="form-control" id="address" name="address" placeholder="Address" type="text"
                                    value="{{ $data->address }}">
@@ -50,7 +50,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="inputEmail3" class="col-sm-2 control-label">Birthday</label>
+                        <label for="inputEmail3" class="col-sm-2 control-label">Ngày sinh </label>
                         <div class="col-sm-10">
                             <input class="form-control" id="birthday" name="birthday" placeholder="Birthday" type="text"
                                    data-date="{{ ($data->birthday) ? date('d-m-Y' ,strtotime($data->birthday)) : date('m-d-Y') }}">
@@ -58,7 +58,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
+                        <label for="inputPassword3" class="col-sm-2 control-label">Mật khẩu </label>
 
                         <div class="col-sm-10">
                             <input class="form-control" id="password" name="password" placeholder="Password"
@@ -67,7 +67,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="inputPassword3" class="col-sm-2 control-label">Retype Password</label>
+                        <label for="inputPassword3" class="col-sm-2 control-label">Nhập lại mật khẩu</label>
 
                         <div class="col-sm-10">
                             <input class="form-control" id="retype_password" name="retype_password"
@@ -78,7 +78,7 @@
                 </div>
 
                 <div class="box-footer">
-                    <button type="submit" class="btn btn-info pull-left">Submit</button>
+                    <button type="submit" class="btn btn-info pull-left">Cập nhật</button>
                 </div>
 
                 <div class="col-md-6 justify-content-center">

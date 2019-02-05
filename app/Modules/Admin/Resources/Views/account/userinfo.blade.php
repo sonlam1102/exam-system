@@ -3,11 +3,11 @@
 @section('content')
     <section class="content-header">
         <h1>
-            Account Info
+            THÔNG TIN THÍ SINH
         </h1>
         <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li><a href="#"><i class="fa fa-dashboard"></i> User Info</a></li>
+            <li><a href="#"><i class="fa fa-dashboard"></i> Thông tin thí sinh </a></li>
         </ol>
         <div class="box box-primary">
             <div class="box-body">
@@ -22,7 +22,7 @@
 
 
                 <div class="form-group">
-                    <label for="inputEmail3" class="col-sm-2 control-label">Name</label>
+                    <label for="inputEmail3" class="col-sm-2 control-label">Tên</label>
                     <div class="col-sm-10">
                         <input class="form-control" id="name" name="name" placeholder="Name" type="text"
                                value="{{ $data->name }}" disabled>
@@ -38,7 +38,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="inputEmail3" class="col-sm-2 control-label">Birthday</label>
+                    <label for="inputEmail3" class="col-sm-2 control-label">Ngày sinh</label>
                     <div class="col-sm-10">
                         <input class="form-control" id="birthday" name="birthday" placeholder="Birthday" type="text"
                                value="{{ ($data->birthday) ? date('d-m-Y' ,strtotime($data->birthday)) : date('m-d-Y') }}"
@@ -49,13 +49,13 @@
             </div>
             <!-- <label>Contest done</label> -->
             <div class="box-body">
-                <label for="inputEmail3" class="col-sm-2 control-label">Contest done</label>
+                <label for="inputEmail3" class="col-sm-4 control-label">Các bài tập đã hoàn thành: </label>
                 <table class="table table-hover">
                     <tbody>
                     <tr>
-                        <th>Contest ID</th>
-                        <th>Result</th>
-                        <th>Date</th>
+                        <th>ID</th>
+                        <th>Kết quả</th>
+                        <th>Ngày</th>
                     </tr>
                     @if ($data->logs)
                         @foreach($data->logs as $item)

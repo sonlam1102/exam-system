@@ -4,11 +4,11 @@
     <div>
         <section class="content-header">
             <h1>
-                User accounts
+                CÁC PHẢN HỒI TỪ THÍ SINH
             </h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li><a href="#"><i class="fa fa-dashboard"></i> Feedback</a></li>
+                <li><a href="#"><i class="fa fa-dashboard"></i> Phản hồi</a></li>
             </ol>
             <div class="box-primary">
                 <div class="col-xs-12">
@@ -19,8 +19,8 @@
                                 <tbody>
                                 <tr>
                                     <th>ID</th>
-                                    <th>UserID</th>
-                                    <th>Content</th>
+                                    <th>ID người dùng</th>
+                                    <th>Nội dung</th>
                                 </tr>
                                 @if ($data)
                                     @foreach($data as $item)
