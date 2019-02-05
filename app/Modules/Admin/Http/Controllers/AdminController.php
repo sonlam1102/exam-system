@@ -38,7 +38,12 @@ class AdminController extends Controller
                 $isSignOut = $user->changePassword($request->password);
             }
 
-            $img_url = Avatar::imageUploadProfile($request, $user);
+            if (env('USE_IMGUR')) {
+                $img_url = Avatar::imageUploadProfile($request, $user);
+            }
+            else {
+                $img_url = Avatar::imgurlUploadProfile($request);
+            }
 
             $data = array(
                 'name' => ($request->name) ? $request->name : '',

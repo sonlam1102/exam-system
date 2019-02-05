@@ -194,7 +194,12 @@ class ContestController extends AdminController
         if (!$question)
             abort('404');
 
-        $question_img = Upload::questionImageUpload($request, $question);
+        if (env('USE_IMGUR')) {
+            $question_img = Upload::questionImgurUpload($request);
+        }
+        else {
+            $question_img = Upload::questionImageUpload($request, $question);
+        }
 
         $question->changeImage($question_img);
 
@@ -206,7 +211,12 @@ class ContestController extends AdminController
         if (!$answer)
             abort('404');
 
-        $answer_img = Upload::answerImageUpload($request, $answer);
+        if (env('USE_IMGUR')) {
+            $answer_img = Upload::answerImgurUpload($request);
+        }
+        else {
+            $answer_img = Upload::answerImageUpload($request, $answer);
+        }
 
         $answer->changeImage($answer_img);
 
