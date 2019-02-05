@@ -2,9 +2,9 @@ image: php:7.1.3
 
 stages:
 - deploy
+- save
 - build
 - migrate
-- save
 
 cache:
   paths:
