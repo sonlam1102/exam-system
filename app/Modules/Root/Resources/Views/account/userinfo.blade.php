@@ -13,6 +13,12 @@
             <div class="box-body">
 
                 <div class="form-group">
+                    <div class="col-sm-10">
+                        <img id="blah" src="{{ $data->img }}" alt="your image" onerror="this.src='/avatar.jpg'" width="200px" height="200px"/>
+                    </div>
+                </div>
+
+                <div class="form-group">
                     <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
                     <div class="col-sm-10">
                         <input class="form-control" id="email" name="email" placeholder="Email" type="email"
