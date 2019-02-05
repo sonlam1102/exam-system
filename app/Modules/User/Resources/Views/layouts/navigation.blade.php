@@ -15,7 +15,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/user/contest">List Contest</a>
+                    <a class="nav-link" href="/user/contest">Các bài tập</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownBlog" data-toggle="dropdown"
@@ -23,11 +23,11 @@
                         {{ \Auth::user()->name }}
                     </a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownBlog">
-                        <a class="dropdown-item" href="/user/info">Info</a>
-                        <a class="dropdown-item" href="/user/feedback">Feedback</a>
+                        <a class="dropdown-item" href="/user/info">Thông tin</a>
+                        <a class="dropdown-item" href="/user/feedback">Phản hồi</a>
                         <form method="POST" action="/logout">
                             @csrf
-                            <input type="submit" class="dropdown-item" value="Sign out">
+                            <input type="submit" class="dropdown-item" value="Đăng xuất">
                         </form>
                     </div>
                 </li>

@@ -4,22 +4,22 @@
         <br>
         <div class="box-body border-line">
             <div class="form-group">
-                <label for="inputEmail3" class="col-sm-7 control-label">Name: {{ \Auth::user()->name }} </label>
+                <label for="inputEmail3" class="col-sm-7 control-label">Họ tên: {{ \Auth::user()->name }} </label>
             </div>
 
             <div class="form-group">
-                <label for="inputEmail3" class="col-sm-6 control-label">Title: {{ $info->title }}</label>
+                <label for="inputEmail3" class="col-sm-6 control-label">Tiêu đề: {{ $info->title }}</label>
             </div>
 
-
-            <div class="form-group">
-                <label for="inputEmail3"
-                       class="col-sm-2 control-label">Date: {{ ($info->date) ? date('d/m/Y', strtotime($info->date)) : null }}</label>
-            </div>
 
             <div class="form-group">
                 <label for="inputEmail3"
-                       class="col-sm-2 control-label">Subject: {{ App\Model\Subjects::getName($info->subject_id) }} </label>
+                       class="col-sm-2 control-label">Ngày: {{ ($info->date) ? date('d/m/Y', strtotime($info->date)) : null }}</label>
+            </div>
+
+            <div class="form-group">
+                <label for="inputEmail3"
+                       class="col-sm-2 control-label">Môn: {{ App\Model\Subjects::getName($info->subject_id) }} </label>
             </div>
 
         </div>
@@ -29,12 +29,12 @@
                 @if ($questions)
                     <input type="text" name="token" id='token' value="{{ csrf_token() }}" hidden>
                     @if ($lasted)
-                        <p class="card-text">Result: {{ $lasted }} </p>
+                        <p class="card-text">Kết quả: {{ $lasted }} </p>
                     @endif
                     @foreach ($questions as $item)
                         <div class="form-group">
                             @if($item->isBigQuestion())
-                                <label for="inputEmail3" class="control-label">Big Question #{{ $item->id }}</label>
+                                <label for="inputEmail3" class="control-label">Câu hỏi lớn #{{ $item->id }}</label>
                                 <input type="text" class='big-question' value="{{ $item->id }}" hidden>
                                 <textarea class='form-control' type='text' disabled> {{ $item->content }} </textarea>
 
@@ -68,7 +68,7 @@
                                         @endphp
                                     @endif
                                     <div class="question_item">
-                                        <label for="inputEmail3" class="control-label">Question #{{ $sub->id }}
+                                        <label for="inputEmail3" class="control-label">Câu hỏi #{{ $sub->id }}
                                             (reference from #Question {{ $item->id }})</label>
                                         <input type="text" class='question' value="{{ $sub->id }}" hidden>
                                         <textarea class='form-control' type='text'
@@ -116,7 +116,7 @@
                                     @endphp
                                 @endif
                                 <div class="question_item">
-                                    <label for="inputEmail3" class="control-label">Question #{{ $item->id }}</label>
+                                    <label for="inputEmail3" class="control-label">Câu hỏi #{{ $item->id }}</label>
                                     <input type="text" class='question' value="{{ $item->id }}" hidden>
                                     <textarea class='form-control' type='text'
                                               disabled> {{ $item->content }} </textarea>
@@ -153,10 +153,10 @@
                         </div>
                         <br>
                     @endforeach
-                    <p>This is the end of the test. Check your answers and submit. Good luck!</p>
+                    <p>Kết thúc bài kiểm tra. Xin vui lòng xem lại các câu trả lời</p>
                     @if (!$took)
                         <div class="box-footer">
-                            <button type="submit" id='submit' class="btn btn-info">Submit</button>
+                            <button type="submit" id='submit' class="btn btn-info">Nộp bài</button>
                         </div>
                     @endif
                 @endif

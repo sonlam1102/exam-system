@@ -2,7 +2,7 @@
 @section('content')
     <section class="content-header">
         <h1 class="my-4">
-            Feedback
+            PHẢN HỒI
         </h1>
         <div class="container">
             <form action="/user/feedback/add/{{ \Auth::user()->id }}" method="POST">
@@ -12,7 +12,7 @@
                 </div>
                 <br>
                 <div class="box-footer">
-                    <button type="submit" id='submit' class="btn btn-info">Submit</button>
+                    <button type="submit" id='submit' class="btn btn-info">GỬI</button>
                 </div>
             </form>
         </div>

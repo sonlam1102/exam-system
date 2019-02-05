@@ -1,7 +1,7 @@
 @extends('user::main')
 @section('content')
     <h1 class="my-4">
-        Available exams
+        DANH SÁCH CÁC BÀI TẬP
     </h1>
     <div class="row">
         @if ($data)
@@ -13,21 +13,20 @@
                             <h4 class="card-title">
                                 <label>{{ $item->title }}</label>
                             </h4>
-                            <p class="card-text">Date
-                                Begin: {{ ($item->date) ? date('d/m/Y', strtotime($item->date)) : '' }} </p>
-                            <p class="card-text">Subject: {{ App\Model\Subjects::getName($item->subject_id) }} </p>
-                            <p class="card-text">Number questions: {{ $item->total_questions }} </p>
+                            <p class="card-text">Ngày bắt đầu: {{ ($item->date) ? date('d/m/Y', strtotime($item->date)) : '' }} </p>
+                            <p class="card-text">Môn học: {{ $item->subject->name }} </p>
+                            <p class="card-text">Số câu hỏi: {{ $item->total_questions }} </p>
                             @if ($lasted = App\Model\UserLog::getLastedLog(\Auth::user()->id, $item->id))
-                                <p class="card-text">Result: {{ $lasted->result }} </p>
+                                <p class="card-text">Kết quả: {{ $lasted->result }} </p>
                             @endif
                         </div>
                         @if (!App\Model\UserRecord::isTookTheContest(\Auth::user()->id, $item->id))
                             <a href="/user/contest/{{ $item->id }}">
-                                <button type="submit" class="btn btn-info">Do it!</button>
+                                <button type="submit" class="btn btn-info">Làm bài!</button>
                             </a>
                         @else
                             <a href="/user/contest/{{ $item->id }}">
-                                <button type="submit" class="btn btn-info">Check answer</button>
+                                <button type="submit" class="btn btn-info">Xem lại</button>
                             </a>
                         @endif
                     </div>

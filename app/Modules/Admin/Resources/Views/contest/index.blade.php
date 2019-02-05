@@ -33,7 +33,7 @@
                                         <tr>
                                             <td> {{ $item->id }}</td>
                                             <td> {{ $item->title }}</td>
-                                            <td> {{ $item->subject_id }}</td>
+                                            <td> {{ $item->subject->name }}</td>
                                             <td> {{ $item->total_questions }}</td>
                                             <td> {{ date('d/m/Y', strtotime($item->date)) }}</td>
                                             <td>

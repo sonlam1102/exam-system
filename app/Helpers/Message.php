@@ -7,15 +7,15 @@ class Message
 	{
 		$message = '';
 		if ($type === 0) {
-			$message = "<span class='label label-success'>OK</span>";
+			$message = "<span class='label label-success'>ĐÚNG</span>";
 		}
 
 		if ($type == 1) {
-			$message = "<span class='label label-warning'>No Answer</span>";
+			$message = "<span class='label label-warning'>KHÔNG ĐÁP ÁN</span>";
 		}
 
 		if ($type == 2) {
-			$message = "<span class='label label-danger'>Wrong</span>";
+			$message = "<span class='label label-danger'>SAI</span>";
 		}
 
 		return $message;
