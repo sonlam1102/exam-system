@@ -20,7 +20,7 @@ class ApiController extends Controller
         ];
 
 
-        if (Auth::attempt($credential)) {
+        if (Auth::attempt($credential) && Auth::user()->type == User::TYPE_USER) {
             Auth::user()->setApiToken();
             $data = [
                 'auth' => true,
