@@ -26,11 +26,8 @@ class ContestController extends ApiController
             'name' => $contest->title,
             'date' => $contest->date,
             'question' => $contest->questions->count(),
+            'is_took' => $took
         ];
-
-        if ($took) {
-            $data['contest']['is_took'] = $took;
-        }
 
         $questions = [];
         foreach ($contest->questions as $item) {
