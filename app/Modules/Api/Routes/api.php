@@ -23,3 +23,8 @@ Route::group(['prefix' => 'contest'], function (){
     Route::get('/{id}', 'ContestController@index')->where('id', '[0-9]+')->middleware('api_auth');
     Route::post('/{id}/submit', 'ContestController@submit')->where('id', '[0-9]+')->middleware('api_auth');
 });
+
+Route::group(['prefix' => 'user', 'middleware' => ['api_auth'] ], function (){
+    Route::post('/info', 'UserController@info');
+    Route::get('/info', 'UserController@info');
+});
