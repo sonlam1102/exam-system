@@ -28,7 +28,8 @@ class MainController extends ApiController
                 'name' => $item->title,
                 'date' => $item->date,
                 'question' => $item->questions->count(),
-                'is_took' => $took
+                'is_took' => $took,
+                'result' => $item->get_user_log($user->id)
             ];
 
             array_push($contest_data, $temp);

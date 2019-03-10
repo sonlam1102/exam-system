@@ -62,6 +62,12 @@ class Contests extends Model
         return $this->save();
     }
 
+    public function get_user_log($user_id) {
+        $data = $this->userslog->where('user_id', '=', $user_id);
+
+        return $data->first() ? $data->first()->result: null;
+    }
+
     public function __get($key)
     {
         if ($key == 'total_questions')

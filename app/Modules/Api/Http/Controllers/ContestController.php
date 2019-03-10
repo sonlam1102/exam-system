@@ -26,7 +26,8 @@ class ContestController extends ApiController
             'name' => $contest->title,
             'date' => $contest->date,
             'question' => $contest->questions->count(),
-            'is_took' => $took
+            'is_took' => $took,
+            'result' => $contest->get_user_log($user->id)
         ];
 
         $questions = [];
