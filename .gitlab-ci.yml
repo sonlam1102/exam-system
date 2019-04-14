@@ -45,7 +45,7 @@ backup:
 deploy:
   stage: deploy
   script:
-  - apt-get update -qq && apt-get install -y -qq git
+  - apk update && apk add git
   - git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git HEAD:master
   only:
     refs:
@@ -53,17 +53,23 @@ deploy:
 
 migrate:
   stage: migrate
+  image: node:latest
+  cache:
+    key: ${CI_COMMIT_REF_SLUG}
+    paths:
+      - npm
+  before_script:
+    - npm install -g heroku
   script:
-  - curl https://cli-assets.heroku.com/install-ubuntu.sh | sh
-  - heroku run --app $HEROKU_APP_NAME php artisan migrate
+    - heroku run --app $HEROKU_APP_NAME python manage.py migrate
   only:
     refs:
-    - master
+      - master
 
 save:
   stage: save
   script:
-    - apt-get update -qq && apt-get install -y -qq git
+    - apk update && apk add git
     - git push  https://$BITBUCKET_USER:$BITBUCKET_ACCESS_TOKEN@bitbucket.org/$BITBUCKET_USER/$BITBUCKET_APP_NAME.git HEAD:master
   only:
     refs:
