@@ -1,10 +1,14 @@
 image: php:7.1.3
 
+services:
+  - mysql:5.6
+
 stages:
 - deploy
 - save
 - build
 - migrate
+- backup
 
 cache:
   paths:
@@ -19,6 +23,24 @@ build:
   only:
     refs:
     - master
+
+backup:
+  stage: backup
+  variables:
+    MYSQL_DATABASE: fmzy4o9i0222t5c4
+    MYSQL_HOST: g3v9lgqa8h5nq05o.cbetxkdyhwsb.us-east-1.rds.amazonaws.com
+    MYSQL_USER: ajmatif7xnvmger6
+    MYSQL_PASSWORD: gg258e7refgieg02
+
+  allow_failure: true
+
+  script:
+    mysqldump --user="$MYSQL_USER" --password="$MYSQL_PASSWORD" --host="$MYSQL_HOST" "$MYSQL_DATABASE" > /var/lib/mysql/backup.sql
+
+  artifacts:
+    when: on_success
+    paths:
+        - /var/lib/mysql/
 
 deploy:
   stage: deploy
