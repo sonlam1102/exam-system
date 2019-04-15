@@ -21,8 +21,8 @@ build:
     key: ${CI_COMMIT_REF_SLUG}
     paths:
       - npm
-    before_script:
-      - npm install -g heroku
+  before_script:
+    - npm install -g heroku
   script:
     - heroku run --app $HEROKU_APP_NAME composer update
     - heroku run --app $HEROKU_APP_NAME composer dump-autoload
