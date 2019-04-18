@@ -8,7 +8,6 @@ stages:
   - save
   - build
   - migrate
-  - backup
 
 cache:
   paths:
