@@ -41,7 +41,7 @@ backup:
   allow_failure: true
 
   script:
-    mysqldump --user="$MYSQL_USER" --password="$MYSQL_PASSWORD" --host="$MYSQL_HOST" "$MYSQL_DATABASE" > /var/lib/mysql/backup.sql
+    mysqldump --user="$MYSQL_USER" --password="$MYSQL_PASSWORD" --host="$MYSQL_HOST" "$MYSQL_DATABASE" > exam_system_backup.sql
 
   artifacts:
     when: on_success
