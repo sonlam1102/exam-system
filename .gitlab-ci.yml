@@ -45,9 +45,8 @@ backup:
     mysqldump --user="$MYSQL_USER" --password="$MYSQL_PASSWORD" --host="$MYSQL_HOST" -A -R -E --triggers --single-transaction "$MYSQL_DATABASE" > exam_system_backup.sql
 
   artifacts:
-    when: on_success
     paths:
-      - /var/lib/mysql/
+      - /db/
 
 deploy:
   stage: deploy
