@@ -31,6 +31,7 @@ build:
       - master
 
 backup:
+  image: mysql
   stage: backup
   variables:
     MYSQL_DATABASE: fmzy4o9i0222t5c4
