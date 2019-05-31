@@ -26,6 +26,7 @@
                                     <th>Môn học </th>
                                     <th>Số câu hỏi </th>
                                     <th>Ngày </th>
+                                    <th>Hiển thị </th>
                                     <th>Các thao tác</th>
                                 </tr>
                                 @if ($data)
@@ -36,6 +37,7 @@
                                             <td> {{ $item->subject->name }}</td>
                                             <td> {{ $item->total_questions }}</td>
                                             <td> {{ date('d/m/Y', strtotime($item->date)) }}</td>
+                                            <td> {{ $item->is_show ? 'Có' : 'Không' }} </td>
                                             <td>
                                                 <a href="/admin/contest/edit/{{ $item->id }}">
                                                     <button type="button" class="btn btn-success">Edit</button>

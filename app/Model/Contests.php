@@ -58,6 +58,7 @@ class Contests extends Model
         $this->title = $data['title'];
         $this->date = date('Y-m-d', strtotime($data['date']));
         $this->subject_id = $data['subject_id'];
+        $this->is_show = $data['is_show'];
 
         return $this->save();
     }

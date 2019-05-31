@@ -14,7 +14,7 @@ class ContestController extends UserController
 {
     public function index()
     {
-    	$data = Contests::select()->get();
+    	$data = Contests::select()->where('is_show', '=', true)->get();
     	return view('user::contest.list')
             ->with('data', $data);
     }

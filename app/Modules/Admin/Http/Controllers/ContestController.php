@@ -123,11 +123,14 @@ class ContestController extends AdminController
         $subject_id = ($request->subject) ? $request->subject : '';
         $title = ($request->title) ? $request->title : '';
         $date = ($request->startdate) ? $request->startdate : '';
+        $is_show = $request->is_show ? true : false;
+
 
         $data = array(
             'subject_id' => $subject_id,
             'title' => $title,
             'date' => $date,
+            'is_show' => $is_show
         );
 
         $check = Contests::find($id)->edit($data);

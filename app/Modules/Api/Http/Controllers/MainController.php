@@ -15,7 +15,7 @@ class MainController extends ApiController
         $user = $this->get_user($request);
         $user_info_data = $this->get_user_info($request);
 
-        $contests = Contests::all();
+        $contests = Contests::select()->where('is_show', '=', true)->get();
 
         $data['user'] = $user_info_data;
 

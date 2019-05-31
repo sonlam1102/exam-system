@@ -49,6 +49,12 @@
                                         </select>
                                     </div>
                                 </div>
+
+                                <div class="form-group">
+                                    <div class="col-sm-10">
+                                        <label><input type="checkbox" {{ $data->is_show ? 'checked' : '' }} name="is_show" id="is_show"> Hiển thị </label>
+                                    </div>
+                                </div>
                                 <button type="submit" id='submit' class="btn btn-info pull-left">Edit info</button>
                             </div>
 
