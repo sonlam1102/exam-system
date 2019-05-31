@@ -60,7 +60,7 @@ class ContestController extends ApiController
                     'img' => $ans->img,
                 ];
                 if ($took) {
-                    if ($ans->question->result->answer_id == $ans->id) {
+                    if ($ans->question->result && $ans->question->result->answer_id == $ans->id) {
                         $ans_item['chose'] = true;
                     }
                     else {
