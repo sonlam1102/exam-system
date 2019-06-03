@@ -40,16 +40,16 @@
                                             <td> {{ $item->is_show ? 'Có' : 'Không' }} </td>
                                             <td>
                                                 <a href="/admin/contest/edit/{{ $item->id }}">
-                                                    <button type="button" class="btn btn-success">Edit</button>
+                                                    <button type="button" class="btn btn-sm btn-success">Edit</button>
                                                 </a>
                                                 <a href="/admin/contest/{{ $item->id }}/candidate">
-                                                    <button type="button" class="btn btn-primary">Status</button>
+                                                    <button type="button" class="btn btn-sm btn-primary">Status</button>
                                                 </a>
                                                 <form class="btn" action="/admin/contest/delete/{{ $item->id }}"
                                                       method="POST">
                                                     @csrf
                                                     <input type="hidden" name="_method" value="delete"/>
-                                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                                    <button type="submit" class="btn btn-sm btn-danger">Delete</button>
                                                 </form>
                                             </td>
                                         </tr>
