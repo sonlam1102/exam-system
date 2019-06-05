@@ -42,7 +42,7 @@ backup:
   allow_failure: true
 
   script:
-    mysqldump --user=$MYSQL_USER --password=$MYSQL_PASSWORD --host=$MYSQL_HOST $MYSQL_DATABASE --result-file=exam_system_backup.sql
+    mysqldump --single-transaction --set-gtid-purged=OFF --user=$MYSQL_USER --password=$MYSQL_PASSWORD --host=$MYSQL_HOST $MYSQL_DATABASE --result-file=exam_system_backup.sql
 
   artifacts:
     paths:
