@@ -150,7 +150,7 @@ class ContestController extends AdminController
         if (!$contest)
             abort('404');
 
-        $questions = $questions->paginate(10);
+        $questions = $questions->paginate(5);
         return view('admin::contest.question')
             ->with('id', $id)
             ->with('data', $contest)
