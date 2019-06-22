@@ -16,6 +16,9 @@
             <div class="box-primary">
                 <div class="col-xs-12">
                     <div class="box">
+                        <div class="box-body">
+                            {{ $data->links() }}
+                        </div>
                         <!-- /.box-header -->
                         <div class="box-body">
                             <table class="table table-hover">

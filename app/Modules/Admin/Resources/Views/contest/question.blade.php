@@ -17,7 +17,6 @@
                         <form class="form-horizontal" method="POST" action="/admin/contest/edit/{{ $id }}/info">
                             @csrf
                             <div class="box-body">
-
                                 <div class="form-group">
                                     <label for="inputEmail3" class="col-sm-2 control-label"> Tên bài tập </label>
                                     <div class="col-sm-10">
@@ -61,6 +60,10 @@
                         </form>
                     </div>
                     <div class="box">
+                        <div class="box-body">
+                            <label>Trang </label>
+                            {!! $questions->links() !!}
+                        </div>
                         <form id='question-form' action='/admin/contest/edit/{{ $id }}/question'>
                             <input type="text" name="token" id='token' value="{{ csrf_token() }}" hidden>
                             <div class="box-header">
@@ -69,8 +72,8 @@
                                 <a href="javascript:void(0)" id="add_new_big_question">Thêm câu hỏi lớn </a>
                             </div>
                             <div class="box-body" id='question_field'>
-                                @if ($data->questions)
-                                    @foreach($data->questions as $item)
+                                @if ($questions)
+                                    @foreach($questions as $item)
                                         <div class='form-group'>
                                             @if ($item->isBigQuestion())
                                                 <div class="delete_question">
@@ -289,6 +292,10 @@
                                 <a href="javascript:void(0)" id="add_new_question_last_page">Thêm câu hỏi </a>
                                 <br>
                                 <a href="javascript:void(0)" id="add_new_big_question_last_page">Thêm câu hỏi lớn </a>
+                            </div>
+                            <div class="box-body">
+                                <label>Trang </label>
+                                {!! $questions->links() !!}
                             </div>
 
                         </form>

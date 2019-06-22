@@ -3,6 +3,9 @@
     <h1 class="my-4">
         DANH SÁCH CÁC BÀI TẬP
     </h1>
+    <div>
+        {{ $data->links() }}
+    </div>
     <div class="row">
         @if ($data)
             @foreach($data as $item)
@@ -33,6 +36,9 @@
                 </div>
             @endforeach
         @endif
+    </div>
+    <div>
+        {{ $data->links() }}
     </div>
 
 @stop

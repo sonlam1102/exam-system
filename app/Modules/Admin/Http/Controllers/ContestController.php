@@ -20,8 +20,8 @@ class ContestController extends AdminController
     //
     public function index()
     {
-    	$data = Contests::select()->get();
-    	return view('admin::contest.index')->with('data',$data);
+    	$data = Contests::select()->paginate(10);
+    	return view('admin::contest.index')->with('data', $data);
     }
     public function add(Request $request)
     {
@@ -145,14 +145,17 @@ class ContestController extends AdminController
 
         $contest = Contests::find($id);
         $subject = Subjects::select()->get();
+        $questions = $contest->questions();
+
         if (!$contest)
             abort('404');
 
-
+        $questions = $questions->paginate(10);
         return view('admin::contest.question')
             ->with('id', $id)
             ->with('data', $contest)
-            ->with('subject', $subject);
+            ->with('subject', $subject)
+            ->with('questions', $questions);
     }
 
     public function deleteContest($id)

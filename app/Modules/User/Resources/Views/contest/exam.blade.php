@@ -24,6 +24,9 @@
 
         </div>
         <br>
+        <div class="box-body">
+            {{ $questions->links() }}
+        </div>
         <div class="box-body" id='question_field'>
             <form id='form_submit' action='/user/contest/{{ $contest->id }}/submit' method="POST">
                 @if ($questions)
@@ -153,12 +156,18 @@
                         </div>
                         <br>
                     @endforeach
-                    <p>Kết thúc bài kiểm tra. Xin vui lòng xem lại các câu trả lời</p>
-                    @if (!$took)
-                        <div class="box-footer">
-                            <button type="submit" id='submit' class="btn btn-info">Nộp bài</button>
-                        </div>
-                    @endif
+                    <div class="box-body">
+                        {{ $questions->links() }}
+                        @if($questions->currentPage() == $questions->lastPage())
+                            <p>Kết thúc bài kiểm tra. Xin vui lòng xem lại các câu trả lời</p>
+                            @if (!$took)
+                                <div class="box-footer">
+                                    <button type="submit" id='submit' class="btn btn-info">Nộp bài</button>
+                                </div>
+                            @endif
+                        @endif
+                    </div>
+
                 @endif
             </form>
         </div>

@@ -14,7 +14,7 @@ class ContestController extends UserController
 {
     public function index()
     {
-    	$data = Contests::select()->where('is_show', '=', true)->get();
+    	$data = Contests::select()->where('is_show', '=', true)->paginate(6);
     	return view('user::contest.list')
             ->with('data', $data);
     }
@@ -26,13 +26,16 @@ class ContestController extends UserController
 
     	$contest = Contests::find($id);
 
-    	$question = $contest->questions;
+    	$question = $contest->questions();
         $took = UserRecord::isTookTheContest(\Auth::user()->id, $id);
 
 
         $info = Contests::find($id);
 
         $lasted = UserLog::getLastedLog(\Auth::user()->id, $id);
+
+        $question = $question->paginate(10);
+
     	return view('user::contest.exam')
             ->with('contest', $contest)
             ->with('questions', $question)
