@@ -30,7 +30,7 @@
                                     <th>Số câu hỏi </th>
                                     <th>Ngày </th>
                                     <th>Hiển thị </th>
-                                    <th>Các thao tác</th>
+                                    <th style="width: 20%">Các thao tác</th>
                                 </tr>
                                 @if ($data)
                                     @foreach($data as $item)
