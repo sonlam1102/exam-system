@@ -46,7 +46,11 @@ class Contests extends Model
     	$contest->subject_id = $data['subject_id'];
     	$contest->user_id = $data['user_id'];
 
-    	return $contest->save();
+    	$check = $contest->save();
+    	if (!$check) {
+    	    return false;
+        }
+    	return $contest->id;
     }
     public function edit($data)
     {

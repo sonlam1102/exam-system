@@ -34,7 +34,7 @@ class ContestController extends AdminController
     		);
     		$check = Contests::add($data);
     		if ($check)
-    			return redirect('/admin/contest');
+    			return redirect('/admin/contest/edit/'.$check);
 
     	}
     	$subject = Subjects::select()->get();
