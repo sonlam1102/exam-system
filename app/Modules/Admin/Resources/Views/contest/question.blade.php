@@ -97,7 +97,7 @@
                                                                 <input type='file' id="quest_image{{ $item->id }}">
                                                             </td>
                                                             <td>
-                                                                <button type="button" class="btn btn-sm btn-info" id='upload'
+                                                                <button type="button" class="btn btn-sm btn-success" id='upload'
                                                                         data-qid='{{ $item->id }} '>Thêm hình câu hỏi
                                                                 </button>
                                                             </td>
@@ -161,8 +161,8 @@
                                                                         <input type='file' id="quest_image{{ $subs->id }}">
                                                                     </td>
                                                                     <td>
-                                                                        <button type="button" class="btn btn-sm btn-info" id='upload'
-                                                                                data-qid='{{ $subs->id }} '>Thêm hình ảnh
+                                                                        <button type="button" class="btn btn-sm btn-success" id='upload'
+                                                                                data-qid='{{ $subs->id }} '>Thêm hình ảnh câu hỏi
                                                                         </button>
                                                                     </td>
                                                                 </tr>
@@ -193,7 +193,7 @@
                                                                             </td>
                                                                             <td>
                                                                                 <button type="button" class="btn btn-sm btn-info" id='upload'
-                                                                                        data-qid='{{ $subsansw->id }} '>Thêm hình ảnh
+                                                                                        data-qid='{{ $subsansw->id }} '>Thêm hình ảnh câu trả lời
                                                                                 </button>
                                                                             </td>
                                                                         </tr>
@@ -246,7 +246,7 @@
                                                                 </td>
 
                                                                 <td>
-                                                                    <button type="button" class="btn btn-sm btn-info" id='upload'
+                                                                    <button type="button" class="btn btn-sm btn-success" id='upload'
                                                                             data-qid='{{ $item->id }} '>Thêm hình câu hỏi
                                                                     </button>
                                                                 </td>
