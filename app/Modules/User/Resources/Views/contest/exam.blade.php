@@ -57,7 +57,17 @@
                                         }
                                     @endphp
                                 @endif
+                                Câu hỏi lớn này gồm các câu hỏi nhỏ sau:
+                                <strong>
+                                    @php
+                                        $subquestionData = $item->subquestions;
+                                        foreach($subquestionData as $val) {
+                                            echo $val->id . ' ';
+                                        }
+                                    @endphp
+                                </strong>
                                 <br>
+                                <p>---------</p>
                                 @foreach ($item->subquestions as $sub)
                                     @if($took)
                                         @php
