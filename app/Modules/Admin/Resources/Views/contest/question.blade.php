@@ -61,7 +61,6 @@
                     </div>
                     <div class="box">
                         <div class="box-body">
-                            <label>Trang </label>
                             {!! $questions->links() !!}
                         </div>
                         <form id='question-form' action='/admin/contest/edit/{{ $id }}/question'>
@@ -309,7 +308,6 @@
                                                 </div>
                                             @endif
                                         </div>
-                                        <hr>
                                     @endforeach
                                 @endif
                             </div>
@@ -325,7 +323,6 @@
                                 <a href="javascript:void(0)" id="add_new_big_question_last_page">Thêm câu hỏi lớn </a>
                             </div>
                             <div class="box-body">
-                                <label>Trang </label>
                                 {!! $questions->links() !!}
                             </div>
 
