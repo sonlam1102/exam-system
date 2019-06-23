@@ -264,7 +264,7 @@
 
     function subQuestionPackGenerate(i = 0, big_question_id) {
         var content = "<div class='form-group question_pack'>" +
-            "<label class='col-sm-2 control-label'>Câu hỏi (Cho câu hỏi lớn #" + big_question_id + ")</label>" +
+            "<label class='col-sm-12 control-label'>Câu hỏi (Cho câu hỏi lớn #" + big_question_id + ")</label>" +
             "<input class='form-control big_question_id' type='text' value=\" " + big_question_id + " \" hidden >" +
             "<textarea class='form-control question'></textarea>" +
             "<label class='col-sm-2 control-label'>Các câu trả lời</label>" +

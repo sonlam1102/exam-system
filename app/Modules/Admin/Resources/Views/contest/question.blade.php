@@ -92,12 +92,18 @@
                                                 <div class="question_image col-4">
                                                     <input type="text" name="token" id='token'
                                                            value="{{ csrf_token() }}" hidden>
-
-                                                    <input type='file' id="quest_image{{ $item->id }}">
-
-                                                    <button type="button" class="btn btn-sm btn-info" id='upload'
-                                                            data-qid='{{ $item->id }} '>Thêm hình câu hỏi
-                                                    </button>
+                                                    <table>
+                                                        <tr>
+                                                            <td>
+                                                                <input type='file' id="quest_image{{ $item->id }}">
+                                                            </td>
+                                                            <td>
+                                                                <button type="button" class="btn btn-sm btn-info" id='upload'
+                                                                        data-qid='{{ $item->id }} '>Thêm hình câu hỏi
+                                                                </button>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
                                                 </div>
 
                                                 <input class='form-control question_id' type='text'
@@ -150,11 +156,18 @@
                                                             <input type="text" name="token" id='token'
                                                                    value="{{ csrf_token() }}" hidden>
 
-                                                            <input type='file' id="quest_image{{ $subs->id }}">
-
-                                                            <button type="button" class="btn btn-sm btn-info" id='upload'
-                                                                    data-qid='{{ $subs->id }} '>Thêm hình ảnh
-                                                            </button>
+                                                            <table>
+                                                                <tr>
+                                                                    <td>
+                                                                        <input type='file' id="quest_image{{ $subs->id }}">
+                                                                    </td>
+                                                                    <td>
+                                                                        <button type="button" class="btn btn-sm btn-info" id='upload'
+                                                                                data-qid='{{ $subs->id }} '>Thêm hình ảnh
+                                                                        </button>
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
                                                         </div>
 
                                                         <input class='form-control question_id' type='text'
@@ -168,9 +181,25 @@
                                                             @endif
                                                         </p>
 
-                                                        <label class='col-sm-2 control-label'>Các câu trả lời: </label>
+                                                        <label class='col-sm-12 control-label'>Các câu trả lời: </label>
                                                         @if($subs->answers)
                                                             @foreach($subs->answers as $subsansw)
+                                                                <div class="input-group answer_image col-4">
+                                                                    <input type="text" name="token" id='token'
+                                                                           value="{{ csrf_token() }}" hidden>
+                                                                    <table>
+                                                                        <tr>
+                                                                            <td>
+                                                                                <input type='file' id="answ_image{{ $subsansw->id }}">
+                                                                            </td>
+                                                                            <td>
+                                                                                <button type="button" class="btn btn-sm btn-info" id='upload'
+                                                                                        data-qid='{{ $subsansw->id }} '>Thêm hình ảnh
+                                                                                </button>
+                                                                            </td>
+                                                                        </tr>
+                                                                    </table>
+                                                                </div>
                                                                 <div class='input-group answers_group'
                                                                      name='answers_group'>
                                                                     <input class='input-group-addon flat-red right-answer'
@@ -187,17 +216,6 @@
 
                                                                 </div>
                                                                 <br>
-
-                                                                <div class="input-group answer_image col-4">
-                                                                    <input type="text" name="token" id='token'
-                                                                           value="{{ csrf_token() }}" hidden>
-
-                                                                    <input type='file' id="answ_image{{ $subsansw->id }}">
-
-                                                                    <button type="button" class="btn btn-sm btn-info" id='upload'
-                                                                            data-qid='{{ $subsansw->id }} '>Thêm hình ảnh
-                                                                    </button>
-                                                                </div>
                                                                 <br>
                                                             @endforeach
                                                         @endif
@@ -222,12 +240,19 @@
                                                     <div class="question_image col-4">
                                                         <input type="text" name="token" id='token'
                                                                value="{{ csrf_token() }}" hidden>
+                                                        <table>
+                                                            <tr>
+                                                                <td>
+                                                                    <input type='file' id="quest_image{{ $item->id }}">
+                                                                </td>
 
-                                                        <input type='file' id="quest_image{{ $item->id }}">
-
-                                                        <button type="button" class="btn btn-sm btn-info" id='upload'
-                                                                data-qid='{{ $item->id }} '>Thêm hình câu hỏi
-                                                        </button>
+                                                                <td>
+                                                                    <button type="button" class="btn btn-sm btn-info" id='upload'
+                                                                            data-qid='{{ $item->id }} '>Thêm hình câu hỏi
+                                                                    </button>
+                                                                </td>
+                                                            </tr>
+                                                        </table>
                                                     </div>
 
 
@@ -245,6 +270,23 @@
                                                     <label class='col-sm-2 control-label'>Answers</label>
                                                     @if($item->answers)
                                                         @foreach($item->answers as $ans)
+                                                            <div class="input-group answer_image col-4">
+                                                                <input type="text" name="token" id='token'
+                                                                       value="{{ csrf_token() }}" hidden>
+                                                                <table>
+                                                                    <tr>
+                                                                        <td>
+                                                                            <input type='file' id="answ_image{{ $ans->id }}">
+                                                                        </td>
+                                                                        <td>
+                                                                            <button type="button" class="btn btn-sm btn-info" id='upload'
+                                                                                    data-qid='{{ $ans->id }} '>Thêm hình ảnh câu trả lời
+                                                                            </button>
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+                                                            </div>
+
                                                             <div class='input-group answers_group' name='answers_group'>
                                                                 <input class='input-group-addon flat-red right-answer'
                                                                        name='{{ "right-answer".$item->id }}'
@@ -260,17 +302,6 @@
 
                                                             </div>
                                                             <br>
-
-                                                            <div class="input-group answer_image col-4">
-                                                                <input type="text" name="token" id='token'
-                                                                       value="{{ csrf_token() }}" hidden>
-
-                                                                <input type='file' id="answ_image{{ $ans->id }}">
-
-                                                                <button type="button" class="btn btn-sm btn-info" id='upload'
-                                                                        data-qid='{{ $ans->id }} '>Thêm hình ảnh
-                                                                </button>
-                                                            </div>
                                                             <br>
 
                                                         @endforeach
