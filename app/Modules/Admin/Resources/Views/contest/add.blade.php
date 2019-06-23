@@ -37,6 +37,19 @@
                         </div>
 
                         <div class="form-group">
+                            <label for="inputEmail3" class="col-sm-2 control-label">Khối lớp</label>
+                            <div class="col-sm-10">
+                                <select class="form-control" id='grade' name='grade'>
+                                    <option value="" disabled>--Vui lòng chọn---</option>
+                                    @for ($i=1; $i<=12; $i++)
+                                        <option value="{{ $i }}"> {{ $i }}</option>
+                                    @endfor
+                                    <option value="{{ $i }}"> Đại học</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
                             <label for="inputEmail3" class="col-sm-2 control-label">Ngày</label>
                             <div class="col-sm-10">
                                 <input class="form-control" id="date" name="date" placeholder="Date" type="text">

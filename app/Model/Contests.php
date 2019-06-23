@@ -45,6 +45,7 @@ class Contests extends Model
     	$contest->date = date('Y-m-d', strtotime($data['date']));
     	$contest->subject_id = $data['subject_id'];
     	$contest->user_id = $data['user_id'];
+    	$contest->grade = $data['grade'];
 
     	$check = $contest->save();
     	if (!$check) {
@@ -63,6 +64,7 @@ class Contests extends Model
         $this->date = date('Y-m-d', strtotime($data['date']));
         $this->subject_id = $data['subject_id'];
         $this->is_show = $data['is_show'];
+        $this->grade = $data['grade'];
 
         return $this->save();
     }

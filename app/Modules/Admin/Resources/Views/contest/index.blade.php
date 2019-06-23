@@ -27,6 +27,7 @@
                                     <th>ID</th>
                                     <th>Tiêu đề </th>
                                     <th>Môn học </th>
+                                    <th>Khối </th>
                                     <th>Số câu hỏi </th>
                                     <th>Ngày </th>
                                     <th>Hiển thị </th>
@@ -38,6 +39,7 @@
                                             <td> {{ $item->id }}</td>
                                             <td> {{ $item->title }}</td>
                                             <td> {{ $item->subject->name }}</td>
+                                            <td> {{ $item->grade }}</td>
                                             <td> {{ $item->total_questions }}</td>
                                             <td> {{ date('d/m/Y', strtotime($item->date)) }}</td>
                                             <td> {{ $item->is_show ? 'Có' : 'Không' }} </td>

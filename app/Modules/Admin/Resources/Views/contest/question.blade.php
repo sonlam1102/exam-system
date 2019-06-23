@@ -50,6 +50,19 @@
                                 </div>
 
                                 <div class="form-group">
+                                    <label for="inputEmail3" class="col-sm-2 control-label">Khối</label>
+                                    <div class="col-sm-10">
+                                        <select class="form-control" id='grade' name='grade'>
+                                            <option value="" disabled selected>--Vui lòng chọn---</option>
+                                            @for ($i=1; $i<=12; $i++)
+                                                <option value="{{ $i }}" {{ $data->grade && $data->grade == $i ? 'selected' : '' }}> {{ $i }}</option>
+                                            @endfor
+                                            <option value="{{ $i }}" {{ $data->grade && $data->grade == 13 ? 'selected' : '' }}> Đại học</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
                                     <div class="col-sm-10">
                                         <label><input type="checkbox" {{ $data->is_show ? 'checked' : '' }} name="is_show" id="is_show"> Hiển thị </label>
                                     </div>

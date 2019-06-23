@@ -30,7 +30,8 @@ class ContestController extends AdminController
     			'subject_id' => $request->subject,
     			'title' => $request->title,
     			'date' => $request->date,
-                'user_id' => \Auth::user()->id
+                'user_id' => \Auth::user()->id,
+                'grade' => $request->grade
     		);
     		$check = Contests::add($data);
     		if ($check)
@@ -124,13 +125,14 @@ class ContestController extends AdminController
         $title = ($request->title) ? $request->title : '';
         $date = ($request->startdate) ? $request->startdate : '';
         $is_show = $request->is_show ? true : false;
-
+        $grade = ($request->grade) ? $request->grade : null;
 
         $data = array(
             'subject_id' => $subject_id,
             'title' => $title,
             'date' => $date,
-            'is_show' => $is_show
+            'is_show' => $is_show,
+            'grade' => $grade
         );
 
         $check = Contests::find($id)->edit($data);
@@ -151,11 +153,14 @@ class ContestController extends AdminController
             abort('404');
 
         $questions = $questions->paginate(5);
+        $grade = $contest->grade;
+
         return view('admin::contest.question')
             ->with('id', $id)
             ->with('data', $contest)
             ->with('subject', $subject)
-            ->with('questions', $questions);
+            ->with('questions', $questions)
+            ->with('grade', $grade);
     }
 
     public function deleteContest($id)
