@@ -40,7 +40,7 @@
                             <label for="inputEmail3" class="col-sm-2 control-label">Khối lớp</label>
                             <div class="col-sm-10">
                                 <select class="form-control" id='grade' name='grade'>
-                                    <option value="" disabled>--Vui lòng chọn---</option>
+                                    <option value="" disabled selected>--Vui lòng chọn---</option>
                                     @for ($i=1; $i<=12; $i++)
                                         <option value="{{ $i }}"> {{ $i }}</option>
                                     @endfor
