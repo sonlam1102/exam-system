@@ -42,6 +42,12 @@
                             </div>
                         </div>
                         <div class="form-group row mb-0">
+                            <div class="col-md-6 offset-md-4">
+                                @if($error)
+                                    <strong style="color: red">{{ $error }}</strong>
+                                @endif
+                            </div>
+
                             <div class="col-md-8 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('Login') }}

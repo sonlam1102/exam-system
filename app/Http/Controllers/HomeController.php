@@ -38,6 +38,8 @@ class HomeController extends Controller
     }
     public function login(Request $request)
     {
+        $error = "";
+
         if(\Auth::check())
         	return redirect('/');
         if($request->isMethod('post')) {
@@ -54,7 +56,7 @@ class HomeController extends Controller
             $validator = Validator::make($request->all(), $rules, $messages);
 
             if ($validator->fails()) {
-                return redirect('/')->withErrors($validator)->withInput();
+                $error = "Email và mật khẩu không chính xác";
             } else {
                 $email = $request->input('email');
                 $password = $request->input('password');
@@ -62,12 +64,11 @@ class HomeController extends Controller
                 if( Auth::attempt(['email' => $email, 'password' =>$password])) {
                     return redirect()->intended('/');
                 } else {
-                    \Session::flash('error','Email or password incorrect');
-                    return redirect('/')->withInput()->withErrors('');
+                    $error = "Email và mật khẩu không chính xác";
                 }
             }
         }
-        return view('auth.login');
+        return view('auth.login')->with('error', $error);
     }
     public function register(Request $request)
     {
@@ -87,14 +88,25 @@ class HomeController extends Controller
                 return redirect('/register')->withErrors($validator)->withInput();
             }
             $data = $request->all();
-            \App\User::create([
-               'name' => $data['name'],
-               'email' => $data['email'],
-               'password' => bcrypt($data['password']),
-            ]);
-            return view('auth.login');
+
+            $error = "";
+            try {
+                \App\User::create([
+                    'name' => $data['name'],
+                    'email' => $data['email'],
+                    'password' => bcrypt($data['password']),
+                ]);
+            } catch (\Exception $e) {
+                $error = "Đăng ký không thành công. Vui lòng kiểm tra lại email và mật khẩu";
+            }
+            if ($error === "") {
+                return view('auth.login');
+            }
+            else {
+                return view('auth.register')->with('error', $error);
+            }
         }
-        return view('auth.register');
+        return view('auth.register')->with('error', "");
     }
     public function logout()
     {
