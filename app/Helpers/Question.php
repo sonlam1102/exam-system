@@ -88,4 +88,27 @@ class Question
 
 		return (in_array($data, $resultData)) ? 'checked' : '';
 	}
+
+    public static function isChoseAnswer($question_id, $answer_id, $result)
+    {
+        $resultArr = $result ? $result->toArray() : [];
+        $resultData = [];
+        foreach ($resultArr as $result) {
+            $temp = [
+                'question_id' => $result['question_id'],
+                'answer_id'=> $result['answer_id']
+            ];
+            array_push($resultData, $temp);
+        }
+
+        if (!$question_id || empty($answer_id) || empty($resultData))
+            return null;
+
+        $data = [
+            'question_id' => $question_id,
+            'answer_id' => $answer_id
+        ];
+
+        return (in_array($data, $resultData)) ? true : false;
+    }
 }

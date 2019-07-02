@@ -62,12 +62,8 @@ class ContestController extends ApiController
                     'img' => $ans->img,
                 ];
                 if ($took) {
-                    if ($contest->records->where('user_id', '=', $user->id)->first() && $contest->records->where('user_id', '=', $user->id)->first()->answer_id == $ans->id) {
-                        $ans_item['chose'] = true;
-                    }
-                    else {
-                        $ans_item['chose'] = false;
-                    }
+                    $is_chose = \App\Helpers\Question::isChoseAnswer($item->id, $ans->id, $contest->records->where('user_id', '=', $user->id));
+                    $ans_item['chose'] = $is_chose;
                 }
                 array_push($answers, $ans_item);
             }
