@@ -50,8 +50,11 @@ class ContestController extends ApiController
                 if ($check === 1) {
                     $temp['result'] = true;
                 }
-                else {
+                elseif ($check === 2) {
                     $temp['result'] = false;
+                }
+                else {
+                    $temp['result'] = null;
                 }
             }
             $answers = [];
