@@ -33,14 +33,14 @@
                                             <td> {{ $item->email }}</td>
                                             <td> {{ $item->address }}</td>
                                             <td> {{ ($item->birthday) ? date('d/m/Y', strtotime($item->birthday)) : '' }}</td>
-                                            <td>
+                                            <td style="width: 20%">
                                                 <a href="/admin/user/info/{{ $item->id }}">
-                                                    <button type="button" class="btn btn-primary">Thông tin</button>
+                                                    <button type="button" class="btn btn-sm btn-primary">Thông tin</button>
                                                 </a>
 
-                                                <form method="post" action="/admin/user/{{ $item->id }}/reset">
+                                                <form class="btn" method="post" action="/admin/user/{{ $item->id }}/reset">
                                                     @csrf
-                                                    <button type="submit" class="btn btn-warning">Khôi phục</button>
+                                                    <button type="submit" class="btn btn-sm btn-warning">Khôi phục</button>
                                                 </form>
                                             </td>
                                         </tr>
