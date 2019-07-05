@@ -27,15 +27,16 @@ class ApiController extends Controller
                 'success' => true,
                 'access_token' => Auth::user()->api_token
             ];
-
+            return response()->json($data, 200);
         }
         else {
             $data = [
                 'auth' => false,
                 'success' => false,
             ];
+            return response()->json($data, 400);
         }
-        return response()->json($data);
+
     }
 
     public function auth_error() {
@@ -43,7 +44,7 @@ class ApiController extends Controller
             'auth' => false
         ];
 
-        return response()->json($data);
+        return response()->json($data, 400);
     }
 
     public function logout(Request $request) {
@@ -55,7 +56,7 @@ class ApiController extends Controller
             $data = [
                 'success' => false
             ];
-            return response()->json($data);
+            return response()->json($data, 400);
         }
 
         $user->clearApiToken();
@@ -64,7 +65,7 @@ class ApiController extends Controller
             'success' => true
         ];
 
-        return response()->json($data);
+        return response()->json($data, 200);
     }
 
     public function get_user(Request $request) {
@@ -89,5 +90,27 @@ class ApiController extends Controller
         ];
 
         return $data;
+    }
+
+    public function register_user(Request $request) {
+        $email = $request->post('email', null);
+        $name = $request->post('name', null);
+        $password = $request->post('password', null);
+        $retype_password = $request->post('retype_password', null);
+
+        if ($password !== $retype_password) {
+            return response()->json(['error' => 'Mật khẩu không chính xác'], 400);
+        }
+
+        try {
+            \App\User::create([
+                'name' => $name,
+                'email' => $email,
+                'password' => bcrypt($password),
+            ]);
+            return response()->json(['error' => 'Thành công'], 200);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Đăng ký không thành công. Vui lòng kiểm tra lại email và mật khẩu'], 400);
+        }
     }
 }

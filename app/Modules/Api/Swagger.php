@@ -33,6 +33,30 @@
  */
 
 /**
+ * @SWG\Post(
+ *      path="/register",
+ *      tags={"Authentication"},
+ *      summary="Register user to system",
+ *      description="Register new user of the system",
+ *      @SWG\Parameter(
+ *         name="body",
+ *         in="body",
+ *         description="User registration",
+ *         required=true,
+ *         type="string",
+ *         @SWG\Schema(
+ *            @SWG\Property(property="email", type="string"),
+ *            @SWG\Property(property="name", type="string"),
+ *            @SWG\Property(property="password", type="string"),
+ *            @SWG\Property(property="retype_password", type="string"),
+ *         ),
+ *       ),
+ *       @SWG\Response(response=400, description="Bad request"),
+ *       @SWG\Response(response=500, description="Internal Server Errors")
+ *     )
+ */
+
+/**
  * @SWG\Get(
  *      path="/",
  *      tags={"Contest"},
