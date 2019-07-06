@@ -41,6 +41,12 @@ class ContestController extends ApiController
             ];
             if ($item->isBigQuestion($item->id)) {
                 $temp['big_question'] = true;
+
+                $sq = "";
+                foreach($item->subquestions as $bq) {
+                    $sq = $sq.$bq->id." ";
+                }
+                $temp['sub_questions'] = $sq;
             }
             elseif ($item->isSubQuestion($item->id)) {
                 $temp['parent_question'] = $item->parent_question_id;
